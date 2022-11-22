@@ -4,7 +4,11 @@ import { Footer } from '../../Components/Layouts/Footer'
 import { Categories } from '../../Components/Layouts/Categories'
 import homeHeader from '../../Assets/images/homeHeader.png'
 import { SocialNetworks } from '../../Components/SocialNetworks'
+import { useNavigate } from 'react-router-dom'
+
 const Home = () => {
+  const navigate = useNavigate()
+
   return (
     <div className="font-Baloo">
       <Header />
@@ -35,7 +39,7 @@ const Home = () => {
         <button
           className="bg-reCycle-green text-white rounded-xl px-6 w-48 mx-auto mt-6"
           onClick={() => {
-            console.log('ok')
+            navigate('/inscription')
           }}
         >
           S inscrire

@@ -28,6 +28,7 @@ module.exports = {
       'black-opacity-50': 'rgba(0,0,0,0.5)',
       'black-opacity-90': 'rgba(0,0,0,0.9)',
       'gray-reCycle': '#6A6F7D',
+      'red-reCycle': '#DA2D2D',
     },
 
     extend: {

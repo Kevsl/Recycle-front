@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
+  const navigate = useNavigate()
+
   const [isBurgerMenuVisible, setIsBurgerMenuVisible] = useState(false)
 
   return (
@@ -10,10 +13,20 @@ export const Header = () => {
         <li className="rounded-lg text-dark-blue">Accueil</li>
         <li className="rounded-lg text-dark-blue">Annonces</li>
         <li className="rounded-lg text-dark-blue">Profil</li>
-        <li className="rounded-lg border-reCycle-green border-solid border text-reCycle-green rounded-xl px-6">
+        <li
+          className="rounded-lg border-reCycle-green border-solid border text-reCycle-green rounded-xl px-6 cursor-pointer"
+          onClick={() => {
+            navigate('/connexion')
+          }}
+        >
           Connexion
         </li>
-        <li className=" bg-reCycle-green text-white rounded-xl px-6">
+        <li
+          className=" bg-reCycle-green text-white rounded-xl px-6 cursor-pointer"
+          onClick={() => {
+            navigate('/inscription')
+          }}
+        >
           S'inscrire
         </li>
       </ul>
@@ -34,15 +47,15 @@ export const Header = () => {
             <button
               className="rounded-lg border-reCycle-green border-solid border text-reCycle-green bg-white rounded-xl px-6 w-1/2 mx-auto"
               onClick={() => {
-                console.log('ok')
+                navigate('/connexion')
               }}
             >
               Connexion
             </button>
             <button
-              className="bg-reCycle-green text-white rounded-xl px-6 w-1/2 mx-auto mt-6"
+              className="bg-reCycle-green text-white rounded-xl px-6 w-1/2 mx-auto mt-6 cursor-pointer"
               onClick={() => {
-                console.log('ok')
+                navigate('/inscription')
               }}
             >
               S inscrire
