@@ -14,7 +14,7 @@ export const Header = () => {
         <li className="rounded-lg text-dark-blue">Annonces</li>
         <li className="rounded-lg text-dark-blue">Profil</li>
         <li
-          className="rounded-lg border-reCycle-green border-solid border text-reCycle-green rounded-xl px-6 cursor-pointer"
+          className="border-reCycle-green border-reCycle-green border text-reCycle-green rounded-xl px-6 cursor-pointer"
           onClick={() => {
             navigate('/connexion')
           }}
@@ -22,7 +22,7 @@ export const Header = () => {
           Connexion
         </li>
         <li
-          className=" bg-reCycle-green text-white rounded-xl px-6 cursor-pointer"
+          className=" bg-reCycle-green text-white border-white rounded-xl px-6 cursor-pointer"
           onClick={() => {
             navigate('/inscription')
           }}
