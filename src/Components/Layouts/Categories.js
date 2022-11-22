@@ -30,14 +30,14 @@ export const Categories = () => {
             return (
               <div
                 key={categorie.id}
-                className="w-1/5 mx-5 h-32 my-8 m-h-32 rounded-xl relative  "
+                className="md:w-1/5 w-2/5 mx-5 h-24  my-8 md:h-32 rounded-xl relative  "
               >
                 <img
                   className="w-full object-cover h-full rounded-xl z-20"
                   src={categorie.image}
                   alt={categorie.name}
                 />
-                <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-sm rounded-b-xl">
+                <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs md:text-sm rounded-b-xl">
                   {categorie.name}
                 </p>
               </div>
