@@ -13,7 +13,7 @@ const Home = () => {
     <div className="font-Baloo">
       <Header />
       <h2 className="text-dark-blue absolute top-20 text-xl ml-14 md:text-2xl md:top-28">
-        Partager, reçevoir, préserver...
+        Partager, recevoir, préserver...
       </h2>
       <img
         src={homeHeader}
@@ -25,7 +25,7 @@ const Home = () => {
       </div>
       <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
       <div>
-        <Ads />
+        <Ads title="Annonces" />
       </div>
       <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
       <div className="my-8 w-full flex items-center justify-center flex-col mx-auto w-5/6 md:w-1/3">

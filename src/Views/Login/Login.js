@@ -1,6 +1,6 @@
 import logo from '../../Assets/images/logo.png'
 import { checkEmail, checkPassword } from '../../Utils/Regex'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
@@ -11,6 +11,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [emailOk, setEmailOk] = useState(false)
   const [passOK, setPassOk] = useState(false)
+  const [isConnected, setIsConnected] = useState(false)
 
   function handleEmail(value) {
     checkEmail(value) === true ? setEmailOk(true) : setEmailOk(false)
@@ -18,6 +19,21 @@ const Login = () => {
   function handlePassword(value) {
     checkPassword(value) === true ? setPassOk(true) : setPassOk(false)
   }
+  function handleLogin() {
+    if (emailOk && passOK) {
+      localStorage.setItem('isConnected', 'true')
+      navigate('/')
+    } else {
+      alert('Problème avec vos identifiants')
+    }
+  }
+
+  let token = localStorage.getItem('isConnected')
+
+  if (token === 'true') {
+    navigate('/')
+  }
+
   return (
     <div>
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-Baloo">
@@ -55,7 +71,6 @@ const Login = () => {
                 id="password"
                 name="password"
                 type="password"
-                autocomplete="current-password"
                 required
                 className="relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                 placeholder="Mot de passe"
@@ -76,11 +91,7 @@ const Login = () => {
           <div className="w-full flex items-center justify-center flex-col">
             <button
               className="bg-reCycle-green text-white rounded-xl px-6 w-48 mx-auto mt-2"
-              onClick={() => {
-                passOK && emailOk
-                  ? navigate('/')
-                  : alert('Mot de passe incorect')
-              }}
+              onClick={() => handleLogin()}
             >
               Se connecter
             </button>
@@ -102,10 +113,7 @@ const Login = () => {
                 type="checkbox"
                 className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               />
-              <label
-                for="remember-me"
-                className="ml-2 block text-sm text-gray-900"
-              >
+              <label className="ml-2 block text-sm text-gray-900">
                 Remember me
               </label>
             </div>

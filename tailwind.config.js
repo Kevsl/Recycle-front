@@ -29,6 +29,7 @@ module.exports = {
       'black-opacity-90': 'rgba(0,0,0,0.9)',
       'gray-reCycle': '#6A6F7D',
       'red-reCycle': '#DA2D2D',
+      'pink-reCycle': '#FA928F',
     },
 
     extend: {
