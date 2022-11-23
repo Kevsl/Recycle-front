@@ -10,7 +10,7 @@ import gardening from '../../Assets/images/gardening.jpg'
 import petToy from '../../Assets/images/petToy.jpg'
 import { data } from 'autoprefixer'
 
-export const Ads = () => {
+export const Ads = ({ title }) => {
   const offers = [
     { id: 1, name: 'Machine à laver', image: cleaningMachine },
     { id: 2, name: 'Vêtements', image: clothes },
@@ -44,12 +44,12 @@ export const Ads = () => {
 
   useEffect(() => {
     isOffers ? setDatas(offers) : setDatas(asks)
-  }, [isOffers, asks, offers])
+  }, [isOffers])
 
   return (
     <div className="font-Baloo block mb-12 Ads">
       <div className="w-90 mx-5  mt-16">
-        <h2 className="text-dark-blue ml-4 md:ml-12 ">Annonces</h2>
+        <h2 className="text-dark-blue ml-4 md:ml-12 ">{title}</h2>
         <div className="flex items-center justify-between mt-12 md:w-1/3 md:ml-12 mx-5">
           <button
             className={

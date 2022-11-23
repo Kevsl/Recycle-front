@@ -3,35 +3,72 @@ import { useNavigate } from 'react-router-dom'
 
 export const Header = () => {
   const navigate = useNavigate()
+  const [isConnected, setIsConnected] = useState(false)
 
   const [isBurgerMenuVisible, setIsBurgerMenuVisible] = useState(false)
 
-  return (
-    <div className="flex flex-row items-center justify-between w-90  mt-4 mx-5 font-Baloo md:justify-around sm:justify-around ">
-      <p className="text-reCycle-green text-3xl font-Baloo">Recycle</p>
-      <ul className="flex items-center w-2/3  ml-auto justify-around hidden md:flex ">
-        <li className="rounded-lg text-dark-blue">Accueil</li>
-        <li className="rounded-lg text-dark-blue">Annonces</li>
-        <li className="rounded-lg text-dark-blue">Profil</li>
-        <li
-          className="border-reCycle-green border-reCycle-green border text-reCycle-green rounded-xl px-6 cursor-pointer"
-          onClick={() => {
-            navigate('/connexion')
-          }}
-        >
-          Connexion
-        </li>
-        <li
-          className=" bg-reCycle-green text-white border-white rounded-xl px-6 cursor-pointer"
-          onClick={() => {
-            navigate('/inscription')
-          }}
-        >
-          S'inscrire
-        </li>
-      </ul>
+  useEffect(() => {
+    let token = localStorage.getItem('isConnected')
+    if (token === 'true') {
+      setIsConnected(true)
+    }
+  })
 
-      {isBurgerMenuVisible ? (
+  function handleLogout() {
+    localStorage.setItem('isConnected', false)
+    setIsConnected(false)
+  }
+
+  return (
+    <div className="flex flex-row items-center justify-between w-90  mt-4 mx-5 font-Baloo ">
+      <p
+        className="text-reCycle-green text-3xl font-Baloo cursor-pointer mt-2 md:mt-px"
+        onClick={() => {
+          navigate('/')
+        }}
+      >
+        Recycle
+      </p>
+      {!isConnected ? (
+        <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex ">
+          <li
+            className="border-reCycle-green border-reCycle-green border text-reCycle-green rounded-xl px-6 cursor-pointer"
+            onClick={() => {
+              navigate('/connexion')
+            }}
+          >
+            Connexion
+          </li>
+          <li
+            className=" bg-reCycle-green text-white border-white rounded-xl px-6 cursor-pointer"
+            onClick={() => {
+              navigate('/inscription')
+            }}
+          >
+            S'inscrire
+          </li>
+        </ul>
+      ) : (
+        <div className="flex items-center justify-center w-1/2 md:flex mt-1">
+          <button
+            className=""
+            onClick={() => {
+              navigate('/profil')
+            }}
+          >
+            <i class="fa-regular fa-user text-dark-blue w-6 h-6 text-2xl mx-4"></i>
+          </button>
+          <button
+            className="mr-8"
+            onClick={() => {
+              handleLogout()
+            }}
+          >
+            <i class="fa-solid fa-right-from-bracket text-dark-blue w-6 h-6 text-2xl mx-4"></i>{' '}
+          </button>
+        </div>
+      )}
+      {isBurgerMenuVisible && !isConnected && (
         <div className="relative">
           <div className="w-screen bg-black-opacity-90 h-screen fixed left-0 top-0 z-20 flex flex-col justify-center ">
             <p
@@ -62,7 +99,8 @@ export const Header = () => {
             </button>
           </div>
         </div>
-      ) : (
+      )}
+      {!isBurgerMenuVisible && !isConnected && (
         <p
           className=" absolute top-8 right-14 md:hidden sm:hidden  "
           onClick={() => {

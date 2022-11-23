@@ -1,9 +1,11 @@
 import logo from '../../Assets/images/logo.png'
 import { checkEmail, checkPassword } from '../../Utils/Regex'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
+  const navigate = useNavigate()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -30,12 +32,17 @@ const Register = () => {
   }
   function handleRegister() {
     if (passOK && emailOk && confirmPassword) {
+      localStorage.setItem('isConnected', 'true')
       navigate('/')
     } else {
       alert('Problème avec vos identifiants')
     }
   }
-  const navigate = useNavigate()
+
+  let token = localStorage.getItem('isConnected')
+  if (token === 'true') {
+    navigate('/')
+  }
 
   return (
     <div>
