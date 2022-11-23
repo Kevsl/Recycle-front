@@ -30,8 +30,8 @@ export const Header = () => {
       >
         Recycle
       </p>
-      {!isConnected === true ? (
-        <ul className="flex items-center w-2/6  ml-auto justify-around hidden md:flex ">
+      {!isConnected ? (
+        <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex ">
           <li
             className="border-reCycle-green border-reCycle-green border text-reCycle-green rounded-xl px-6 cursor-pointer"
             onClick={() => {
@@ -50,27 +50,26 @@ export const Header = () => {
           </li>
         </ul>
       ) : (
-        <div className="flex items-center justify-between hidden md:flex">
+        <div className="flex items-center justify-center w-1/2 md:flex mt-1">
           <button
-            className="w-32"
+            className=""
             onClick={() => {
               navigate('/profil')
             }}
           >
-            <i class="fa-regular fa-user text-dark-blue w-6 h-6 text-2xl"></i>
+            <i class="fa-regular fa-user text-dark-blue w-6 h-6 text-2xl mx-4"></i>
           </button>
           <button
-            className="w-32"
+            className="mr-8"
             onClick={() => {
               handleLogout()
             }}
           >
-            <i class="fa-solid fa-right-from-bracket text-dark-blue w-6 h-6 text-2xl"></i>{' '}
+            <i class="fa-solid fa-right-from-bracket text-dark-blue w-6 h-6 text-2xl mx-4"></i>{' '}
           </button>
         </div>
       )}
-
-      {isBurgerMenuVisible ? (
+      {isBurgerMenuVisible && !isConnected && (
         <div className="relative">
           <div className="w-screen bg-black-opacity-90 h-screen fixed left-0 top-0 z-20 flex flex-col justify-center ">
             <p
@@ -101,7 +100,8 @@ export const Header = () => {
             </button>
           </div>
         </div>
-      ) : (
+      )}
+      {!isBurgerMenuVisible && !isConnected && (
         <p
           className=" absolute top-8 right-14 md:hidden sm:hidden  "
           onClick={() => {
