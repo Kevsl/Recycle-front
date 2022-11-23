@@ -6,9 +6,11 @@ import homeHeader from '../../Assets/images/homeHeader.png'
 import { SocialNetworks } from '../../Components/SocialNetworks'
 import { useNavigate } from 'react-router-dom'
 import { FooterMenu } from '../../Components/FooterMenu'
+import React, { useState, useEffect } from 'react'
 
 const Home = () => {
   const navigate = useNavigate()
+  const [isConnected, setIsConnected] = useState(false)
 
   return (
     <div className="font-Baloo">

@@ -12,7 +12,6 @@ export const Header = () => {
     if (token === 'true') {
       setIsConnected(true)
     }
-    console.log(isConnected)
   })
 
   function handleLogout() {
