@@ -30,7 +30,7 @@ export const Header = () => {
         Recycle
       </p>
       {!isConnected ? (
-        <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex ">
+        <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex  ">
           <li
             className="border-reCycle-green border-reCycle-green border text-reCycle-green rounded-xl px-6 cursor-pointer"
             onClick={() => {
@@ -40,7 +40,7 @@ export const Header = () => {
             Connexion
           </li>
           <li
-            className=" bg-reCycle-green text-white border-white rounded-xl px-6 cursor-pointer"
+            className=" bg-reCycle-green text-white border-white rounded-xl px-6 cursor-pointer ml-4"
             onClick={() => {
               navigate('/inscription')
             }}
