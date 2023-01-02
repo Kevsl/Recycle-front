@@ -2,6 +2,8 @@ import logo from '../../Assets/images/logo.png'
 import { checkEmail, checkPassword } from '../../Utils/Regex'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { loginFunction } from '../../Service/authService'
+import { Triangle } from 'react-loader-spinner'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -12,6 +14,7 @@ const Login = () => {
   const [emailOk, setEmailOk] = useState(false)
   const [passOK, setPassOk] = useState(false)
   const [isConnected, setIsConnected] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   function handleEmail(value) {
     checkEmail(value) === true ? setEmailOk(true) : setEmailOk(false)
@@ -20,18 +23,53 @@ const Login = () => {
     checkPassword(value) === true ? setPassOk(true) : setPassOk(false)
   }
   function handleLogin() {
-    if (emailOk && passOK) {
-      localStorage.setItem('isConnected', 'true')
-      navigate('/')
-    } else {
-      alert('Problème avec vos identifiants')
+    setIsLoading(true)
+    try {
+      loginFunction(email, password).then((res) => {
+        setIsLoading(false)
+        switch (res) {
+          case 200:
+            navigate('/')
+            break
+          case 500:
+            setErrorMessage('Problème avec le serveur')
+            break
+          case 'connexion':
+            setErrorMessage('Problème avec votre connexion')
+            break
+          case 401:
+            setErrorMessage('Problème avec vos identifiants')
+            break
+          default:
+            console.log(res)
+        }
+      })
+    } catch (e) {
+      console.log(e)
     }
-  }
 
-  let token = localStorage.getItem('isConnected')
-
-  if (token === 'true') {
-    navigate('/')
+    // loginFunction(email, password)
+    //   .then((res) => {
+    //     console.log(res)
+    //     switch (res) {
+    //       case 200:
+    //         navigate('/')
+    //         break
+    //       case 500:
+    //         setErrorMessage('Problème avec le serveur')
+    //         break
+    //       case 'connexion':
+    //         setErrorMessage('Problème avec votre connexion')
+    //         break
+    //       case 401:
+    //         setErrorMessage('Problème avec vos identifiants')
+    //         break
+    //       default:
+    //         console.log(res)
+    //     }
+    //     setIsLoading(false)
+    //   })
+    //   .catch((error) => console.log(error))
   }
 
   return (
@@ -88,13 +126,31 @@ const Login = () => {
               </p>
             )}
           </div>
+          {errorMessage.length > 0 && (
+            <p className="text-red-reCycle text-sm my-4 text-center">
+              {errorMessage}
+            </p>
+          )}
           <div className="w-full flex items-center justify-center flex-col">
-            <button
-              className="bg-reCycle-green text-white rounded-xl px-6 w-48 mx-auto mt-2"
-              onClick={() => handleLogin()}
-            >
-              Se connecter
-            </button>
+            {isLoading === true ? (
+              <Triangle
+                height="80"
+                width="80"
+                color="#91C788"
+                ariaLabel="triangle-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+              />
+            ) : (
+              <button
+                className="bg-reCycle-green text-white rounded-xl px-6 w-48 mx-auto mt-2"
+                onClick={() => handleLogin()}
+              >
+                Se connecter
+              </button>
+            )}
+
             <p className="mt-2">où</p>
             <button
               className="text-reCycle-green bg-white rounded-xl px-6 w-48 mx-auto border border-reCycle-green mt-2"
@@ -117,7 +173,6 @@ const Login = () => {
                 Remember me
               </label>
             </div>
-
             <div className="text-sm">
               <p>Forgot your password?</p>
             </div>
