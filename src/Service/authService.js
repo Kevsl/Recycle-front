@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export async function loginFunction(email, password) {
-  let url = `http://0.0.0/api/login_check`
+  let url = `${process.env.REACT_APP_API_URL}login_check`
   return axios
     .post(url, { email: email, password: password })
     .then((res) => {

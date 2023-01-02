@@ -1,49 +1,24 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react'
-import cleaningMachine from '../../Assets/images/cleaningMachine.jpg'
-import clothes from '../../Assets/images/clothes.jpg'
-import childs from '../../Assets/images/child.jpg'
-import furnishing from '../../Assets/images/furnishing.jpg'
-import electronic from '../../Assets/images/electronic.jpg'
-import hobbies from '../../Assets/images/hobbies.jpg'
-import gardening from '../../Assets/images/gardening.jpg'
-import petToy from '../../Assets/images/petToy.jpg'
-import { data } from 'autoprefixer'
+import { Triangle } from 'react-loader-spinner'
+import { getListings } from '../../Service/listingService'
 
 export const Ads = ({ title }) => {
-  const offers = [
-    { id: 1, name: 'Machine à laver', image: cleaningMachine },
-    { id: 2, name: 'Vêtements', image: clothes },
-    { id: 3, name: 'Jouet', image: childs },
-    { id: 4, name: 'Meuble', image: furnishing },
-    { id: 5, name: 'Walkman', image: electronic },
-    { id: 6, name: 'Rollers', image: hobbies },
-    { id: 7, name: 'Arrosoir', image: gardening },
-    { id: 8, name: 'Nonos', image: petToy },
-  ]
-  const asks = [
-    { id: 1, name: 'Nonos', image: petToy },
-    { id: 2, name: 'Arrosoir', image: gardening },
-
-    { id: 3, name: 'Rollers', image: hobbies },
-
-    { id: 4, name: 'Walkman', image: electronic },
-
-    { id: 5, name: 'Canapé', image: furnishing },
-
-    { id: 6, name: 'Jouet', image: childs },
-
-    { id: 7, name: 'Vêtements', image: clothes },
-
-    { id: 8, name: 'Machine à laver', image: cleaningMachine },
-  ]
-
-  const [isOffers, setIsOffers] = useState(true)
-
   const [datas, setDatas] = useState([])
+  const [isOffers, setIsOffers] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
-    isOffers ? setDatas(offers) : setDatas(asks)
+    setIsLoading(true)
+    isOffers
+      ? getListings().then((res) => {
+          setDatas(res)
+          setIsLoading(false)
+        })
+      : getListings().then((res) => {
+          setDatas(res)
+          setIsLoading(false)
+        })
   }, [isOffers])
 
   return (
@@ -77,23 +52,37 @@ export const Ads = ({ title }) => {
           </button>
         </div>
         <div className="flex items-center flex-wrap  ">
-          {datas.map((data) => {
-            return (
-              <div
-                key={data.id}
-                className="md:w-1/5 w-2/5 mx-5 h-24  my-8 md:h-32 rounded-xl relative  "
-              >
-                <img
-                  className="w-full object-cover h-full rounded-xl z-20"
-                  src={data.image}
-                  alt={data.name}
-                />
-                <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-sm rounded-b-xl">
-                  {data.name}
-                </p>
-              </div>
-            )
-          })}
+          {isLoading === true ? (
+            <div className="w-1/2 mx-auto flex items-center justify-center">
+              <Triangle
+                color="#91C788"
+                ariaLabel="triangle-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+                width="80"
+                height="80"
+              />
+            </div>
+          ) : (
+            datas.map((data) => {
+              return (
+                <div
+                  key={data.id}
+                  className="md:w-1/5 w-2/5 mx-5 h-24  my-8 md:h-32 rounded-xl relative  "
+                >
+                  <img
+                    className="w-full object-cover h-full rounded-xl z-20"
+                    src={data.listingImage}
+                    alt={data.name}
+                  />
+                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-sm rounded-b-xl">
+                    {data.title}
+                  </p>
+                </div>
+              )
+            })
+          )}
         </div>
       </div>
     </div>
