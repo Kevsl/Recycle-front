@@ -1,5 +1,5 @@
-import logo from '../../Assets/images/logo.png'
-import { checkEmail, checkPassword } from '../../Utils/Regex'
+import logo from '../Assets/images/logo.png'
+import { checkEmail, checkPassword } from '../Utils/Regex'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 

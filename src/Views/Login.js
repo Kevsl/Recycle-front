@@ -1,13 +1,12 @@
-import logo from '../../Assets/images/logo.png'
-import { checkEmail, checkPassword } from '../../Utils/Regex'
+import logo from '../Assets/images/logo.png'
+import { checkEmail, checkPassword } from '../Utils/Regex'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { loginFunction } from '../../Service/authService'
+import { loginFunction } from '../Service/authService'
 import { Triangle } from 'react-loader-spinner'
 
 const Login = () => {
   const navigate = useNavigate()
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)

@@ -1,18 +1,14 @@
 import axios from 'axios'
+import { apiUrl } from '../url'
 
 export async function loginFunction(email, password) {
-  let url = `${process.env.REACT_APP_API_URL}login_check`
-  return axios
-    .post(url, { email: email, password: password })
-    .then((res) => {
-      localStorage.setItem('token', res.data.token)
-      return res.status
-    })
-    .catch(function (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        return error.response.status
-      }
-    })
+  let url = `${apiUrl}login`
+
+  return axios.get(url, { email: email, password: password }).then((res) => {
+    localStorage.setItem('username', res.data.username)
+    localStorage.setItem('token', res.data.token)
+    localStorage.setItem('avatar', res.data.avatar)
+    localStorage.setItem('id', res.data.id)
+    return res.status
+  })
 }

@@ -40,7 +40,7 @@ export const Categories = () => {
                 >
                   <img
                     className="w-full object-cover h-full rounded-xl z-20"
-                    src={categorie.image}
+                    src={categorie.categoryImage}
                     alt={categorie.category}
                   />
                   <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs md:text-sm rounded-b-xl">
