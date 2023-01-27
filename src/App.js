@@ -1,12 +1,22 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './Views/Home/Home'
-import Login from './Views/Login/Login'
-import Register from './Views/Register/Register'
-import Profil from './Views/Profil/Profil'
-
-import { Navigate } from 'react-router-dom'
+import Home from './Views/Home'
+import Login from './Views/Login'
+import Register from './Views/Register'
+import Profil from './Views/Profil'
+import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import Messages from './Views/Messages'
 
 function App() {
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    let token = localStorage.getItem('token')
+    if (!token) {
+      navigate('/connexion')
+    }
+  }, [])
+
   return (
     <div className="App">
       <Routes>
@@ -14,6 +24,7 @@ function App() {
         <Route path="/connexion" element={<Login />} />
         <Route path="/inscription" element={<Register />} />
         <Route path="/profil" element={<Profil />} />
+        <Route path="/messages" element={<Messages />} />
       </Routes>
     </div>
   )

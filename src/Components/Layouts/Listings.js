@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { getListings } from '../../Service/listingService'
 import { Triangle } from 'react-loader-spinner'
 
-export const Ads = () => {
+export const listings = () => {
   const [listings, setListings] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -20,7 +20,7 @@ export const Ads = () => {
         <h2 className="text-dark-blue ml-4 md:ml-12 ">Toutes les catégories</h2>
         <div className="flex items-center flex-wrap block ">
           {isLoading === true ? (
-            <div className="w-1/2 mx-auto flex items-center justify-center overflow-y-scroll ">
+            <div className="w-1/2 mx-auto flex items-center justify-center">
               <Triangle
                 color="#91C788"
                 ariaLabel="triangle-loading"
@@ -33,6 +33,7 @@ export const Ads = () => {
             </div>
           ) : (
             listings.map((listing) => {
+              console.log(listing)
               return (
                 <div
                   key={listing.id}
@@ -40,11 +41,14 @@ export const Ads = () => {
                 >
                   <img
                     className="w-full object-cover h-full rounded-xl z-20"
-                    src="https://images.unsplash.com/photo-1516946870798-f970a32afc8c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTJ8fHRoaW5nfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=800&q=60"
+                    src={listing.images[0]}
                     alt={listing.title}
                   />
-                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs rounded-b-xl">
-                    {listing.title} <br /> {listing.city}
+                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs md:text-sm rounded-b-xl">
+                    {listing.title}
+                  </p>
+                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs md:text-sm rounded-b-xl">
+                    {listing.city[0]}
                   </p>
                 </div>
               )
