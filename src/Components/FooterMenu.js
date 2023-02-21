@@ -36,21 +36,21 @@ export const FooterMenu = () => {
             navigate('/publier')
           }}
         >
-          <i class="fa-solid fa-plus text-white text-2xl "></i>
+          <i className="fa-solid fa-plus text-white text-2xl "></i>
         </button>
         <button
           onClick={() => {
             navigate('/')
           }}
         >
-          <i class="fa-solid fa-magnifying-glass text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-magnifying-glass text-reCycle-green text-2xl"></i>
         </button>
         <button
           onClick={() => {
             navigate('/profil')
           }}
         >
-          <i class="fa-solid fa-user-pen mx-2 text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-user-pen mx-2 text-reCycle-green text-2xl"></i>
         </button>
       </div>
     )

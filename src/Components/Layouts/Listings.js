@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { getListings } from '../../Service/listingService'
 import { Triangle } from 'react-loader-spinner'
+import { useNavigate } from 'react-router-dom'
 
 export const listings = () => {
   const [listings, setListings] = useState([])
   const [isLoading, setIsLoading] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setIsLoading(true)
@@ -33,11 +35,10 @@ export const listings = () => {
             </div>
           ) : (
             listings.map((listing) => {
-              console.log(listing)
               return (
                 <div
                   key={listing.id}
-                  className="md:w-1/5 w-2/5 mx-5 h-24  my-8 md:h-32 rounded-xl relative  "
+                  className="md:w-1/5 w-2/5 mx-5 h-24  my-8 md:h-32 rounded-xl relative cursor-pointer "
                 >
                   <img
                     className="w-full object-cover h-full rounded-xl z-20"

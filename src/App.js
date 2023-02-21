@@ -6,6 +6,7 @@ import Profil from './Views/Profil'
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import Messages from './Views/Messages'
+import Listing from './Views/Listing'
 
 function App() {
   const navigate = useNavigate()
@@ -25,6 +26,7 @@ function App() {
         <Route path="/inscription" element={<Register />} />
         <Route path="/profil" element={<Profil />} />
         <Route path="/messages" element={<Messages />} />
+        <Route path="/listing" element={<Listing />} />
       </Routes>
     </div>
   )

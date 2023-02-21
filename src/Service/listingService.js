@@ -8,3 +8,12 @@ export async function getListings() {
     return res.data
   })
 }
+
+export async function getListing(id) {
+  let url = `${symfoUrl}listing/${id}`
+
+  return axios.get(url).then((res) => {
+    console.log(res.data)
+    return res.data
+  })
+}

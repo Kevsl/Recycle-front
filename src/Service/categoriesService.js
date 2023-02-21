@@ -1,7 +1,8 @@
 import axios from 'axios'
-import { apiUrl } from '../url'
+import { symfoUrl } from '../url'
+
 export async function getCategories() {
-  let url = `${apiUrl}categories`
+  let url = `${symfoUrl}listingCategory`
 
   return axios.get(url).then((res) => {
     return res.data
