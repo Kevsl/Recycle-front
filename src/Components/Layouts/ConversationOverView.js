@@ -58,7 +58,7 @@ export const ConversationOverview = () => {
                       {specific.contact}
                     </p>
                   </div>
-                  <p className="text-dark-blue ml-16 text-gray-reCycle text-sm italic overflow-hidden">
+                  <p className="text-dark-blue ml-16 text-gray-recycle text-sm italic overflow-hidden">
                     {specific.lastMessage}
                   </p>
                 </div>

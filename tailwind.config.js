@@ -24,12 +24,12 @@ module.exports = {
       white: '#fff',
       or: '#FAF3BF',
       black: '#14213D',
-      'reCycle-green': '#91C788',
+      'green-recycle': '#91C788',
       'black-opacity-50': 'rgba(0,0,0,0.5)',
       'black-opacity-90': 'rgba(0,0,0,0.9)',
-      'gray-reCycle': '#6A6F7D',
-      'red-reCycle': '#DA2D2D',
-      'pink-reCycle': '#FA928F',
+      'gray-recycle': '#6A6F7D',
+      'red-recycle': '#DA2D2D',
+      'pink-recycle': '#FA928F',
     },
 
     extend: {

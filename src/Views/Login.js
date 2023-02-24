@@ -85,7 +85,7 @@ const Login = () => {
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
               {email.length > 0 && emailOk === false && (
-                <p className="text-xs text-red-reCycle">
+                <p className="text-xs text-red-recycle">
                   Le format de l’email est incorrect
                 </p>
               )}
@@ -119,14 +119,14 @@ const Login = () => {
               />
             </div>
             {password.length > 0 && passOK === false && (
-              <p className="text-xs text-red-reCycle">
+              <p className="text-xs text-red-recycle">
                 Le mot de passe doit avoir 1 majuscule,1minuscule,1 caractère
                 spécial, 8 caractères minimum
               </p>
             )}
           </div>
           {errorMessage.length > 0 && (
-            <p className="text-red-reCycle text-sm my-4 text-center">
+            <p className="text-red-recycle text-sm my-4 text-center">
               {errorMessage}
             </p>
           )}
@@ -143,7 +143,7 @@ const Login = () => {
               />
             ) : (
               <button
-                className="bg-reCycle-green text-white rounded-xl px-6 w-48 mx-auto mt-2"
+                className="bg-green-recycle text-white rounded-xl px-6 w-48 mx-auto mt-2"
                 onClick={() => handleLogin()}
               >
                 Se connecter
@@ -152,7 +152,7 @@ const Login = () => {
 
             <p className="mt-2">où</p>
             <button
-              className="text-reCycle-green bg-white rounded-xl px-6 w-48 mx-auto border border-reCycle-green mt-2"
+              className="text-green-recycle bg-white rounded-xl px-6 w-48 mx-auto border border-green-recycle mt-2"
               onClick={() => {
                 navigate('/inscription')
               }}

@@ -20,7 +20,7 @@ export const FooterMenu = () => {
             navigate('/')
           }}
         >
-          <i className="fa-solid fa-house-chimney text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-house-chimney text-green-recycle text-2xl"></i>
         </button>
         <button
           className=""
@@ -28,10 +28,10 @@ export const FooterMenu = () => {
             navigate('/messages')
           }}
         >
-          <i className="fa-regular fa-message text-reCycle-green text-2xl "></i>
+          <i className="fa-regular fa-message text-green-recycle text-2xl "></i>
         </button>
         <button
-          className="bg-reCycle-green rounded-full mb-4 w-12 h-12 mt-2"
+          className="bg-green-recycle rounded-full mb-4 w-12 h-12 mt-2"
           onClick={() => {
             navigate('/publier')
           }}
@@ -43,14 +43,14 @@ export const FooterMenu = () => {
             navigate('/')
           }}
         >
-          <i className="fa-solid fa-magnifying-glass text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-magnifying-glass text-green-recycle text-2xl"></i>
         </button>
         <button
           onClick={() => {
             navigate('/profil')
           }}
         >
-          <i className="fa-solid fa-user-pen mx-2 text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-user-pen mx-2 text-green-recycle text-2xl"></i>
         </button>
       </div>
     )

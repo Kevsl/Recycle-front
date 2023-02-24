@@ -34,12 +34,12 @@ const Home = () => {
         <h3 className="text-lg text-center">
           Créez un compte et rejoignez notre communauté.
         </h3>
-        <p className="text-xs text-center text-gray-reCycle">
+        <p className="text-xs text-center text-gray-recycle">
           Un compte est nécessaire pour communiquer avec les vendeurs et publier
           une annonce.
         </p>
         <button
-          className="bg-reCycle-green text-white rounded-xl px-6 w-48 mx-auto mt-6"
+          className="bg-green-recycle text-white rounded-xl px-6 w-48 mx-auto mt-6"
           onClick={() => {
             navigate('/inscription')
           }}

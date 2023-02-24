@@ -23,7 +23,7 @@ const Profil = () => {
             Messagerie
           </button>
           <button
-            className="w-48 border rounded-xl border-dark-Blue py-2 text-center bg-pink-reCycle text-white"
+            className="w-48 border rounded-xl border-dark-Blue py-2 text-center bg-pink-recycle text-white"
             onClick={() => {
               console.log('oups la messagerie n existe pas encore.')
             }}

@@ -36,7 +36,7 @@ const Listing = () => {
   }
   return (
     <div className="font-Baloo">
-      <div className="bg-reCycle-green w-4/6 mx-auto h-72">
+      <div className="bg-green-recycle w-4/6 mx-auto h-72">
         {listingData &&
           listingData.map((data) => {
             return (
