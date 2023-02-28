@@ -25,7 +25,7 @@ const Profil = () => {
           <button
             className="w-48 border rounded-xl border-dark-Blue py-2 text-center bg-pink-recycle text-white"
             onClick={() => {
-              console.log('oups la messagerie n existe pas encore.')
+              navigate('/creation')
             }}
           >
             <i className="fa-solid fa-plus mx-2"></i>
@@ -33,9 +33,7 @@ const Profil = () => {
           </button>
           <button
             className="w-48 border rounded-xl border-dark-Blue py-2 text-center"
-            onClick={() => {
-              console.log('oups la messagerie n existe pas encore.')
-            }}
+            onClick={() => {}}
           >
             <i className="fa-solid fa-user-pen mx-2"></i> Editer mon profil
           </button>

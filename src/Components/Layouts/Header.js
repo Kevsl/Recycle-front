@@ -21,7 +21,7 @@ export const Header = () => {
   }
 
   return (
-    <div className="flex flex-row items-center fixed top-0 left-0  bg-white justify-between w-90  py-4 px-5 font-Baloo ">
+    <div className="flex flex-row items-center fixed top-0 left-0  bg-white justify-between w-full  py-4 px-5 font-Baloo z-50 ">
       <p
         className="text-green-recycle text-3xl font-Baloo cursor-pointer mt-2 md:mt-px"
         onClick={() => {
@@ -33,7 +33,7 @@ export const Header = () => {
       {!isConnected ? (
         <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex  ">
           <li
-            className="border-green-recycle border-green-recycle border text-green-recycle rounded-xl px-6 cursor-pointer"
+            className="border-green-recycle border text-green-recycle rounded-xl px-6 cursor-pointer"
             onClick={() => {
               navigate('/connexion')
             }}
@@ -50,7 +50,7 @@ export const Header = () => {
           </li>
         </ul>
       ) : (
-        <div className="flex items-center justify-center w-1/2 md:flex mt-1">
+        <div className="flex items-center justify-center w-1/3 md:flex mt-1">
           <button
             className=""
             onClick={() => {
@@ -91,7 +91,7 @@ export const Header = () => {
               Connexion
             </button>
             <button
-              className="bg-green-recycle text-white rounded-xl px-6 w-1/2 mx-auto mt-6 cursor-pointer"
+              className="bg-green-recycle text-white rounded-xl px-6 w-1/2 mx-auto ^ cursor-pointer"
               onClick={() => {
                 navigate('/inscription')
               }}

@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div className="font-Baloo">
       <Header />
-      <h2 className="text-dark-blue absolute top-20 text-xl ml-14 md:text-2xl md:top-28 mt-64">
+      <h2 className="text-dark-blue absolute top-60 text-xl ml-14 md:text-2xl md:top-28 ">
         Partager, recevoir, préserver...
       </h2>
       <img

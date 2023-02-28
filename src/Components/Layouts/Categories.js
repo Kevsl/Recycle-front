@@ -18,9 +18,9 @@ export const Categories = () => {
     <div className="font-Baloo block mb-12  categories">
       <div className="w-90 mx-5  mt-16">
         <h2 className="text-dark-blue ml-4 md:ml-12 ">Toutes les catégories</h2>
-        <div className="flex items-center flex-wrap block ">
+        <div className="flex items-center flex-wrap justify-between">
           {isLoading === true ? (
-            <div className="w-1/2 mx-auto flex items-center justify-center">
+            <div className="w-1/2 mx-auto flex items-center justify-evenly">
               <Triangle
                 color="#91C788"
                 ariaLabel="triangle-loading"
@@ -36,7 +36,7 @@ export const Categories = () => {
               return (
                 <div
                   key={categorie.id}
-                  className="md:w-1/5 w-2/5 mx-5 h-24  my-8 md:h-32 rounded-xl relative  "
+                  className="w-2/5 mx-5 md:w-1/4 md:mx-9 h-24  my-8 md:h-32 rounded-xl relative  "
                 >
                   <img
                     className="w-full object-cover h-full rounded-xl z-20"

@@ -2,7 +2,7 @@ import axios from 'axios'
 import { symfoUrl } from '../url'
 
 export async function getListings() {
-  let url = `${symfoUrl}listing`
+  let url = `${symfoUrl}listing/images`
 
   return axios.get(url).then((res) => {
     return res.data

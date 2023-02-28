@@ -33,7 +33,7 @@ export const FooterMenu = () => {
         <button
           className="bg-green-recycle rounded-full mb-4 w-12 h-12 mt-2"
           onClick={() => {
-            navigate('/publier')
+            navigate('/creation')
           }}
         >
           <i className="fa-solid fa-plus text-white text-2xl "></i>

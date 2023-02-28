@@ -17,12 +17,12 @@ export const listings = () => {
   }, [])
 
   return (
-    <div className="font-Baloo block mb-12  listings">
-      <div className="w-90 mx-5  mt-16">
-        <h2 className="text-dark-blue ml-4 md:ml-12 ">Toutes les catégories</h2>
-        <div className="flex items-center flex-wrap block ">
+    <div className="font-Baloo block mb-12 listings">
+      <div className="w-90 mx-5 mt-16">
+        <h2 className="text-dark-blue ml-4 md:ml-12">Toutes les catégories</h2>
+        <div className="flex items-center flex-wrap">
           {isLoading === true ? (
-            <div className="w-1/2 mx-auto flex items-center justify-center">
+            <div className="w-1/2 mx-auto flex items-center justify-between">
               <Triangle
                 color="#91C788"
                 ariaLabel="triangle-loading"
@@ -38,7 +38,7 @@ export const listings = () => {
               return (
                 <div
                   key={listing.id}
-                  className="md:w-1/5 w-2/5 mx-5 h-24  my-8 md:h-32 rounded-xl relative cursor-pointer "
+                  className="md:w-2/5 w-2/5 mx-5  my-8 md:h-32 rounded-xl relative cursor-pointer "
                 >
                   <img
                     className="w-full object-cover h-full rounded-xl z-20"
