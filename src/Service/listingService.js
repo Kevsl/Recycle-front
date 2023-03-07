@@ -3,7 +3,6 @@ import { symfoUrl } from '../url'
 
 export async function getListings() {
   let url = `${symfoUrl}listing/images`
-
   return axios.get(url).then((res) => {
     return res.data
   })
@@ -11,9 +10,7 @@ export async function getListings() {
 
 export async function getListing(id) {
   let url = `${symfoUrl}listing/${id}`
-
   return axios.get(url).then((res) => {
-    console.log(res.data)
     return res.data
   })
 }
@@ -26,6 +23,20 @@ export async function getListingTypes() {
 
 export async function getListingCategories() {
   let url = `${symfoUrl}listingCategory`
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+export async function getListingByCategory(id) {
+  let url = `${symfoUrl}listing/images/category/${id}`
+
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+
+export async function getMyListings(id) {
+  let url = `${symfoUrl}listing/me/${id}`
 
   return axios.get(url).then((res) => {
     return res.data

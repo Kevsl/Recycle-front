@@ -41,10 +41,13 @@ const Login = () => {
             break
           default:
             console.log(res)
+            setIsLoading(false)
         }
+        setIsLoading(false)
       })
     } catch (e) {
       console.log(e)
+      setIsLoading(false)
     }
 
     // loginFunction(email, password)

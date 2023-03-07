@@ -8,3 +8,10 @@ export async function getCategories() {
     return res.data
   })
 }
+export async function getSubCategoriesByCategoryId(id) {
+  let url = `${symfoUrl}subCategory/category/${id}`
+
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}

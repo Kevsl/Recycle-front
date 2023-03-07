@@ -77,15 +77,20 @@ const Listing = () => {
                   <div className="flex items-center justify-between my-8">
                     <div className=" flex items-center">
                       <img
-                        src={localStorage.getItem('avatar')}
+                        src={data.photo}
                         className="w-16 h-16 rounded-full object-cover"
                       />
-                      <p className="md:ml-8 ml-2">
-                        Inscrit(e) le: <br />
-                        <span className="text-gray-light">
-                          {new Date().toLocaleDateString('fr-fr')}
-                        </span>
-                      </p>
+                      <div>
+                        <p className="md:ml-8 ml-2">{data.name}</p>
+                        <p className="md:ml-8 ml-2 text-xs text-gray-light ">
+                          Inscrit(e) le: <br />
+                          <span className="">
+                            {new Date(data.createdAt.date).toLocaleDateString(
+                              'fr-fr'
+                            )}
+                          </span>
+                        </p>
+                      </div>
                     </div>
                     <button className="bg-green-recycle text-white px-2 py-2 rounded-full cursor-pointer">
                       Contacter
@@ -94,17 +99,21 @@ const Listing = () => {
                   <div>
                     <div className="flex items-center px-4 justify-between my-4">
                       <div>
-                        <p>Lieu</p>
+                        <p className="text-gray-dark-recycle">Lieu</p>
                         <p>{data.city}</p>
                       </div>
                       <div>
-                        <p>Type</p>
+                        <p className="text-gray-dark-recycle">Type</p>
                         <p>{data.fkListingType}</p>
                       </div>
                     </div>
                     <div className="mb-24">
                       <p className="px-4">
-                        Description : <br />
+                        <span className="text-gray-dark-recycle">
+                          {' '}
+                          Description :{' '}
+                        </span>
+                        <br />
                         {data.description}
                       </p>
                     </div>

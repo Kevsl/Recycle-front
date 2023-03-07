@@ -1,10 +1,11 @@
 import axios from 'axios'
-import { apiUrl } from '../url'
+import { apiUrl, symfoUrl } from '../url'
 
 export async function loginFunction(email, password) {
-  let url = `${apiUrl}login`
+  let url = 'http://127.0.0.1/api/login_check'
 
-  return axios.get(url, { email: email, password: password }).then((res) => {
+  return axios.post(url, { email: email, password: password }).then((res) => {
+    console.log(res)
     localStorage.setItem('username', res.data.username)
     localStorage.setItem('token', res.data.token)
     localStorage.setItem('avatar', res.data.avatar)

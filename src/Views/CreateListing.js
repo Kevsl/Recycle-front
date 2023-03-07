@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { getSubCategoriesByCategoryId } from '../Service/categoriesService'
 import {
   createListing,
   getListingCategories,
@@ -9,9 +10,12 @@ import { AcceptMaxFiles } from '../Utils/dragNDrop'
 const CreateListing = () => {
   const [listingTypeList, setListingTypeList] = useState([])
   const [listingCategories, setListingCategories] = useState([])
+  const [listingSubCategoriesList, setListingSubCategoriesList] = useState([])
+
   const [listingTypeId, setListingTypeId] = useState('')
   const [listingSubTypeId, setListingSubTypeId] = useState(1)
   const [listingCategoryId, setListingCategoryId] = useState('')
+  const [listingSubCategoryId, setListingSubCategoryId] = useState('')
 
   const [zip, setZip] = useState('')
   const [city, setCity] = useState('')
@@ -52,6 +56,12 @@ const CreateListing = () => {
       setListingCategories(res)
     })
   }, [])
+
+  useEffect(() => {
+    getSubCategoriesByCategoryId(listingCategoryId).then((res) => {
+      setListingSubCategoriesList(res)
+    })
+  }, [listingCategoryId])
 
   return (
     <div className="flex flex-col justify-center w-5/6 mx-auto font-Baloo max-w-xl border border-solid px-4 py-4 rounded-xl my-4 border-green-recycle">
@@ -123,6 +133,32 @@ const CreateListing = () => {
                     className="mx-2 border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg  peer-checked:bg-green-recycle peer-checked:text-white  my-4 cursor-pointer "
                   >
                     {listingCategory.category}
+                  </label>
+                </div>
+              )
+            })}
+        </div>
+        <div className="flex items-center flex-wrap justify-center my-4">
+          {listingSubCategoriesList &&
+            listingSubCategoriesList.map((listingSubCategory) => {
+              return (
+                <div className="h-21 my-4" key={listingSubCategory.id}>
+                  <input
+                    id={`listing-category-${listingSubCategory.id}`}
+                    type="radio"
+                    name="listing-category"
+                    className="peer hidden"
+                    value={`listing-category-${listingSubCategory.id}`}
+                    aria-label={listingSubCategory.category}
+                    onClick={() => {
+                      setListingSubCategoryId(listingSubCategory.id)
+                    }}
+                  />
+                  <label
+                    htmlFor={`listing-category-${listingSubCategory.id}`}
+                    className="mx-2 border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg  peer-checked:bg-green-recycle peer-checked:text-white  my-4 cursor-pointer "
+                  >
+                    {listingSubCategory.category}
                   </label>
                 </div>
               )
