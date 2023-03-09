@@ -68,12 +68,14 @@ export async function getMyListings(id) {
 
 export async function createListing(
   title,
+  description,
   listingTypeId,
-  listingCategoryId,
   listingSubTypeId,
-  zip,
+  listingCategoryId,
+  listingSubCategoryId,
+  postCode,
   city,
-  description
+  coordinates
 ) {
   let url = `${symfoUrl}listing/new`
 
@@ -84,7 +86,7 @@ export async function createListing(
       {
         city: city,
         street: 'test',
-        country: 'test',
+        country: 'France',
         description: description,
         title: title,
         fkListingCategory: listingCategoryId,
@@ -92,9 +94,9 @@ export async function createListing(
         fkListingType: listingTypeId,
         fkSubListingType: listingSubTypeId,
         fkProfile: 1,
-        gpsCoordinates: 1,
-        postCode: zip,
-        streetName: 'Test',
+        gpsCoordinates: coordinates,
+        postCode: postCode,
+        streetName: 'to remove',
         streetNumber: 1,
       }
     )

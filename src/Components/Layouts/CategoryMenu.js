@@ -29,9 +29,11 @@ export const CategoryMenu = ({
   }, [])
 
   useEffect(() => {
-    getSubCategoriesByCategoryId(listingCategoryId).then((res) => {
-      setListingSubCategoriesList(res)
-    })
+    if (listingCategoryId) {
+      getSubCategoriesByCategoryId(listingCategoryId).then((res) => {
+        setListingSubCategoriesList(res)
+      })
+    }
   }, [listingCategoryId])
   return (
     <>

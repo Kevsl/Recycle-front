@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { FooterMenu } from '../Components/FooterMenu'
 import { CategoryMenu } from '../Components/Layouts/CategoryMenu'
 import { Footer } from '../Components/Layouts/Footer'
 import { Header } from '../Components/Layouts/Header'
-import { createListing } from '../Service/listingService'
+import { createListing, getCitiesList } from '../Service/listingService'
 import { AcceptMaxFiles } from '../Utils/dragNDrop'
 
 const CreateListing = () => {
@@ -15,6 +16,11 @@ const CreateListing = () => {
   const [listingSubTypeId, setListingSubTypeId] = useState(1)
   const [listingCategoryId, setListingCategoryId] = useState('')
   const [listingSubCategoryId, setListingSubCategoryId] = useState('')
+  const [coordinates, setCoordinates] = useState('')
+  const [coordinatesList, setCoordinatesList] = useState([])
+  const [query, setQuery] = useState([])
+  const [queryFound, setQueryFound] = useState(false)
+  const navigate = useNavigate()
 
   function handleSubmit() {
     if (
@@ -28,17 +34,38 @@ const CreateListing = () => {
     ) {
       createListing(
         title,
+        description,
         listingTypeId,
-        listingCategoryId,
         listingSubTypeId,
+        listingCategoryId,
+        listingSubCategoryId,
         zip,
         city,
-        description,
-        title
+        coordinates
       ).then((res) => {
         console.log(res)
+        navigate('/')
       })
     }
+  }
+  useEffect(() => {
+    if (query.length > 2 && !queryFound) {
+      getCitiesList(query).then((res) => {
+        setCoordinatesList(res)
+      })
+    }
+  }, [query, queryFound])
+
+  function handleCity(resultCity) {
+    setCity(resultCity.properties.label)
+    setCoordinates(
+      resultCity.geometry.coordinates[0] +
+        '.' +
+        resultCity.geometry.coordinates[1]
+    )
+    setZip(resultCity.properties.postcode)
+    setQueryFound(true)
+    setCoordinatesList([])
   }
 
   return (
@@ -53,7 +80,7 @@ const CreateListing = () => {
 
         <input
           type="text"
-          className="w-2/3 text-center mx-auto border-b border-gray-recycle text-gray-recycle mt-10 mb-4 font-Baloo font-bold"
+          className="w-2/3 indent-5 mx-auto border-b border-gray-recycle text-gray-recycle mt-10 mb-4 font-Baloo font-bold"
           placeholder="Titre de l'annonce"
           onChange={(e) => {
             setTitle(e.target.value)
@@ -76,28 +103,39 @@ const CreateListing = () => {
           <p className="text-gray-recycle">Lieu de l'annonce</p>
           <input
             type="text"
-            placeholder="CP"
-            className="border-b-2 border-green-recycle w-72"
-            maxLength={5}
+            placeholder="Localisation"
+            className="border border-gray-recycle rounded-lg mx-4 w-64 indent-5 text-gray-recycle mt-6"
             onChange={(e) => {
-              setZip(e.target.value)
+              setQuery(e.target.value)
             }}
+            value={queryFound ? city : query}
           />
-          <input
-            type="text"
-            placeholder="Ville"
-            className="border-b-2 border-green-recycle w-72"
-            onChange={(e) => {
-              setCity(e.target.value)
-            }}
-          />
+          {coordinatesList.length > 0 && (
+            <div className="flex items-center justify-center mt-4">
+              <ul className=" border border-gray-recycle text-gray-recycle rounded-lg w-64 bg-white -mt-2">
+                {coordinatesList.map((resultCity) => {
+                  return (
+                    <li
+                      className="my-2 w-full pl-5"
+                      key={resultCity.properties.score}
+                      onClick={() => {
+                        handleCity(resultCity)
+                      }}
+                    >
+                      {`${resultCity.properties.label} ${resultCity.properties.postcode}`}
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+          )}
         </div>
         <div className="flex flex-col justify-center max-w-xl mx-auto">
           <p className="text-gray-recycle">Description</p>
           <textarea
             rows={5}
             cols={33}
-            className="border border-solid border-dark-blue rounded-lg max-w-xl"
+            className="border border-solid border-dark-blue rounded-lg max-w-xl text-gray-recycle indent-5"
             onChange={(e) => {
               setDescription(e.target.value)
             }}
