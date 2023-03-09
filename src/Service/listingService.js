@@ -7,6 +7,29 @@ export async function getListings() {
     return res.data
   })
 }
+export async function getCustomListings(
+  listingTypeId,
+  listingSubTypeId,
+  listingCategoryId,
+  listingSubCategoryId,
+  city,
+  coordinates,
+  round
+) {
+  let url = `${symfoUrl}listing/images`
+  return axios
+    .get(url, {
+      fkType: listingTypeId,
+      fkSubType: listingSubTypeId,
+      fkCategory: listingCategoryId,
+      fkSubCategory: listingSubCategoryId,
+      city: city,
+      round: round,
+    })
+    .then((res) => {
+      return res.data
+    })
+}
 
 export async function getListing(id) {
   let url = `${symfoUrl}listing/${id}`
@@ -78,4 +101,10 @@ export async function createListing(
     .then((res) => {
       return res.status
     })
+}
+export async function getCitiesList(id) {
+  let url = `https://api-adresse.data.gouv.fr/search/?q=${id}&type=municipality`
+  return axios.get(url).then((res) => {
+    return res.data.features
+  })
 }
