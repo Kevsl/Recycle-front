@@ -28,7 +28,7 @@ export const Ads = ({ listings, isLoading, title }) => {
               return (
                 <div
                   key={listing.id}
-                  className="w-40 sm:w-1/3 md:mx-5 mx- my-8  rounded-xl relative cursor-pointer "
+                  className="md:w-1/4 md:mx-1 mx- my-8  rounded-xl relative cursor-pointer "
                   onClick={() => {
                     navigate('/listing', { state: { id: listing.id } })
                   }}

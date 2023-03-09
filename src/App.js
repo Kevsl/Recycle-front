@@ -8,6 +8,7 @@ import Messages from './Views/Messages'
 import Listing from './Views/Listing'
 import CreateListing from './Views/CreateListing'
 import ListingsCategory from './Views/ListingsByCategory'
+import Search from './Views/Search'
 
 function App() {
   const navigate = useNavigate()
@@ -29,6 +30,8 @@ function App() {
         <Route path="/messages" element={<Messages />} />
         <Route path="/listing" element={<Listing />} />
         <Route path="/creation" element={<CreateListing />} />
+        <Route path="/recherche" element={<Search />} />
+
         <Route path="/categorie/:id" element={<ListingsCategory />} />
       </Routes>
     </div>

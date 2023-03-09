@@ -36,7 +36,18 @@ const Home = () => {
       <div>
         <Categories />
       </div>
+
       <div className="w-full bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
+      <div className="flex items-center justify-center my-6">
+        <button
+          className="text-green-recycle border border-green-recycle bg-white w-48 text-center h-12 py-auto rounded-lg"
+          onClick={() => {
+            navigate('/recherche')
+          }}
+        >
+          Recherche d'annonces
+        </button>
+      </div>
       <div>
         {listings && (
           <Ads
