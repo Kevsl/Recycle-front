@@ -31,12 +31,12 @@ export const ConversationOverview = () => {
   return (
     <div className=" w-full md:justify-around md:flex items-center">
       {isMessengerVisible && (
-        <div className=" w-full my-16  h-screen md:w-1/4  overflow-scroll py-4 rounded-xl">
+        <div className=" w-full my-16  h-screen md:w-1/4  overflow-scroll  rounded-xl  md:border md:border-solid md-border-sm md:border-gray-light md:rounded-xl md:mt-24 text-ellipsis">
           {conversations &&
             conversations.map((specific) => {
               return (
                 <div
-                  className="my-8  rounded-lg"
+                  className="my-4 pb-2   border-b-2 border-gray-recycle"
                   onClick={() => {
                     setContactId('123')
                     setContactName(specific.contact)
@@ -58,7 +58,7 @@ export const ConversationOverview = () => {
                       {specific.contact}
                     </p>
                   </div>
-                  <p className="text-dark-blue ml-16 text-gray-recycle text-sm italic overflow-hidden">
+                  <p className=" ml-16 text-gray-recycle text-sm italic overflow-hidden text-ellipsis truncate">
                     {specific.lastMessage}
                   </p>
                 </div>
@@ -78,7 +78,7 @@ export const ConversationOverview = () => {
           </button>
           {messages &&
             messages.map((message) => {
-              return message.sender == ownerId ? (
+              return message.sender === ownerId ? (
                 <div
                   className="my-8 border-t-[1px] border-dark-blue rounded-lg"
                   key={message.id}

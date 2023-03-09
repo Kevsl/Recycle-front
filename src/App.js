@@ -1,10 +1,9 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import Home from './Views/Home'
 import Login from './Views/Login'
 import Register from './Views/Register'
 import Profil from './Views/Profil'
-import { useNavigate } from 'react-router-dom'
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Messages from './Views/Messages'
 import Listing from './Views/Listing'
 import CreateListing from './Views/CreateListing'
@@ -18,7 +17,7 @@ function App() {
     if (!token) {
       navigate('/connexion')
     }
-  }, [])
+  }, [navigate])
 
   return (
     <div className="App">

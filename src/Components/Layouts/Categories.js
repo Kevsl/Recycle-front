@@ -48,7 +48,7 @@ export const Categories = () => {
                   }
                 >
                   <img
-                    className="w-full object-cover md:h-full max-h-24 rounded-xl z-20"
+                    className="w-full object-cover md:h-full max-h-24 md:max-h-32 rounded-xl z-20"
                     src={categorie.image}
                     alt={categorie.category}
                   />

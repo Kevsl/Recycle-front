@@ -3,7 +3,7 @@ import { Ads } from '../Components/Layouts/Ads'
 import { useNavigate } from 'react-router-dom'
 import { FooterMenu } from '../Components/FooterMenu'
 import { Balance } from '../Components/Layouts/Balance'
-import { getListings, getMyListings } from '../Service/listingService'
+import { getMyListings } from '../Service/listingService'
 import React, { useState, useEffect } from 'react'
 
 const Profil = () => {

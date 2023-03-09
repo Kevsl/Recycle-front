@@ -1,6 +1,6 @@
 import { Header } from '../Components/Layouts/Header'
 import { Ads } from '../Components/Layouts/Ads'
-import { useNavigate, useParams, useLocation } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { FooterMenu } from '../Components/FooterMenu'
 import { getListingByCategory } from '../Service/listingService'
 import React, { useState, useEffect } from 'react'
@@ -20,7 +20,7 @@ const ListingsCategory = () => {
       setIsLoading(false)
       setListings(res)
     })
-  }, [])
+  }, [id.id])
 
   return (
     <div className="font-Baloo">

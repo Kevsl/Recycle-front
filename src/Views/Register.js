@@ -9,8 +9,6 @@ const Register = () => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
-
-  const [isLoading, setIsLoading] = useState(false)
   const [emailOk, setEmailOk] = useState(false)
   const [passOK, setPassOk] = useState(false)
   const [confirmpassOK, setConfirmPassOk] = useState(false)

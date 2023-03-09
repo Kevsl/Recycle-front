@@ -11,8 +11,6 @@ export const AcceptMaxFiles = (props) => {
       },
     })
 
-  const reader = new FileReader()
-
   const acceptedFileItems = acceptedFiles.map((file) => (
     <li key={file.path}>{file.path}</li>
   ))

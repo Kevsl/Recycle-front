@@ -7,7 +7,7 @@ export const Balance = () => {
   useEffect(() => {
     getBalance().then((res) => {
       res.map((response) => {
-        setAmount(response.balance)
+        return setAmount(response.balance)
       })
     })
   }, [])

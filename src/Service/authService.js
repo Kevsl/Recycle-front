@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { apiUrl, symfoUrl } from '../url'
 
 export async function loginFunction(email, password) {
   let url = 'http://127.0.0.1/api/login_check'

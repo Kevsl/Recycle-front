@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Triangle } from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import noPhoto from '../../Assets/images/no-photo.png'
@@ -34,7 +34,7 @@ export const Ads = ({ listings, isLoading, title }) => {
                   }}
                 >
                   <img
-                    className="w-full object-cover md:h-full rounded-xl z-20 max-h-24"
+                    className="w-full object-cover rounded-xl z-20 md:max-h-32 max-h-24 "
                     src={listing.image ? listing.image : noPhoto}
                     alt={listing.title}
                   />

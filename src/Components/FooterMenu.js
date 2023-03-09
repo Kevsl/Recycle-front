@@ -10,11 +10,11 @@ export const FooterMenu = () => {
     if (token) {
       setIsConnected(true)
     }
-  })
+  }, [setIsConnected])
 
   return (
     isConnected === true && (
-      <div className="menu flex items-center justify-between px-5 h-16 mt-4 bottom-0 right-0 w-screen fixed bottom-0 left-0 bg-white md:hidden">
+      <div className="menu flex items-center justify-between px-5 h-16 mt-4 right-0 w-screen fixed bottom-0 left-0 bg-white md:hidden">
         <button
           onClick={() => {
             navigate('/')
@@ -32,7 +32,9 @@ export const FooterMenu = () => {
         </button>
         <button
           className="bg-green-recycle rounded-full mb-4 w-12 h-12 mt-2"
-          onClick={() => {}}
+          onClick={() => {
+            navigate('/creation')
+          }}
         >
           <i className="fa-solid fa-plus text-white text-2xl "></i>
         </button>

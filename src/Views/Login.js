@@ -12,7 +12,6 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false)
   const [emailOk, setEmailOk] = useState(false)
   const [passOK, setPassOk] = useState(false)
-  const [isConnected, setIsConnected] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
   function handleEmail(value) {

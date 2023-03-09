@@ -1,12 +1,11 @@
 import { Footer } from '../Components/Layouts/Footer'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { FooterMenu } from '../Components/FooterMenu'
 import React, { useState, useEffect } from 'react'
 import { getListing } from '../Service/listingService'
 import { Header } from '../Components/Layouts/Header'
 
 const Listing = () => {
-  const navigate = useNavigate()
   const [listingData, setListingData] = useState([])
   let carousselPosition = 0
   const { state } = useLocation()
@@ -54,6 +53,7 @@ const Listing = () => {
                   <img
                     src={data.images[carousselPosition]}
                     className="w-full object-cover"
+                    alt={data.images[carousselPosition]}
                   />
                   <button
                     className="w-16 h-16 absolute top-32 left-2 z-10  rounded-full py-1 flex items-center justify-center hover:bg-gray hover:text-white"
@@ -79,6 +79,7 @@ const Listing = () => {
                       <img
                         src={data.photo}
                         className="w-16 h-16 rounded-full object-cover"
+                        alt={data.photo}
                       />
                       <div>
                         <p className="md:ml-8 ml-2">{data.name}</p>
