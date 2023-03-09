@@ -7,32 +7,32 @@ import { Header } from '../Components/Layouts/Header'
 
 const Listing = () => {
   const [listingData, setListingData] = useState([])
-  let carousselPosition = 0
+  const [carousselPosition, setCarousselPosition] = useState(0)
   const { state } = useLocation()
   const { id } = state
 
   useEffect(() => {
     getListing(id).then((res) => {
-      console.log(res)
       setListingData(res)
     })
   }, [id])
 
-  useEffect(() => {}, [carousselPosition])
-
   function handleCaroussel(direction) {
-    if (direction === '+') {
-      carousselPosition++
+    if (direction === 'right') {
+      let value = carousselPosition
+      setCarousselPosition((value += 1))
       if (carousselPosition === listingData[0].images.length - 1) {
-        carousselPosition = -1
+        setCarousselPosition(0)
       }
     } else {
-      carousselPosition--
-      if (carousselPosition < 0) {
-        carousselPosition = 3
+      let value = carousselPosition
+      setCarousselPosition((value -= 1))
+      if (carousselPosition < 1) {
+        setCarousselPosition(2)
       }
     }
   }
+
   return (
     <div className="font-Baloo w-full text-gray-recycle">
       <Header />
@@ -43,12 +43,12 @@ const Listing = () => {
               <div key={data.id}>
                 <div className="relative flex items-center justify-between overflow-y-hidden h-96 mt-4 md:mt-16">
                   <button
-                    className="w-16 h-16 absolute top-32 right-2 z-10 rounded-full py-1 flex items-center justify-center hover:bg-gray hover:text-white"
+                    className="w-16 h-16 absolute top-42 right-0 rounded-full py-1 flex items-center justify-center hover:bg-gray hover:text-white cursor-pointer"
                     onClick={() => {
-                      handleCaroussel('-')
+                      handleCaroussel('right')
                     }}
                   >
-                    <i class="fa-solid fa-chevron-right"></i>
+                    <i className="fa-solid fa-chevron-right"></i>
                   </button>
                   <img
                     src={data.images[carousselPosition]}
@@ -56,12 +56,12 @@ const Listing = () => {
                     alt={data.images[carousselPosition]}
                   />
                   <button
-                    className="w-16 h-16 absolute top-32 left-2 z-10  rounded-full py-1 flex items-center justify-center hover:bg-gray hover:text-white"
+                    className="w-16 h-16 absolute top-42 left-2  rounded-full py-1 flex items-center justify-center hover:bg-gray hover:text-white"
                     onClick={() => {
-                      handleCaroussel('+')
+                      handleCaroussel('left')
                     }}
                   >
-                    <i class="fa-solid fa-chevron-left"></i>
+                    <i className="fa-solid fa-chevron-left"></i>
                   </button>
                 </div>
                 <div className="my-8 w-5/6 mx-auto">

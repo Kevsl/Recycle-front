@@ -34,11 +34,11 @@ export const Ads = ({ listings, isLoading, title }) => {
                   }}
                 >
                   <img
-                    className="w-full object-cover rounded-xl z-20 md:max-h-32 max-h-24 "
+                    className="md:w-full object-cover rounded-xl z-20 min-w-[8rem] md:min-w-[21rem] md:max-h-32 max-h-24 "
                     src={listing.image ? listing.image : noPhoto}
                     alt={listing.title}
                   />
-                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs rounded-b-xl">
+                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs rounded-b-xl md:min-w-[21rem]">
                     {listing.title} <br /> {listing.city}
                   </p>
                 </div>
