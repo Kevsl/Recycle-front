@@ -9,7 +9,15 @@ import { SearchMenu } from '../Components/Layouts/SearchMenu'
 const Search = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [listings, setListings] = useState(true)
-  const [isAdsVisible, setiIAdsVisible] = useState(false)
+  const [isAdsVisible, setisAdsVisible] = useState(false)
+  const [listingTypeId, setListingTypeId] = useState('')
+  const [listingSubTypeId, setListingSubTypeId] = useState(1)
+  const [listingCategoryId, setListingCategoryId] = useState('')
+  const [listingSubCategoryId, setListingSubCategoryId] = useState('')
+  const [coordinates, setCoordinates] = useState('')
+  const [city, setCity] = useState('')
+
+  const [round, setRound] = useState(0)
 
   useEffect(() => {
     setIsLoading(true)
@@ -21,11 +29,43 @@ const Search = () => {
     }
   }, [isAdsVisible])
 
+  function handleSearch() {
+    if (isAdsVisible) {
+      getListings(
+        listingTypeId,
+        listingSubTypeId,
+        listingCategoryId,
+        listingSubCategoryId,
+        city,
+        coordinates,
+        round
+      ).then((res) => {
+        setIsLoading(false)
+        setListings(res)
+      })
+    }
+  }
+
   return (
     <div className="font-Baloo">
       <Header />
       <div className="mt-24">
-        <SearchMenu setiIAdsVisible={setiIAdsVisible} />
+        <SearchMenu
+          setisAdsVisible={setisAdsVisible}
+          listingTypeId={listingTypeId}
+          setListingTypeId={setListingTypeId}
+          listingSubTypeId={listingSubTypeId}
+          setListingSubTypeId={setListingSubTypeId}
+          listingCategoryId={listingCategoryId}
+          setListingCategoryId={setListingCategoryId}
+          listingSubCategoryId={listingSubCategoryId}
+          setListingSubCategoryId={setListingSubCategoryId}
+          city={city}
+          setCity={setCity}
+          setCoordinates={setCoordinates}
+          round={round}
+          setRound={setRound}
+        />
         <div className="w-full bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
         <div>
           {listings && isAdsVisible && (
