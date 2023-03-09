@@ -2,7 +2,7 @@ import { CategoryMenu } from './CategoryMenu'
 import React, { useEffect, useState } from 'react'
 import { getCitiesList } from '../../Service/listingService'
 export const SearchMenu = ({
-  setiIAdsVisible,
+  setIsAdsVisible,
   listingTypeId,
   setListingTypeId,
   listingSubTypeId,
@@ -43,7 +43,6 @@ export const SearchMenu = ({
   return (
     <div>
       <CategoryMenu
-        setiIAdsVisible={setiIAdsVisible}
         listingTypeId={listingTypeId}
         setListingTypeId={setListingTypeId}
         listingSubTypeId={listingSubTypeId}
@@ -59,6 +58,7 @@ export const SearchMenu = ({
           placeholder="Localisation"
           className="border border-gray-recycle rounded-lg mx-4 w-48 indent-5 text-gray-recycle"
           onChange={(e) => {
+            setQueryFound(false)
             setQuery(e.target.value)
           }}
           value={queryFound ? city : query}
@@ -105,7 +105,7 @@ export const SearchMenu = ({
         <button
           className="w-48 mx-auto my-6 border border-solid border-green-recycle bg-green-recycle text-white px-2 py-2 rounded-lg cursor-pointer"
           onClick={() => {
-            setiIAdsVisible(true)
+            setIsAdsVisible(true)
           }}
         >
           Rechercher

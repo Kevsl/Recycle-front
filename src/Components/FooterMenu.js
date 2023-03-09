@@ -40,7 +40,7 @@ export const FooterMenu = () => {
         </button>
         <button
           onClick={() => {
-            navigate('/')
+            navigate('/recherche')
           }}
         >
           <i className="fa-solid fa-magnifying-glass text-green-recycle text-2xl"></i>

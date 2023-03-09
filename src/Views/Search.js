@@ -9,7 +9,7 @@ import { SearchMenu } from '../Components/Layouts/SearchMenu'
 const Search = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [listings, setListings] = useState(true)
-  const [isAdsVisible, setisAdsVisible] = useState(false)
+  const [isAdsVisible, setIsAdsVisible] = useState(false)
   const [listingTypeId, setListingTypeId] = useState('')
   const [listingSubTypeId, setListingSubTypeId] = useState(1)
   const [listingCategoryId, setListingCategoryId] = useState('')
@@ -20,8 +20,8 @@ const Search = () => {
   const [round, setRound] = useState(0)
 
   useEffect(() => {
-    setIsLoading(true)
     if (isAdsVisible) {
+      setIsLoading(true)
       getListings().then((res) => {
         setIsLoading(false)
         setListings(res)
@@ -51,7 +51,7 @@ const Search = () => {
       <Header />
       <div className="mt-24">
         <SearchMenu
-          setisAdsVisible={setisAdsVisible}
+          setIsAdsVisible={setIsAdsVisible}
           listingTypeId={listingTypeId}
           setListingTypeId={setListingTypeId}
           listingSubTypeId={listingSubTypeId}
@@ -79,8 +79,6 @@ const Search = () => {
             />
           )}
         </div>
-        <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
-        <Footer />
         <FooterMenu />
       </div>
     </div>
