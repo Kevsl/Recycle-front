@@ -8,7 +8,7 @@ export const Ads = ({ listings, isLoading, title }) => {
 
   return (
     <div className="font-Baloo block mb-12  listings">
-      <div className="w-full mt-16">
+      <div className="w-full mt-22">
         <h2 className="text-dark-blue text-center my-4">{title}</h2>
         <div className="flex items-center  flex-wrap justify-evenly">
           {isLoading === true ? (

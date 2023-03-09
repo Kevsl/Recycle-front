@@ -21,7 +21,7 @@ export const Header = () => {
   }
 
   return (
-    <div className="flex flex-row items-center fixed top-0 left-0  bg-white justify-between w-full  py-4 px-5 font-Baloo z-50 ">
+    <div className="flex flex-row items-center fixed top-0 left-0  bg-white justify-between w-full  py-4 px-5 font-Baloo z-50 mb-6 ">
       <p
         className="text-green-recycle text-3xl font-Baloo cursor-pointer mt-2 md:mt-px"
         onClick={() => {
