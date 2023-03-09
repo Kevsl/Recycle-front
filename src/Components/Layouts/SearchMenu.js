@@ -19,9 +19,10 @@ export const SearchMenu = ({
 }) => {
   const [coordinatesList, setCoordinatesList] = useState([])
   const [query, setQuery] = useState([])
+  const [queryFound, setQueryFound] = useState(false)
 
   useEffect(() => {
-    if (query.length > 2) {
+    if (query.length > 2 && !queryFound) {
       getCitiesList(query).then((res) => {
         setCoordinatesList(res)
       })
@@ -35,6 +36,7 @@ export const SearchMenu = ({
         '.' +
         resultCity.geometry.coordinates[1]
     )
+    setQueryFound(true)
     setCoordinatesList([])
   }
 
@@ -54,12 +56,12 @@ export const SearchMenu = ({
       <div className="flex items-center justify-center my-4 relative">
         <input
           type="text"
-          placeholder="Localisation"
+          placeholder={'Localisation'}
           className="border border-gray-recycle rounded-lg mx-4 w-48 indent-5 text-gray-recycle"
           onChange={(e) => {
             setQuery(e.target.value)
           }}
-          value={city}
+          value={queryFound ? city : query}
         />
 
         <div className="-mt-2">
