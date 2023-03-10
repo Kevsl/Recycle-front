@@ -76,9 +76,11 @@ export async function createListing(
   listingSubCategoryId,
   postCode,
   city,
-  coordinates
+  latitude,
+  longitude
 ) {
   let url = `${symfoUrl}listing/new`
+  let id = localStorage.getItem('id')
 
   return axios
     .post(
@@ -86,16 +88,18 @@ export async function createListing(
 
       {
         city: city,
-        street: 'test',
+        street: 'to remove',
         country: 'France',
         description: description,
         title: title,
         fkListingCategory: listingCategoryId,
+        fkListingSubCategory: listingSubCategoryId,
         fkListingStatus: 1,
         fkListingType: listingTypeId,
         fkSubListingType: listingSubTypeId,
-        fkProfile: 1,
-        gpsCoordinates: coordinates,
+        fkProfile: id,
+        latitude: latitude,
+        longitude: longitude,
         postCode: postCode,
         streetName: 'to remove',
         streetNumber: 1,

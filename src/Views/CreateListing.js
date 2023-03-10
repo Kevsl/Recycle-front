@@ -16,7 +16,8 @@ const CreateListing = () => {
   const [listingSubTypeId, setListingSubTypeId] = useState(1)
   const [listingCategoryId, setListingCategoryId] = useState('')
   const [listingSubCategoryId, setListingSubCategoryId] = useState('')
-  const [coordinates, setCoordinates] = useState('')
+  const [latitude, setLatitude] = useState('')
+  const [longitude, setLongitude] = useState('')
   const [coordinatesList, setCoordinatesList] = useState([])
   const [query, setQuery] = useState([])
   const [queryFound, setQueryFound] = useState(false)
@@ -41,7 +42,8 @@ const CreateListing = () => {
         listingSubCategoryId,
         zip,
         city,
-        coordinates
+        latitude,
+        longitude
       ).then((res) => {
         console.log(res)
         navigate('/')
@@ -58,11 +60,8 @@ const CreateListing = () => {
 
   function handleCity(resultCity) {
     setCity(resultCity.properties.label)
-    setCoordinates(
-      resultCity.geometry.coordinates[0] +
-        '.' +
-        resultCity.geometry.coordinates[1]
-    )
+    setLatitude(resultCity.geometry.coordinates[0])
+    setLongitude(resultCity.geometry.coordinates[1])
     setZip(resultCity.properties.postcode)
     setQueryFound(true)
     setCoordinatesList([])
