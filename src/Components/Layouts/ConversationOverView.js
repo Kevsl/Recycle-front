@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {
   getConversations,
+  getMyConversations,
   getSpecificConversation,
 } from '../../Service/conversationsService'
 import { FooterMenu } from '../FooterMenu'
@@ -18,10 +19,11 @@ export const ConversationOverview = () => {
   const [isMessengerVisible, setIsMessengerVisible] = useState(true)
 
   useEffect(() => {
-    getConversations().then((res) => {
+    getMyConversations(ownerId).then((res) => {
       setConversations(res)
     })
   }, [])
+
   useEffect(() => {
     getSpecificConversation(contactId).then((res) => {
       setMessages(res)
@@ -38,8 +40,8 @@ export const ConversationOverview = () => {
                 <div
                   className="my-4 pb-2   border-b-2 border-gray-recycle"
                   onClick={() => {
-                    setContactId('123')
-                    setContactName(specific.contact)
+                    setContactId('1O')
+                    setContactName(specific.profile)
                     setContactAvatar(specific.avatar)
 
                     isMessengerVisible
@@ -51,15 +53,15 @@ export const ConversationOverview = () => {
                   <div className="flex items-center my-1  ">
                     <img
                       src={specific.avatar}
-                      alt={specific.contact}
+                      alt={specific.profile}
                       className="!w-8 !h-8 ml-6 rounded-full object-cover my-1"
                     />
                     <p className="text-dark-blue text-center text-sm ml-4">
-                      {specific.contact}
+                      {specific.profile}
                     </p>
                   </div>
                   <p className=" ml-16 text-gray-recycle text-sm italic overflow-hidden text-ellipsis truncate">
-                    {specific.lastMessage}
+                    {specific.listing}
                   </p>
                 </div>
               )

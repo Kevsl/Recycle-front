@@ -13,9 +13,11 @@ export const SearchMenu = ({
   setListingSubCategoryId,
   city,
   setCity,
-  setCoordinates,
+  setLatitude,
+  setLongitude,
   round,
   setRound,
+  handleSearch,
 }) => {
   const [coordinatesList, setCoordinatesList] = useState([])
   const [query, setQuery] = useState([])
@@ -31,11 +33,8 @@ export const SearchMenu = ({
 
   function handleCity(resultCity) {
     setCity(resultCity.properties.label)
-    setCoordinates(
-      resultCity.geometry.coordinates[0] +
-        '.' +
-        resultCity.geometry.coordinates[1]
-    )
+    setLatitude(resultCity.geometry.coordinates[0])
+    setLongitude(resultCity.geometry.coordinates[1])
     setQueryFound(true)
     setCoordinatesList([])
   }
@@ -105,7 +104,7 @@ export const SearchMenu = ({
         <button
           className="w-48 mx-auto my-6 border border-solid border-green-recycle bg-green-recycle text-white px-2 py-2 rounded-lg cursor-pointer"
           onClick={() => {
-            setIsAdsVisible(true)
+            handleSearch()
           }}
         >
           Rechercher

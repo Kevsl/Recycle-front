@@ -1,9 +1,8 @@
 import { Header } from '../Components/Layouts/Header'
 import { Ads } from '../Components/Layouts/Ads'
-import { Footer } from '../Components/Layouts/Footer'
 import { FooterMenu } from '../Components/FooterMenu'
-import React, { useState, useEffect } from 'react'
-import { getListings } from '../Service/listingService'
+import React, { useState } from 'react'
+import { getCustomListings } from '../Service/listingService'
 import { SearchMenu } from '../Components/Layouts/SearchMenu'
 
 const Search = () => {
@@ -14,36 +13,28 @@ const Search = () => {
   const [listingSubTypeId, setListingSubTypeId] = useState(1)
   const [listingCategoryId, setListingCategoryId] = useState('')
   const [listingSubCategoryId, setListingSubCategoryId] = useState('')
-  const [coordinates, setCoordinates] = useState('')
+  const [latitude, setLatitude] = useState('')
+  const [longitude, setLongitude] = useState('')
+
   const [city, setCity] = useState('')
 
   const [round, setRound] = useState(0)
 
-  useEffect(() => {
-    if (isAdsVisible) {
-      setIsLoading(true)
-      getListings().then((res) => {
-        setIsLoading(false)
-        setListings(res)
-      })
-    }
-  }, [isAdsVisible])
-
-  function handleSearch() {
-    if (isAdsVisible) {
-      getListings(
-        listingTypeId,
-        listingSubTypeId,
-        listingCategoryId,
-        listingSubCategoryId,
-        city,
-        coordinates,
-        round
-      ).then((res) => {
-        setIsLoading(false)
-        setListings(res)
-      })
-    }
+  const handleSearch = () => {
+    setIsLoading(true)
+    return getCustomListings(
+      listingTypeId,
+      listingSubTypeId,
+      listingCategoryId,
+      listingSubCategoryId,
+      latitude,
+      longitude,
+      round
+    ).then((res) => {
+      setIsLoading(false)
+      setListings(res)
+      setIsAdsVisible(true)
+    })
   }
 
   return (
@@ -62,9 +53,11 @@ const Search = () => {
           setListingSubCategoryId={setListingSubCategoryId}
           city={city}
           setCity={setCity}
-          setCoordinates={setCoordinates}
+          setLatitude={setLatitude}
+          setLongitude={setLongitude}
           round={round}
           setRound={setRound}
+          handleSearch={handleSearch}
         />
         <div className="w-full bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
         <div>

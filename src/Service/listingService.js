@@ -12,18 +12,19 @@ export async function getCustomListings(
   listingSubTypeId,
   listingCategoryId,
   listingSubCategoryId,
-  city,
-  coordinates,
+  latitude,
+  longitude,
   round
 ) {
-  let url = `${symfoUrl}listing/images`
+  let url = `${symfoUrl}listing/search`
   return axios
-    .get(url, {
-      fkType: listingTypeId,
+    .post(url, {
+      fkListingType: listingTypeId,
       fkSubType: listingSubTypeId,
-      fkCategory: listingCategoryId,
+      fkListingCategory: listingCategoryId,
       fkSubCategory: listingSubCategoryId,
-      city: city,
+      latitude: latitude,
+      longitude: longitude,
       round: round,
     })
     .then((res) => {

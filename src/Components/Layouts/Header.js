@@ -22,14 +22,14 @@ export const Header = () => {
 
   return (
     <div className="flex flex-row items-center fixed top-0 left-0  bg-white justify-between w-full  py-4 px-5 font-Baloo z-50 mb-6 ">
-      <p
+      <h1
         className="text-green-recycle text-3xl font-Baloo cursor-pointer mt-2 md:mt-px"
         onClick={() => {
           navigate('/')
         }}
       >
         Recycle
-      </p>
+      </h1>
       {!isConnected ? (
         <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex  ">
           <li
