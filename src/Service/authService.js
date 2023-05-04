@@ -1,18 +1,31 @@
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 export async function loginFunction(email, password) {
-  let url = `${process.env.REACT_APP_API_URL}login_check`
+  let url = `${process.env.REACT_APP_API_URL}api/login_check`
+  let axiosConfig = {
+    headers: {
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+  }
   return axios
-    .post(url, { email: email, password: password })
+    .post(
+      url,
+      {
+        username: email,
+        password: password,
+      },
+      axiosConfig
+    )
     .then((res) => {
       localStorage.setItem('token', res.data.token)
-      return res.status
+      localStorage.setItem('id', jwt_decode(res.data.token).id)
+      localStorage.setItem('roles', jwt_decode(res.data.token).roles)
+
+      return res
     })
-    .catch(function (error) {
-      if (error.response) {
-        // The request was made and the server responded with a status code
-        // that falls out of the range of 2xx
-        return error.response.status
-      }
+    .catch((err) => {
+      return err
     })
 }

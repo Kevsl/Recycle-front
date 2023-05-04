@@ -6,21 +6,21 @@ export const FooterMenu = () => {
   const [isConnected, setIsConnected] = useState(false)
 
   useEffect(() => {
-    let token = localStorage.getItem('isConnected')
-    if (token === 'true') {
+    let token = localStorage.getItem('token')
+    if (token) {
       setIsConnected(true)
     }
-  })
+  }, [setIsConnected])
 
   return (
-    isConnected && (
-      <div className="menu flex items-center justify-between px-5 h-16 mt-4 bottom-0 right-0 w-screen fixed bg-white md:hidden">
+    isConnected === true && (
+      <div className="menu flex items-center justify-between px-5 h-16 mt-4 right-0 w-screen fixed bottom-0 left-0 bg-white md:hidden">
         <button
           onClick={() => {
             navigate('/')
           }}
         >
-          <i class="fa-solid fa-house-chimney text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-house-chimney text-green-recycle text-2xl"></i>
         </button>
         <button
           className=""
@@ -28,29 +28,29 @@ export const FooterMenu = () => {
             navigate('/messages')
           }}
         >
-          <i class="fa-regular fa-message text-reCycle-green text-2xl "></i>
+          <i className="fa-regular fa-message text-green-recycle text-2xl "></i>
         </button>
         <button
-          className="bg-reCycle-green rounded-full mb-4 w-12 h-12 mt-2"
+          className="bg-green-recycle rounded-full mb-4 w-12 h-12 mt-2"
           onClick={() => {
-            navigate('/publier')
+            navigate('/creation')
           }}
         >
-          <i class="fa-solid fa-plus text-white text-2xl "></i>
+          <i className="fa-solid fa-plus text-white text-2xl "></i>
         </button>
         <button
           onClick={() => {
-            navigate('/')
+            navigate('/recherche')
           }}
         >
-          <i class="fa-solid fa-magnifying-glass text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-magnifying-glass text-green-recycle text-2xl"></i>
         </button>
         <button
           onClick={() => {
             navigate('/profil')
           }}
         >
-          <i className="fa-solid fa-user-pen mx-2 text-reCycle-green text-2xl"></i>
+          <i className="fa-solid fa-user-pen mx-2 text-green-recycle text-2xl"></i>
         </button>
       </div>
     )

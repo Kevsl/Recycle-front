@@ -8,31 +8,32 @@ export const Header = () => {
   const [isBurgerMenuVisible, setIsBurgerMenuVisible] = useState(false)
 
   useEffect(() => {
-    let token = localStorage.getItem('isConnected')
-    if (token === 'true') {
+    let token = localStorage.getItem('token')
+    if (token) {
       setIsConnected(true)
     }
-  })
+  }, [])
 
   function handleLogout() {
-    localStorage.setItem('isConnected', false)
+    localStorage.clear()
     setIsConnected(false)
+    navigate('/connexion')
   }
 
   return (
-    <div className="flex flex-row items-center justify-between w-90  mt-4 mx-5 font-Baloo ">
-      <p
-        className="text-reCycle-green text-3xl font-Baloo cursor-pointer mt-2 md:mt-px"
+    <div className="flex flex-row items-center fixed top-0 left-0  bg-white justify-between w-full  py-4 px-5 font-Baloo z-50 mb-6 ">
+      <h1
+        className="text-green-recycle text-3xl font-Baloo cursor-pointer mt-2 md:mt-px"
         onClick={() => {
           navigate('/')
         }}
       >
         Recycle
-      </p>
+      </h1>
       {!isConnected ? (
-        <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex ">
+        <ul className="flex items-center md:w-2/6  md:ml-auto justify-center hidden md:flex  ">
           <li
-            className="border-reCycle-green border-reCycle-green border text-reCycle-green rounded-xl px-6 cursor-pointer"
+            className="border-green-recycle border text-green-recycle rounded-xl px-6 cursor-pointer"
             onClick={() => {
               navigate('/connexion')
             }}
@@ -40,7 +41,7 @@ export const Header = () => {
             Connexion
           </li>
           <li
-            className=" bg-reCycle-green text-white border-white rounded-xl px-6 cursor-pointer"
+            className=" bg-green-recycle text-white border-white rounded-xl px-6 cursor-pointer ml-4"
             onClick={() => {
               navigate('/inscription')
             }}
@@ -49,14 +50,14 @@ export const Header = () => {
           </li>
         </ul>
       ) : (
-        <div className="flex items-center justify-center w-1/2 md:flex mt-1">
+        <div className="flex items-center justify-center w-1/3 md:flex mt-1">
           <button
             className=""
             onClick={() => {
               navigate('/profil')
             }}
           >
-            <i class="fa-regular fa-user text-dark-blue w-6 h-6 text-2xl mx-4"></i>
+            <i className="fa-regular fa-user text-dark-blue w-6 h-6 text-2xl mx-4"></i>
           </button>
           <button
             className="mr-8"
@@ -64,7 +65,7 @@ export const Header = () => {
               handleLogout()
             }}
           >
-            <i class="fa-solid fa-right-from-bracket text-dark-blue w-6 h-6 text-2xl mx-4"></i>{' '}
+            <i className="fa-solid fa-right-from-bracket text-dark-blue w-6 h-6 text-2xl mx-4"></i>{' '}
           </button>
         </div>
       )}
@@ -79,10 +80,10 @@ export const Header = () => {
                   : setIsBurgerMenuVisible(true)
               }}
             >
-              <i class="fa-solid fa-xmark z-0 text-white w-12 h-12 text-2xl"></i>
+              <i className="fa-solid fa-xmark z-0 text-white w-12 h-12 text-2xl"></i>
             </p>
             <button
-              className="rounded-lg border-reCycle-green border-solid border text-reCycle-green bg-white rounded-xl px-6 w-1/2 mx-auto"
+              className="rounded-lg border-green-recycle border-solid border text-green-recycle bg-white rounded-xl px-6 w-1/2 mx-auto"
               onClick={() => {
                 navigate('/connexion')
               }}
@@ -90,7 +91,7 @@ export const Header = () => {
               Connexion
             </button>
             <button
-              className="bg-reCycle-green text-white rounded-xl px-6 w-1/2 mx-auto mt-6 cursor-pointer"
+              className="bg-green-recycle text-white rounded-xl px-6 w-1/2 mx-auto ^ cursor-pointer"
               onClick={() => {
                 navigate('/inscription')
               }}

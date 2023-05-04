@@ -1,22 +1,117 @@
 import axios from 'axios'
 
 export async function getListings() {
-  let url = `${process.env.REACT_APP_API_URL}listings`
-  let token = localStorage.getItem('token')
-
-  let config = {
-    headers: {
-      Authorization: 'Bearer ' + token,
-    },
-  }
+  let url = `${process.env.REACT_APP_API_URL}listing/images`
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+export async function getCustomListings(
+  listingTypeId,
+  listingSubTypeId,
+  listingCategoryId,
+  listingSubCategoryId,
+  latitude,
+  longitude,
+  round
+) {
+  let url = `${process.env.REACT_APP_API_URL}listing/search`
   return axios
-    .get(url, config)
+    .post(url, {
+      fkListingType: listingTypeId,
+      fkSubType: listingSubTypeId,
+      fkListingCategory: listingCategoryId,
+      fkSubCategory: listingSubCategoryId,
+      latitude: latitude,
+      longitude: longitude,
+      round: round,
+    })
     .then((res) => {
-      return res.data['hydra:member']
+      return res.data
     })
-    .catch(function (error) {
-      if (error.response) {
-        return error.response.status
+}
+
+export async function getListing(id) {
+  let url = `${process.env.REACT_APP_API_URL}listing/${id}`
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+export async function getListingTypes() {
+  let url = `${process.env.REACT_APP_API_URL}listingType`
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+
+export async function getListingCategories() {
+  let url = `${process.env.REACT_APP_API_URL}listingCategory`
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+export async function getListingByCategory(id) {
+  let url = `${process.env.REACT_APP_API_URL}listing/images/category/${id}`
+
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+
+export async function getMyListings(id) {
+  let url = `${process.env.REACT_APP_API_URL}listing/me/${id}`
+
+  return axios.get(url).then((res) => {
+    return res.data
+  })
+}
+
+export async function createListing(
+  title,
+  description,
+  listingTypeId,
+  listingSubTypeId,
+  listingCategoryId,
+  listingSubCategoryId,
+  postCode,
+  city,
+  latitude,
+  longitude
+) {
+  let url = `${process.env.REACT_APP_API_URL}listing/new`
+  let id = localStorage.getItem('id')
+
+  return axios
+    .post(
+      url,
+
+      {
+        city: city,
+        street: 'to remove',
+        country: 'France',
+        description: description,
+        title: title,
+        fkListingCategory: listingCategoryId,
+        fkListingSubCategory: listingSubCategoryId,
+        fkListingStatus: 1,
+        fkListingType: listingTypeId,
+        fkSubListingType: listingSubTypeId,
+        fkProfile: id,
+        latitude: latitude,
+        longitude: longitude,
+        postCode: postCode,
+        streetName: 'to remove',
+        streetNumber: 1,
       }
+    )
+    .then((res) => {
+      return res.status
     })
+}
+export async function getCitiesList(id) {
+  let url = `https://api-adresse.data.gouv.fr/search/?q=${id}&type=municipality`
+  return axios.get(url).then((res) => {
+    console.log(res.data.features)
+    return res.data.features
+  })
 }
