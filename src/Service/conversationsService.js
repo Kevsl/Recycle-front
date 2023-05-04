@@ -1,15 +1,17 @@
 import axios from 'axios'
-import { symfoUrl } from '../url'
 
 export async function getMyConversations(id) {
-  let url = `${symfoUrl}conversation/me/${id}`
-  return axios.get(url).then((res) => {
-    return res.data
-  })
+  let url = `${process.env.REACT_APP_API_URL}conversation/me/${id}`
+  return axios
+    .get(url)
+
+    .then((res) => {
+      return res.data
+    })
 }
 
 export async function getSpecificConversation(id) {
-  let url = `${symfoUrl}conversation/${id}`
+  let url = `${process.env.REACT_APP_API_URL}conversation/${id}`
 
   return axios.get(url).then((res) => {
     return res.data

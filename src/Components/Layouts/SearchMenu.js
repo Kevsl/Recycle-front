@@ -33,8 +33,8 @@ export const SearchMenu = ({
 
   function handleCity(resultCity) {
     setCity(resultCity.properties.label)
-    setLatitude(resultCity.geometry.coordinates[0])
-    setLongitude(resultCity.geometry.coordinates[1])
+    setLongitude(resultCity.geometry.coordinates[0])
+    setLatitude(resultCity.geometry.coordinates[1])
     setQueryFound(true)
     setCoordinatesList([])
   }

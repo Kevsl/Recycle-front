@@ -28,14 +28,14 @@ export const Ads = ({ listings, isLoading, title }) => {
               return (
                 <div
                   key={listing.id}
-                  className="md:w-1/4 md:mx-1 mx- my-8  rounded-xl relative cursor-pointer "
+                  className="w-40 sm:w-1/3 sm:mx-5 mx- my-8  rounded-xl relative cursor-pointer "
                   onClick={() => {
                     navigate('/listing', { state: { id: listing.id } })
                   }}
                 >
                   <img
-                    className="md:w-full object-cover rounded-xl z-20 min-w-[8rem] md:min-w-[21rem] md:max-h-32 max-h-24 "
-                    src={listing.image ? listing.image : noPhoto}
+                    className="w-full object-cover md:h-full max-h-24 md:max-h-32 rounded-xl z-20"
+                    src={listing.photo ? listing.photo : noPhoto}
                     alt={listing.title}
                   />
                   <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs rounded-b-xl md:min-w-[21rem]">

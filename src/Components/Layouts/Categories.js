@@ -40,7 +40,7 @@ export const Categories = () => {
               return (
                 <div
                   key={categorie.id}
-                  className="w-40 sm:w-1/3 md:mx-5 mx- my-8  rounded-xl relative cursor-pointer "
+                  className="w-40 sm:w-1/3 sm:mx-5 mx- my-8  rounded-xl relative cursor-pointer "
                   onClick={() =>
                     navigate(`/categorie/${categorie.id}`, {
                       state: { category: categorie.category },

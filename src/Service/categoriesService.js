@@ -1,15 +1,14 @@
 import axios from 'axios'
-import { symfoUrl } from '../url'
 
 export async function getCategories() {
-  let url = `${symfoUrl}listingCategory`
+  let url = `${process.env.REACT_APP_API_URL}listingCategory`
 
   return axios.get(url).then((res) => {
     return res.data
   })
 }
 export async function getSubCategoriesByCategoryId(id) {
-  let url = `${symfoUrl}subCategory/category/${id}`
+  let url = `${process.env.REACT_APP_API_URL}subCategory/category/${id}`
 
   return axios.get(url).then((res) => {
     return res.data

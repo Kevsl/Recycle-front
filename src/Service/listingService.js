@@ -1,8 +1,7 @@
 import axios from 'axios'
-import { symfoUrl } from '../url'
 
 export async function getListings() {
-  let url = `${symfoUrl}listing/images`
+  let url = `${process.env.REACT_APP_API_URL}listing/images`
   return axios.get(url).then((res) => {
     return res.data
   })
@@ -16,7 +15,7 @@ export async function getCustomListings(
   longitude,
   round
 ) {
-  let url = `${symfoUrl}listing/search`
+  let url = `${process.env.REACT_APP_API_URL}listing/search`
   return axios
     .post(url, {
       fkListingType: listingTypeId,
@@ -33,26 +32,26 @@ export async function getCustomListings(
 }
 
 export async function getListing(id) {
-  let url = `${symfoUrl}listing/${id}`
+  let url = `${process.env.REACT_APP_API_URL}listing/${id}`
   return axios.get(url).then((res) => {
     return res.data
   })
 }
 export async function getListingTypes() {
-  let url = `${symfoUrl}listingType`
+  let url = `${process.env.REACT_APP_API_URL}listingType`
   return axios.get(url).then((res) => {
     return res.data
   })
 }
 
 export async function getListingCategories() {
-  let url = `${symfoUrl}listingCategory`
+  let url = `${process.env.REACT_APP_API_URL}listingCategory`
   return axios.get(url).then((res) => {
     return res.data
   })
 }
 export async function getListingByCategory(id) {
-  let url = `${symfoUrl}listing/images/category/${id}`
+  let url = `${process.env.REACT_APP_API_URL}listing/images/category/${id}`
 
   return axios.get(url).then((res) => {
     return res.data
@@ -60,7 +59,7 @@ export async function getListingByCategory(id) {
 }
 
 export async function getMyListings(id) {
-  let url = `${symfoUrl}listing/me/${id}`
+  let url = `${process.env.REACT_APP_API_URL}listing/me/${id}`
 
   return axios.get(url).then((res) => {
     return res.data
@@ -79,7 +78,7 @@ export async function createListing(
   latitude,
   longitude
 ) {
-  let url = `${symfoUrl}listing/new`
+  let url = `${process.env.REACT_APP_API_URL}listing/new`
   let id = localStorage.getItem('id')
 
   return axios
@@ -112,6 +111,7 @@ export async function createListing(
 export async function getCitiesList(id) {
   let url = `https://api-adresse.data.gouv.fr/search/?q=${id}&type=municipality`
   return axios.get(url).then((res) => {
+    console.log(res.data.features)
     return res.data.features
   })
 }

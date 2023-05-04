@@ -1,14 +1,31 @@
 import axios from 'axios'
+import jwt_decode from 'jwt-decode'
 
 export async function loginFunction(email, password) {
-  let url = 'http://127.0.0.1/api/login_check'
+  let url = `${process.env.REACT_APP_API_URL}api/login_check`
+  let axiosConfig = {
+    headers: {
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+    },
+  }
+  return axios
+    .post(
+      url,
+      {
+        username: email,
+        password: password,
+      },
+      axiosConfig
+    )
+    .then((res) => {
+      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('id', jwt_decode(res.data.token).id)
+      localStorage.setItem('roles', jwt_decode(res.data.token).roles)
 
-  return axios.post(url, { email: email, password: password }).then((res) => {
-    console.log(res)
-    localStorage.setItem('username', res.data.username)
-    localStorage.setItem('token', res.data.token)
-    localStorage.setItem('avatar', res.data.avatar)
-    localStorage.setItem('id', res.data.id)
-    return res.status
-  })
+      return res
+    })
+    .catch((err) => {
+      return err
+    })
 }

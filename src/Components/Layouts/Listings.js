@@ -38,10 +38,10 @@ export const listings = () => {
               return (
                 <div
                   key={listing.id}
-                  className="md:w-2/5 w-2/5 mx-5  my-8 md:h-32 rounded-xl relative cursor-pointer "
+                  className="w-40 sm:w-1/3 sm:mx-5 mx- my-8  rounded-xl relative cursor-pointer "
                 >
                   <img
-                    className="w-full object-cover h-full rounded-xl z-20"
+                    className="w-full object-cover md:h-full max-h-24 md:max-h-32 rounded-xl z-20"
                     src={listing.images[0]}
                     alt={listing.title}
                   />

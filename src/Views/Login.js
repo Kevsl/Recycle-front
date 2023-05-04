@@ -25,52 +25,44 @@ const Login = () => {
     try {
       loginFunction(email, password).then((res) => {
         setIsLoading(false)
-        switch (res) {
-          case 200:
-            navigate('/')
-            break
-          case 500:
-            setErrorMessage('Problème avec le serveur')
-            break
-          case 'connexion':
-            setErrorMessage('Problème avec votre connexion')
-            break
-          case 401:
-            setErrorMessage('Problème avec vos identifiants')
-            break
-          default:
-            console.log(res)
-            setIsLoading(false)
+        if (res.status === 200) {
+          navigate('/')
+          setIsLoading(false)
         }
-        setIsLoading(false)
+        if (res.response.status) {
+          switch (res.response.status) {
+            case 200:
+              navigate('/')
+              setIsLoading(false)
+              break
+            case 500:
+              setErrorMessage('Problème avec le serveur')
+              setIsLoading(false)
+
+              break
+            case 400:
+              setErrorMessage('Problème avec votre connexion')
+              setIsLoading(false)
+
+              break
+            case 401:
+              setErrorMessage('Problème avec vos identifiants')
+              setIsLoading(false)
+              break
+            default:
+              console.log(res)
+              setIsLoading(false)
+          }
+        } else {
+          setErrorMessage(
+            'Problème interne veuillez nous excuser pour la gêne occasionée'
+          )
+          setIsLoading(false)
+        }
       })
     } catch (e) {
       console.log(e)
-      setIsLoading(false)
     }
-
-    // loginFunction(email, password)
-    //   .then((res) => {
-    //     console.log(res)
-    //     switch (res) {
-    //       case 200:
-    //         navigate('/')
-    //         break
-    //       case 500:
-    //         setErrorMessage('Problème avec le serveur')
-    //         break
-    //       case 'connexion':
-    //         setErrorMessage('Problème avec votre connexion')
-    //         break
-    //       case 401:
-    //         setErrorMessage('Problème avec vos identifiants')
-    //         break
-    //       default:
-    //         console.log(res)
-    //     }
-    //     setIsLoading(false)
-    //   })
-    //   .catch((error) => console.log(error))
   }
 
   return (
@@ -87,7 +79,7 @@ const Login = () => {
           <div className="-space-y-px rounded-md shadow-sm">
             <div>
               {email.length > 0 && emailOk === false && (
-                <p className="text-xs text-red-recycle">
+                <p className="text-xs text-red-recycle my-1">
                   Le format de l’email est incorrect
                 </p>
               )}
@@ -121,7 +113,7 @@ const Login = () => {
               />
             </div>
             {password.length > 0 && passOK === false && (
-              <p className="text-xs text-red-recycle">
+              <p className="text-xs text-red-recycle my-2">
                 Le mot de passe doit avoir 1 majuscule,1minuscule,1 caractère
                 spécial, 8 caractères minimum
               </p>
@@ -146,7 +138,11 @@ const Login = () => {
             ) : (
               <button
                 className="bg-green-recycle text-white rounded-xl px-6 w-48 mx-auto mt-2"
-                onClick={() => handleLogin()}
+                onClick={() => {
+                  handleLogin()
+                  // localStorage.setItem('token', 'ezezeaadsdqsdqs2323231')
+                  // navigate('/')
+                }}
               >
                 Se connecter
               </button>
