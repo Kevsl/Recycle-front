@@ -1,8 +1,12 @@
 import axios from 'axios'
 
 export async function getListings() {
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
+
   let url = `${process.env.REACT_APP_API_URL}listing/images`
-  return axios.get(url).then((res) => {
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }
@@ -45,8 +49,11 @@ export async function getListingTypes() {
 }
 
 export async function getListingCategories() {
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
   let url = `${process.env.REACT_APP_API_URL}listingCategory`
-  return axios.get(url).then((res) => {
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }

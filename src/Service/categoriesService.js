@@ -2,8 +2,10 @@ import axios from 'axios'
 
 export async function getCategories() {
   let url = `${process.env.REACT_APP_API_URL}listingCategory`
-
-  return axios.get(url).then((res) => {
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }
