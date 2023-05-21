@@ -59,16 +59,22 @@ export async function getListingCategories() {
 }
 export async function getListingByCategory(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/images/category/${id}`
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
 
-  return axios.get(url).then((res) => {
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }
 
 export async function getMyListings(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/me/${id}`
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
 
-  return axios.get(url).then((res) => {
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }
@@ -87,6 +93,9 @@ export async function createListing(
 ) {
   let url = `${process.env.REACT_APP_API_URL}listing/new`
   let id = localStorage.getItem('id')
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
 
   return axios
     .post(
@@ -109,7 +118,8 @@ export async function createListing(
         postCode: postCode,
         streetName: 'to remove',
         streetNumber: 1,
-      }
+      },
+      config
     )
     .then((res) => {
       return res.status
@@ -117,7 +127,10 @@ export async function createListing(
 }
 export async function getCitiesList(id) {
   let url = `https://api-adresse.data.gouv.fr/search/?q=${id}&type=municipality`
-  return axios.get(url).then((res) => {
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
+  return axios.get(url, config).then((res) => {
     console.log(res.data.features)
     return res.data.features
   })

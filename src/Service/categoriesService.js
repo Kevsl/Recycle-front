@@ -11,8 +11,11 @@ export async function getCategories() {
 }
 export async function getSubCategoriesByCategoryId(id) {
   let url = `${process.env.REACT_APP_API_URL}subCategory/category/${id}`
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
 
-  return axios.get(url).then((res) => {
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }
