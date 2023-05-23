@@ -55,7 +55,12 @@ const Profil = () => {
       </div>
       <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
       {listings && (
-        <Ads listings={listings} isLoading={isLoading} title="Mes annonces" />
+        <Ads
+          listings={listings}
+          isLoading={isLoading}
+          title="Mes annonces"
+          edit={true}
+        />
       )}
       {profilEdit && (
         <div>
