@@ -7,6 +7,8 @@ const Messages = () => {
   return (
     <div>
       <Header />
+      <h1 className="h-24"> Mes messages</h1>
+
       <ConversationOverview />
       <FooterMenu />
     </div>

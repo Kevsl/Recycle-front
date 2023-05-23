@@ -23,7 +23,13 @@ export const Ads = ({ listings, isLoading, title }) => {
                 height="80"
               />
             </div>
-          ) : (
+          ) : listings.length <= 0 ? (
+            <div>
+              <p className="text-sm italic text-gray-recycle">
+                Aucune annonce pour le moment...
+              </p>
+            </div>
+          ) : listings ? (
             listings.map((listing) => {
               return (
                 <div
@@ -38,12 +44,14 @@ export const Ads = ({ listings, isLoading, title }) => {
                     src={listing.photo ? listing.photo : noPhoto}
                     alt={listing.title}
                   />
-                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs rounded-b-xl md:min-w-[21rem]">
+                  <p className="absolute bottom-0 bg-black-opacity-50 w-full text-center text-white text-xs rounded-b-xl ">
                     {listing.title} <br /> {listing.city}
                   </p>
                 </div>
               )
             })
+          ) : (
+            <p>Aucune annonce</p>
           )}
         </div>
       </div>

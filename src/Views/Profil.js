@@ -5,15 +5,17 @@ import { FooterMenu } from '../Components/FooterMenu'
 import { Balance } from '../Components/Layouts/Balance'
 import { getMyListings } from '../Service/listingService'
 import React, { useState, useEffect } from 'react'
+import { ProfilEdit } from '../Components/Layouts/ProfilEdit'
 
 const Profil = () => {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(true)
-  const [listings, setListings] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
+  const [listings, setListings] = useState([])
+  const [profilEdit, setProfilEdit] = useState(false)
 
   useEffect(() => {
     setIsLoading(true)
-    getMyListings(114).then((res) => {
+    getMyListings(localStorage.getItem('id')).then((res) => {
       setIsLoading(false)
       setListings(res)
     })
@@ -54,7 +56,12 @@ const Profil = () => {
       <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
       {listings && (
         <Ads listings={listings} isLoading={isLoading} title="Mes annonces" />
-      )}{' '}
+      )}
+      {profilEdit && (
+        <div>
+          <ProfilEdit />
+        </div>
+      )}
       <FooterMenu />
     </div>
   )

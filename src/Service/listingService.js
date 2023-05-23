@@ -20,16 +20,23 @@ export async function getCustomListings(
   round
 ) {
   let url = `${process.env.REACT_APP_API_URL}listing/search`
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
   return axios
-    .post(url, {
-      fkListingType: listingTypeId,
-      fkSubType: listingSubTypeId,
-      fkListingCategory: listingCategoryId,
-      fkSubCategory: listingSubCategoryId,
-      latitude: latitude,
-      longitude: longitude,
-      round: round,
-    })
+    .post(
+      url,
+      {
+        fkListingType: listingTypeId,
+        fkSubType: listingSubTypeId,
+        fkListingCategory: listingCategoryId,
+        fkSubCategory: listingSubCategoryId,
+        latitude: latitude,
+        longitude: longitude,
+        round: round,
+      },
+      config
+    )
     .then((res) => {
       return res.data
     })
@@ -37,13 +44,19 @@ export async function getCustomListings(
 
 export async function getListing(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/${id}`
-  return axios.get(url).then((res) => {
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }
 export async function getListingTypes() {
   let url = `${process.env.REACT_APP_API_URL}listingType`
-  return axios.get(url).then((res) => {
+  const config = {
+    headers: { Authorization: `${localStorage.getItem('token')}` },
+  }
+  return axios.get(url, config).then((res) => {
     return res.data
   })
 }
@@ -118,6 +131,7 @@ export async function createListing(
         postCode: postCode,
         streetName: 'to remove',
         streetNumber: 1,
+        fkUser: localStorage.getItem('id'),
       },
       config
     )

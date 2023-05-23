@@ -4,16 +4,20 @@ import { FooterMenu } from '../Components/FooterMenu'
 import React, { useState, useEffect } from 'react'
 import { getListing } from '../Service/listingService'
 import { Header } from '../Components/Layouts/Header'
+import { Triangle } from 'react-loader-spinner'
 
 const Listing = () => {
   const [listingData, setListingData] = useState([])
   const [carousselPosition, setCarousselPosition] = useState(0)
   const { state } = useLocation()
   const { id } = state
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getListing(id).then((res) => {
+      setIsLoading(true)
       setListingData(res)
+      setIsLoading(false)
     })
   }, [id])
 

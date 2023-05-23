@@ -85,9 +85,7 @@ const CreateListing = () => {
             setTitle(e.target.value)
           }}
         />
-        <div>
-          <p className="text-center my-4 text-gray-recycle">Type d'annonce</p>
-        </div>
+
         <CategoryMenu
           listingTypeId={listingTypeId}
           setListingTypeId={setListingTypeId}

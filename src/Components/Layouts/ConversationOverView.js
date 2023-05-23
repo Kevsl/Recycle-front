@@ -5,8 +5,10 @@ import {
   getSpecificConversation,
 } from '../../Service/conversationsService'
 import { FooterMenu } from '../FooterMenu'
+import { useNavigate } from 'react-router-dom'
 
 export const ConversationOverview = () => {
+  const navigate = useNavigate()
   const [conversations, setConversations] = useState([])
   const [messages, setMessages] = useState([])
   const ownerId = localStorage.getItem('id')
@@ -31,22 +33,27 @@ export const ConversationOverview = () => {
   }, [contactId])
 
   return (
-    <div className=" w-full md:justify-around md:flex items-center">
-      {isMessengerVisible && (
-        <div className=" w-full my-16  h-screen md:w-1/4  overflow-scroll  rounded-xl  md:border md:border-solid md-border-sm md:border-gray-light md:rounded-xl md:mt-24 text-ellipsis">
+    <div className="relative">
+      <i
+        onClick={() => {
+          navigate(-1)
+        }}
+        className="fa-solid fa-chevron-left text-3xl absolute -top-4 left-8 text-gray-recycle md:hidden"
+      ></i>
+      <h1 className="text-gray-recycle text-center border-b-2 border-solid border-gray-light pb-4">
+        Mes messages
+      </h1>
+      <div className=" w-full md:justify-around md:mt-4:flex items-start">
+        <div className=" w-full h-screen md:w-1/4  overflow-scroll text-ellipsis border-r-2 border-gray-light">
           {conversations &&
             conversations.map((specific) => {
               return (
                 <div
-                  className="my-4 pb-2   border-b-2 border-gray-recycle"
+                  className="my-2  pb-2   border-b-2  border-gray-light "
                   onClick={() => {
                     setContactId('1O')
                     setContactName(specific.profile)
                     setContactAvatar(specific.avatar)
-
-                    isMessengerVisible
-                      ? setIsMessengerVisible(false)
-                      : setIsMessengerVisible(true)
                   }}
                   key={specific.id}
                 >
@@ -57,7 +64,7 @@ export const ConversationOverview = () => {
                       className="!w-8 !h-8 ml-6 rounded-full object-cover my-1"
                     />
                     <p className="text-dark-blue text-center text-sm ml-4">
-                      {specific.profile}
+                      {specific.user}
                     </p>
                   </div>
                   <p className=" ml-16 text-gray-recycle text-sm italic overflow-hidden text-ellipsis truncate">
@@ -67,18 +74,8 @@ export const ConversationOverview = () => {
               )
             })}
         </div>
-      )}
-      {!isMessengerVisible && (
-        <div className="w-full mt-12 mb-24 bg-white  h-screen md:w-3/4  overflow-scroll  ">
-          <button
-            onClick={() => {
-              setIsMessengerVisible(true)
-            }}
-            className="  border-dark-blue my-8  "
-          >
-            <i class="fa-solid fa-chevron-left text-3xl ml-8"></i>{' '}
-          </button>
-          {messages &&
+        <div className="w-full mb-24 bg-white  h-screen md:w-3/4  overflow-scroll  ">
+          {messages && messages.length > 0 ? (
             messages.map((message) => {
               return message.sender === ownerId ? (
                 <div
@@ -119,10 +116,13 @@ export const ConversationOverview = () => {
                   </p>
                 </div>
               )
-            })}
+            })
+          ) : (
+            <p className="text-center mt-12 text-gray-recycle"></p>
+          )}
         </div>
-      )}
-      <FooterMenu />
+        <FooterMenu />
+      </div>
     </div>
   )
 }

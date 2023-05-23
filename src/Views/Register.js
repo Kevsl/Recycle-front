@@ -31,8 +31,7 @@ const Register = () => {
   }
   function handleRegister() {
     if (passOK && emailOk && similarPasswords && confirmpassOK) {
-      localStorage.setItem('isConnected', 'true')
-      navigate('/')
+      // navigate('/')
     } else {
       alert('Problème avec vos identifiants')
     }
@@ -40,7 +39,7 @@ const Register = () => {
 
   let token = localStorage.getItem('isConnected')
   if (token === 'true') {
-    navigate('/')
+    // navigate('/')
   }
 
   return (
@@ -160,7 +159,7 @@ const Register = () => {
 
             <div className="text-sm">
               <p className="font-medium text-indigo-600 hover:text-indigo-500">
-                Forgot your password?
+                Forgot your password? Inscription
               </p>
             </div>
           </div>
