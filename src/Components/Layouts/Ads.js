@@ -75,7 +75,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
       </div>
       {isModalOpen && (
         <div className="absolute left-0 top-0 w-screen -top-101 z-50 h-400  bg-gray-recycle opacity-95 ">
-          <div className="w-1/2 absolute left-1/4 h-48 top-101  bg-white opacity-100">
+          <div className="w-1/2 absolute left-1/4 h-48 top-101  bg-white opacity-100 rounded-xl">
             <p className="text-black text-center my-8">
               Êtes vous sur de vouloir supprimer cette annonce
             </p>
