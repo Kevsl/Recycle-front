@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 
 export const ProfilEdit = () => {
   const [data, setData] = useState([])
+
+  
   return (
     <div>
       <h2>Modifer mon profil </h2>

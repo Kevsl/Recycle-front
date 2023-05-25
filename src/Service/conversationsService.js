@@ -3,7 +3,7 @@ import axios from 'axios'
 export async function getMyConversations() {
   let url = `${process.env.REACT_APP_API_URL}conversation/me/6`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
   return axios
     .get(url, config)
@@ -19,7 +19,7 @@ export async function getSpecificConversation(id) {
     process.env.REACT_APP_API_URL
   }conversation/${localStorage.getItem('id')}`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
 
   return axios.get(url, config).then((res) => {

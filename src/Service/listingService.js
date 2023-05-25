@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export async function getListings() {
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
 
   let url = `${process.env.REACT_APP_API_URL}listing/images`
@@ -21,7 +21,7 @@ export async function getCustomListings(
 ) {
   let url = `${process.env.REACT_APP_API_URL}listing/search`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
   return axios
     .post(
@@ -45,7 +45,7 @@ export async function getCustomListings(
 export async function getListing(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/${id}`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
   return axios.get(url, config).then((res) => {
     return res.data
@@ -54,7 +54,7 @@ export async function getListing(id) {
 export async function getListingTypes() {
   let url = `${process.env.REACT_APP_API_URL}listingType`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
   return axios.get(url, config).then((res) => {
     return res.data
@@ -63,7 +63,7 @@ export async function getListingTypes() {
 
 export async function getListingCategories() {
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
   let url = `${process.env.REACT_APP_API_URL}listingCategory`
   return axios.get(url, config).then((res) => {
@@ -73,7 +73,7 @@ export async function getListingCategories() {
 export async function getListingByCategory(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/images/category/${id}`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
 
   return axios.get(url, config).then((res) => {
@@ -84,7 +84,7 @@ export async function getListingByCategory(id) {
 export async function getMyListings(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/me/${id}`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
 
   return axios.get(url, config).then((res) => {
@@ -107,7 +107,7 @@ export async function createListing(
   let url = `${process.env.REACT_APP_API_URL}listing/new`
   let id = localStorage.getItem('id')
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
 
   return axios
@@ -142,7 +142,7 @@ export async function createListing(
 export async function getCitiesList(id) {
   let url = `https://api-adresse.data.gouv.fr/search/?q=${id}&type=municipality`
   const config = {
-    headers: { Authorization: `${localStorage.getItem('token')}` },
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
   return axios.get(url, config).then((res) => {
     console.log(res.data.features)

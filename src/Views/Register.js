@@ -1,18 +1,31 @@
 import logo from '../Assets/images/logo.png'
-import { checkEmail, checkPassword } from '../Utils/Regex'
-import React, { useState } from 'react'
+import { getAllAvatars, register } from '../Service/authService'
+import { checkEmail, checkPassword, checkString } from '../Utils/Regex'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Triangle } from 'react-loader-spinner'
 
 const Register = () => {
   const navigate = useNavigate()
 
   const [email, setEmail] = useState('')
+  const [pseudo, setPseudo] = useState('')
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [emailOk, setEmailOk] = useState(false)
   const [passOK, setPassOk] = useState(false)
   const [confirmpassOK, setConfirmPassOk] = useState(false)
   const [similarPasswords, setSimilarPasswords] = useState(false)
+  const [avatars, setAvatars] = useState([])
+  const [avatarChosen, setAvatarChosen] = useState(1)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+
+  useEffect(() => {
+    getAllAvatars().then((res) => {
+      setAvatars(res)
+    })
+  }, [])
 
   function handleEmail(value) {
     checkEmail(value) === true ? setEmailOk(true) : setEmailOk(false)
@@ -29,23 +42,68 @@ const Register = () => {
   function handleSimilarPasswords(password, value) {
     password === value ? setSimilarPasswords(true) : setSimilarPasswords(false)
   }
+
   function handleRegister() {
-    if (passOK && emailOk && similarPasswords && confirmpassOK) {
-      // navigate('/')
-    } else {
-      alert('Problème avec vos identifiants')
+    if (
+      passOK &&
+      emailOk &&
+      similarPasswords &&
+      confirmpassOK &&
+      checkString(pseudo)
+    ) {
+      try {
+        register(email, password, pseudo, avatarChosen).then((res) => {
+          setIsLoading(false)
+          if (res.status === 200) {
+            navigate('/')
+            setIsLoading(false)
+          }
+          if (res.response.status) {
+            switch (res.response.status) {
+              case 200:
+                navigate('/')
+                setIsLoading(false)
+                break
+              case 500:
+                setErrorMessage('Problème avec le serveur')
+                setIsLoading(false)
+
+                break
+              case 400:
+                setErrorMessage('Problème avec votre connexion')
+                setIsLoading(false)
+
+                break
+              case 401:
+                setErrorMessage('Problème avec vos identifiants')
+                setIsLoading(false)
+                break
+              default:
+                console.log(res)
+                setIsLoading(false)
+            }
+          } else {
+            setErrorMessage(
+              'Problème interne veuillez nous excuser pour la gêne occasionée'
+            )
+            setIsLoading(false)
+          }
+        })
+      } catch (e) {
+        console.log(e)
+      }
     }
   }
 
-  let token = localStorage.getItem('isConnected')
-  if (token === 'true') {
-    // navigate('/')
-  }
+  // let token = localStorage.getItem('token')
+  // if (token === 'true') {
+  //   // navigate('/')
+  // }
 
   return (
     <div>
       <div className="flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8 font-Baloo">
-        <div className="w-full max-w-md space-y-8">
+        <div className="w-full max-w-md space-y-4">
           <div>
             <img className="mx-auto h-32 w-auto" src={logo} alt="Recycle" />
             <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
@@ -71,6 +129,18 @@ const Register = () => {
                 onChange={(e) => {
                   handleEmail(e.target.value)
                   setEmail(e.target.value)
+                }}
+              />
+              <input
+                id="pseudo"
+                name="pseudo"
+                type="text"
+                required
+                className="relative block w-full appearance-none rounded-none border-b-0  border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                placeholder="Pseudonyme"
+                value={pseudo}
+                onChange={(e) => {
+                  setPseudo(e.target.value)
                 }}
               />
             </div>
@@ -122,6 +192,41 @@ const Register = () => {
               Le mot de passe et sa confirmation doivent être identiques
             </p>
           )}
+          <div className="w-full flex items-center  flex-col my-4 border border-solid border-gray-light rounded-lg">
+            <h2 className="my-2">Choisissez un avatar</h2>
+            <div className="flex items-center justify-center flex-wrap">
+              {avatars.length > 0 ? (
+                avatars.map((avatar) => {
+                  return (
+                    <button
+                      key={avatar.id}
+                      onClick={() => {
+                        setAvatarChosen(avatar.id)
+                      }}
+                      className="w-20 h-20 flex justify-center items-center rounded-full mx-1 my-1 hover:h-16 hover:w-16 hover:bg-green-recycle focus:h-16 focus:w-16 focus:bg-green-recycle"
+                    >
+                      <img
+                        src={avatar.image}
+                        alt="avatar"
+                        className="w-14 h-14 rounded-full"
+                      />
+                    </button>
+                  )
+                })
+              ) : (
+                <Triangle
+                  color="#91C788"
+                  ariaLabel="triangle-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                  width="80"
+                  height="80"
+                />
+              )}
+            </div>
+          </div>
+
           <div className="w-full flex items-center justify-center flex-col my-4">
             <button
               className="bg-green-recycle text-white rounded-xl px-6 w-48 mx-auto mt-2"
@@ -140,6 +245,11 @@ const Register = () => {
             >
               Se connecter
             </button>
+            {errorMessage.length > 0 && (
+              <p className="text-red-recycle text-sm my-4 text-center">
+                {errorMessage}
+              </p>
+            )}
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center">
