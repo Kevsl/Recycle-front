@@ -6,6 +6,7 @@ import {
 } from '../../Service/conversationsService'
 import { FooterMenu } from '../FooterMenu'
 import { useNavigate } from 'react-router-dom'
+import { dateTranslator } from '../../Utils/tools'
 
 export const ConversationOverview = () => {
   const navigate = useNavigate()
@@ -16,9 +17,7 @@ export const ConversationOverview = () => {
   const ownerName = localStorage.getItem('username')
   const [contactName, setContactName] = useState('')
   const [contactAvatar, setContactAvatar] = useState('')
-  const [contactId, setContactId] = useState('123')
-
-  const [isMessengerVisible, setIsMessengerVisible] = useState(true)
+  const [conversationId, setConversationId] = useState('')
 
   useEffect(() => {
     getMyConversations(ownerId).then((res) => {
@@ -27,10 +26,10 @@ export const ConversationOverview = () => {
   }, [])
 
   useEffect(() => {
-    getSpecificConversation(contactId).then((res) => {
+    getSpecificConversation(conversationId).then((res) => {
       setMessages(res)
     })
-  }, [contactId])
+  }, [conversationId])
 
   return (
     <div className="relative">
@@ -44,23 +43,23 @@ export const ConversationOverview = () => {
         Mes messages
       </h1>
       <div className=" w-full md:justify-around md:mt-4:flex items-start">
-        <div className=" w-full h-screen md:w-1/4  overflow-scroll text-ellipsis border-r-2 border-gray-light">
+        <div className=" w-full h-screen md:w-1/3  overflow-scroll text-ellipsis border-r-2 border-gray-light">
           {conversations &&
             conversations.map((specific) => {
               return (
                 <div
                   className="my-2  pb-2   border-b-2  border-gray-light "
                   onClick={() => {
-                    setContactId('1O')
-                    setContactName(specific.profile)
+                    setConversationId(specific.id)
+                    setContactName(specific.user)
                     setContactAvatar(specific.avatar)
                   }}
                   key={specific.id}
                 >
-                  <div className="flex items-center my-1  ">
+                  <div className="flex items-center my-px  ">
                     <img
                       src={specific.avatar}
-                      alt={specific.profile}
+                      alt={specific.user}
                       className="!w-8 !h-8 ml-6 rounded-full object-cover my-1"
                     />
                     <p className="text-dark-blue text-center text-sm ml-4">
@@ -68,13 +67,16 @@ export const ConversationOverview = () => {
                     </p>
                   </div>
                   <p className=" ml-16 text-gray-recycle text-sm italic overflow-hidden text-ellipsis truncate">
-                    {specific.listing}
+                    {specific.message}
+                  </p>
+                  <p className=" ml-16 text-gray-recycle text-sm italic overflow-hidden text-ellipsis truncate">
+                    {dateTranslator(specific.createdAt.date)}
                   </p>
                 </div>
               )
             })}
         </div>
-        <div className="w-full mb-24 bg-white  h-screen md:w-3/4  overflow-scroll  ">
+        <div className="w-full mb-24 bg-white  h-screen md:w-2/3  overflow-scroll  ">
           {messages && messages.length > 0 ? (
             messages.map((message) => {
               return message.sender === ownerId ? (

@@ -1,7 +1,9 @@
 import axios from 'axios'
 
 export async function getMyConversations() {
-  let url = `${process.env.REACT_APP_API_URL}conversation/me/6`
+  let url = `${
+    process.env.REACT_APP_API_URL
+  }conversation/me/${localStorage.getItem('id')}`
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }
@@ -15,9 +17,7 @@ export async function getMyConversations() {
 }
 
 export async function getSpecificConversation(id) {
-  let url = `${
-    process.env.REACT_APP_API_URL
-  }conversation/${localStorage.getItem('id')}`
+  let url = `${process.env.REACT_APP_API_URL}conversation/${id}`
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }

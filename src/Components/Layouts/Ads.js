@@ -40,13 +40,15 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                   {edit && (
                     <p className=" w-full absolute flex items-center justify-end px-2">
                       <i
-                        className="fa-solid fa-pen-to-square mx-2  my-2 text-gray-recycle w-6 h-6 text-center"
+                        className="fa-solid fa-pen-to-square mx-2  my-2 text-gray-recycle w-6 h-6 text-center bg-gray-light pt-1 rounded-lg"
                         onClick={() => {
-                          alert('ohohoh')
+                          navigate('/modification', {
+                            state: { id: listing.id },
+                          })
                         }}
                       ></i>
                       <i
-                        className="fa-solid fa-trash mx-2  my-2 text-red-recycle w-6 h-6 text-center"
+                        className="fa-solid fa-trash mx-2  my-2 text-red-recycle w-6 h-6 text-center bg-gray-light pt-1 rounded-lg"
                         onClick={() => {
                           setIsModalOpen(true)
                         }}

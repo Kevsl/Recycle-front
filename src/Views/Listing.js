@@ -41,7 +41,19 @@ const Listing = () => {
     <div className="font-Baloo w-full text-gray-recycle">
       <Header />
       <div className=" mx-auto">
-        {listingData &&
+        {isLoading ? (
+          <div className="w-1/2 mx-auto flex items-center justify-center ">
+            <Triangle
+              color="#91C788"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+              width="80"
+              height="80"
+            />
+          </div>
+        ) : listingData.length ? (
           listingData.map((data) => {
             return (
               <div key={data.id}>
@@ -70,10 +82,10 @@ const Listing = () => {
                 </div>
                 <div className="my-8 w-5/6 mx-auto">
                   <label className="mr-2  border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg">
-                    {data.fkListingCategory}
+                    {data.listingCategory}
                   </label>
                   <label className="mr-2  border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg">
-                    {data.subCategory}
+                    {data.listingSubCategory}
                   </label>
                   <h1 className="text-2xl  text-gray-recycle font-bold mt-8">
                     {data.title}
@@ -115,8 +127,7 @@ const Listing = () => {
                     <div className="mb-24">
                       <p className="px-4">
                         <span className="text-gray-dark-recycle">
-                          {' '}
-                          Description :{' '}
+                          Description :
                         </span>
                         <br />
                         {data.description}
@@ -126,7 +137,10 @@ const Listing = () => {
                 </div>
               </div>
             )
-          })}
+          })
+        ) : (
+          <p>Problème de chargement, veuillez réessayer plus tard</p>
+        )}
       </div>
       <Footer />
       <FooterMenu />
