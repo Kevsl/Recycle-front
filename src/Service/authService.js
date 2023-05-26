@@ -32,23 +32,14 @@ export async function login(email, password) {
 
 export async function register(email, password, pseudo, avatar) {
   let url = `${process.env.REACT_APP_API_URL}api/register`
-  let axiosConfig = {
-    headers: {
-      'Content-type': 'application/json',
-      'Access-Control-Allow-Origin': '*',
-    },
-  }
+
   return axios
-    .post(
-      url,
-      {
-        email: email,
-        password: password,
-        pseudo: pseudo,
-        avatar: avatar,
-      },
-      axiosConfig
-    )
+    .post(url, {
+      email: email,
+      password: password,
+      pseudo: pseudo,
+      avatar: avatar,
+    })
     .then((res) => {
       return res
     })
