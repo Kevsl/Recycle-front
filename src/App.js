@@ -23,7 +23,6 @@ function App() {
         <Route path="/creation" element={<CreateListing />} />
         <Route path="/recherche" element={<Search />} />
         <Route path="/modification" element={<EditListing />} />
-
         <Route path="/categorie/:id" element={<ListingsCategory />} />
       </Routes>
     </div>

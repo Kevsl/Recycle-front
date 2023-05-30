@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react'
 import { getListing } from '../Service/listingService'
 import { Header } from '../Components/Layouts/Header'
 import { Triangle } from 'react-loader-spinner'
+import { useNavigate } from 'react-router-dom'
 
 const Listing = () => {
   const [listingData, setListingData] = useState([])
@@ -12,6 +13,7 @@ const Listing = () => {
   const { state } = useLocation()
   const { id } = state
   const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getListing(id).then((res) => {
@@ -109,7 +111,18 @@ const Listing = () => {
                         </p>
                       </div>
                     </div>
-                    <button className="bg-green-recycle text-white px-2 py-2 rounded-full cursor-pointer">
+                    <button
+                      className="bg-green-recycle text-white px-2 py-2 rounded-full cursor-pointer"
+                      onClick={() => {
+                        navigate('/messages', {
+                          state: {
+                            id: data.id,
+                            image: data.images[0],
+                            title: data.title,
+                          },
+                        })
+                      }}
+                    >
                       Contacter
                     </button>
                   </div>

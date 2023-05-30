@@ -7,6 +7,7 @@ import {
 import { FooterMenu } from '../FooterMenu'
 import { useNavigate } from 'react-router-dom'
 import { dateTranslator } from '../../Utils/tools'
+import { useLocation } from 'react-router-dom'
 
 export const ConversationOverview = () => {
   const navigate = useNavigate()
@@ -19,6 +20,7 @@ export const ConversationOverview = () => {
   const [contactAvatar, setContactAvatar] = useState('')
   const [conversationId, setConversationId] = useState('')
   const [isMessagesVisible, setIsMessagesVisible] = useState(false)
+  const { state } = useLocation()
 
   useEffect(() => {
     getMyConversations(ownerId).then((res) => {
@@ -31,6 +33,10 @@ export const ConversationOverview = () => {
       setMessages(res)
     })
   }, [conversationId])
+
+  useEffect(() => {
+    console.log(state)
+  }, [state])
 
   return (
     <div className="relative">
@@ -52,7 +58,10 @@ export const ConversationOverview = () => {
               conversations.map((specific) => {
                 return (
                   <div
-                    className="my-2  pb-2   border-b-2  border-gray-light "
+                    className={` pb-4  border-b-2  border-gray-light ${
+                      conversationId === specific.conversationId &&
+                      'bg-gray-light'
+                    } `}
                     onClick={() => {
                       setConversationId(specific.conversationId)
                       setIsMessagesVisible(true)
@@ -78,6 +87,26 @@ export const ConversationOverview = () => {
                   </div>
                 )
               })}
+            <div
+              className={`py-2  pb-2   border-b-2  border-gray-light ${
+                conversationId === state.id && 'bg-gray-light'
+              } `}
+              onClick={() => {
+                setConversationId(state.id)
+                setIsMessagesVisible(true)
+              }}
+            >
+              <div className="flex items-center my-px  ">
+                <img
+                  src={state.image}
+                  alt={state.title}
+                  className="!w-8 !h-8 ml-6 rounded-full object-cover my-1"
+                />
+                <p className="text-dark-blue text-center text-sm ml-4">
+                  {state.title}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
         <div
