@@ -3,7 +3,7 @@ import axios from 'axios'
 export async function getMyConversations() {
   let url = `${
     process.env.REACT_APP_API_URL
-  }conversation/me/${localStorage.getItem('id')}`
+  }conversation/byUser/${localStorage.getItem('id')}`
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
   }

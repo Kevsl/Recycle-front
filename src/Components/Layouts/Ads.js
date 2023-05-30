@@ -12,7 +12,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
       <div className="w-full mt-22">
         <h2 className="text-dark-blue text-center my-4">{title}</h2>
         <div className="flex items-center  flex-wrap justify-evenly">
-          {isLoading === true ? (
+          {isLoading ? (
             <div className="w-1/2 mx-auto flex items-center justify-center ">
               <Triangle
                 color="#91C788"
