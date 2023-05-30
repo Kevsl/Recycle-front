@@ -116,12 +116,10 @@ export async function createListing(
 
       {
         city: city,
-        street: 'to remove',
         country: 'France',
         description: description,
         title: title,
-        fkListingCategory: listingCategoryId,
-        fkListingSubCategory: listingSubCategoryId,
+        fkSubCategory: listingSubCategoryId,
         fkListingStatus: 1,
         fkListingType: listingTypeId,
         fkSubListingType: listingSubTypeId,
@@ -129,8 +127,6 @@ export async function createListing(
         latitude: latitude,
         longitude: longitude,
         postCode: postCode,
-        streetName: 'to remove',
-        streetNumber: 1,
         fkUser: localStorage.getItem('id'),
       },
       config

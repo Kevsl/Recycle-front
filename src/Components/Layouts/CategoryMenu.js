@@ -105,24 +105,28 @@ export const CategoryMenu = ({
         <div className="flex items-center flex-wrap justify-center my-4">
           {listingSubCategoriesList &&
             listingSubCategoriesList.map((listingSubCategory) => {
+              console.log(listingSubCategory)
               return (
-                <div className="h-21 my-4" key={listingSubCategory.id}>
+                <div
+                  className="h-21 my-4"
+                  key={listingSubCategory.subCategoryId}
+                >
                   <input
-                    id={`listing-subcategory-${listingSubCategory.id}`}
+                    id={`listing-subcategory-${listingSubCategory.subCategoryId}`}
                     type="radio"
                     name="listing-subcategory"
                     className="peer hidden"
-                    value={`listing-subcategory-${listingSubCategory.id}`}
+                    value={`listing-subcategory-${listingSubCategory.subCategoryId}`}
                     aria-label={listingSubCategory.category}
                     onClick={() => {
-                      setListingSubCategoryId(listingSubCategory.id)
+                      setListingSubCategoryId(listingSubCategory.subCategoryId)
                     }}
                   />
                   <label
-                    htmlFor={`listing-subcategory-${listingSubCategory.id}`}
+                    htmlFor={`listing-subcategory-${listingSubCategory.subCategoryId}`}
                     className="mx-2 border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg  peer-checked:bg-green-recycle peer-checked:text-white  my-4 cursor-pointer "
                   >
-                    {listingSubCategory.category}
+                    {listingSubCategory.subCategoryName}
                   </label>
                 </div>
               )
