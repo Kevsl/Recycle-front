@@ -50,7 +50,6 @@ const Login = () => {
               setIsLoading(false)
               break
             default:
-              res
               setIsLoading(false)
           }
         } else {
@@ -61,7 +60,9 @@ const Login = () => {
         }
       })
     } catch (e) {
-      e
+      setErrorMessage(
+        'Problème interne veuillez nous excuser pour la gêne occasionée'
+      )
     }
   }
 
