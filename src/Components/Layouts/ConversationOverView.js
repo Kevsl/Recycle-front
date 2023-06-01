@@ -3,6 +3,7 @@ import {
   getConversations,
   getMyConversations,
   getSpecificConversation,
+  sendFirstMessage,
 } from '../../Service/conversationsService'
 import { FooterMenu } from '../FooterMenu'
 import { useNavigate } from 'react-router-dom'
@@ -13,6 +14,8 @@ export const ConversationOverview = () => {
   const navigate = useNavigate()
   const [conversations, setConversations] = useState([])
   const [messages, setMessages] = useState([])
+  const [currentMessage, setCurrentMessage] = useState('')
+
   const ownerId = localStorage.getItem('id')
   const ownerAvatar = localStorage.getItem('avatar')
   const ownerName = localStorage.getItem('username')
@@ -33,6 +36,12 @@ export const ConversationOverview = () => {
       setMessages(res)
     })
   }, [conversationId])
+
+  function handleNewConversation(id, firstMessage){
+    if(id && firstMessage){
+      sendFirstMessage(id,firstMessage)
+    }
+  }
 
   return (
     <div className="relative">
@@ -151,10 +160,18 @@ export const ConversationOverview = () => {
             <input
               type="text"
               className=" border border-solid border-gray-light w-full rounded-xl mx-4 h-12 px-4"
+            
+              onChange={(e) => {
+                setCurrentMessage(e.target.default)
+              }}
+
             />
             <span>
               <p className="relative">
-                <i className="fa-solid fa-paper-plane w-6 h-6 text-dark-blue absolute -bottom-4 right-8 "></i>
+                <i className="fa-solid fa-paper-plane w-6 h-6 text-dark-blue absolute -bottom-4 right-8 " 
+                onClick={() => {
+                  handleNewConversation(state.id, currentMessage)
+                }}></i>
               </p>
             </span>
           </div>
