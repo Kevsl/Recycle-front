@@ -119,6 +119,7 @@ const Listing = () => {
                             id: data.id,
                             image: data.images[0],
                             title: data.title,
+                            isNewConversation: true
                           },
                         })
                       }}
