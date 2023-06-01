@@ -79,7 +79,6 @@ const Register = () => {
                 setIsLoading(false)
                 break
               default:
-                res
                 setIsLoading(false)
             }
           } else {
@@ -89,9 +88,7 @@ const Register = () => {
             setIsLoading(false)
           }
         })
-      } catch (e) {
-        e
-      }
+      } catch (e) {}
     }
   }
 
