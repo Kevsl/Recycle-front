@@ -1,7 +1,7 @@
 import axios from 'axios'
 import jwt_decode from 'jwt-decode'
 
-export async function loginFunction(email, password) {
+export async function login(email, password) {
   let url = `${process.env.REACT_APP_API_URL}api/login_check`
   let axiosConfig = {
     headers: {
@@ -28,4 +28,30 @@ export async function loginFunction(email, password) {
     .catch((err) => {
       return err
     })
+}
+
+export async function register(email, password, pseudo, avatar) {
+  let url = `${process.env.REACT_APP_API_URL}api/register`
+
+  return axios
+    .post(url, {
+      email: email,
+      password: password,
+      pseudo: pseudo,
+      avatar: avatar,
+    })
+    .then((res) => {
+      return res
+    })
+    .catch((err) => {
+      return err
+    })
+}
+
+export async function getAllAvatars() {
+  let url = `${process.env.REACT_APP_API_URL}avatar`
+
+  return axios.get(url).then((res) => {
+    return res.data
+  })
 }

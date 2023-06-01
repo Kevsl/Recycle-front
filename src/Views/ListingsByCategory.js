@@ -16,7 +16,6 @@ const ListingsCategory = () => {
   useEffect(() => {
     setIsLoading(true)
     getListingByCategory(id.id).then((res) => {
-      console.log(res)
       setIsLoading(false)
       setListings(res)
     })

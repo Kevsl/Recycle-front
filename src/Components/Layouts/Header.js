@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 export const Header = () => {
   const navigate = useNavigate()
   const [isConnected, setIsConnected] = useState(false)
-
   const [isBurgerMenuVisible, setIsBurgerMenuVisible] = useState(false)
 
   useEffect(() => {
@@ -13,6 +12,13 @@ export const Header = () => {
       setIsConnected(true)
     }
   }, [])
+
+  useEffect(() => {
+    let token = localStorage.getItem('token')
+    if (!token) {
+      navigate('/connexion')
+    }
+  }, [navigate])
 
   function handleLogout() {
     localStorage.clear()
@@ -50,7 +56,7 @@ export const Header = () => {
           </li>
         </ul>
       ) : (
-        <div className="flex items-center justify-center w-1/3 md:flex mt-1">
+        <div className="flex items-center justify-center 1/6 md:flex mt-1">
           <button
             className=""
             onClick={() => {
@@ -60,7 +66,7 @@ export const Header = () => {
             <i className="fa-regular fa-user text-dark-blue w-6 h-6 text-2xl mx-4"></i>
           </button>
           <button
-            className="mr-8"
+            className=""
             onClick={() => {
               handleLogout()
             }}

@@ -2,7 +2,7 @@ import logo from '../Assets/images/logo.png'
 import { checkEmail, checkPassword } from '../Utils/Regex'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { loginFunction } from '../Service/authService'
+import { login } from '../Service/authService'
 import { Triangle } from 'react-loader-spinner'
 
 const Login = () => {
@@ -23,7 +23,7 @@ const Login = () => {
   function handleLogin() {
     setIsLoading(true)
     try {
-      loginFunction(email, password).then((res) => {
+      login(email, password).then((res) => {
         setIsLoading(false)
         if (res.status === 200) {
           navigate('/')
@@ -32,7 +32,7 @@ const Login = () => {
         if (res.response.status) {
           switch (res.response.status) {
             case 200:
-              navigate('/')
+              navigate('/connexion')
               setIsLoading(false)
               break
             case 500:
@@ -50,7 +50,6 @@ const Login = () => {
               setIsLoading(false)
               break
             default:
-              console.log(res)
               setIsLoading(false)
           }
         } else {
@@ -61,7 +60,9 @@ const Login = () => {
         }
       })
     } catch (e) {
-      console.log(e)
+      setErrorMessage(
+        'Problème interne veuillez nous excuser pour la gêne occasionée'
+      )
     }
   }
 

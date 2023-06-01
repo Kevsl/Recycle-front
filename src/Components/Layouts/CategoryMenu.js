@@ -40,11 +40,11 @@ export const CategoryMenu = ({
       <div>
         <p className="text-center my-4 text-gray-recycle">Type d'annonce</p>
 
-        <div className="flex items-center justify-center">
+        <div className="flex items-center flex-wrap justify-center my-4">
           {listingTypeList &&
             listingTypeList.map((listingType) => {
               return (
-                <div key={listingType.id}>
+                <div key={listingType.id} className="h-21 my-4">
                   <input
                     id={`listing-type-${listingType.id}`}
                     type="radio"
@@ -58,7 +58,7 @@ export const CategoryMenu = ({
                   />
                   <label
                     htmlFor={`listing-type-${listingType.id}`}
-                    className="mx-2 border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg  peer-checked:bg-green-recycle peer-checked:text-white cursor-pointer"
+                    className="mx-2 border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg  peer-checked:bg-green-recycle peer-checked:text-white  my-4 cursor-pointer "
                   >
                     {listingType.type}
                   </label>
@@ -106,23 +106,26 @@ export const CategoryMenu = ({
           {listingSubCategoriesList &&
             listingSubCategoriesList.map((listingSubCategory) => {
               return (
-                <div className="h-21 my-4" key={listingSubCategory.id}>
+                <div
+                  className="h-21 my-4"
+                  key={listingSubCategory.subCategoryId}
+                >
                   <input
-                    id={`listing-subcategory-${listingSubCategory.id}`}
+                    id={`listing-subcategory-${listingSubCategory.subCategoryId}`}
                     type="radio"
                     name="listing-subcategory"
                     className="peer hidden"
-                    value={`listing-subcategory-${listingSubCategory.id}`}
+                    value={`listing-subcategory-${listingSubCategory.subCategoryId}`}
                     aria-label={listingSubCategory.category}
                     onClick={() => {
-                      setListingSubCategoryId(listingSubCategory.id)
+                      setListingSubCategoryId(listingSubCategory.subCategoryId)
                     }}
                   />
                   <label
-                    htmlFor={`listing-subcategory-${listingSubCategory.id}`}
+                    htmlFor={`listing-subcategory-${listingSubCategory.subCategoryId}`}
                     className="mx-2 border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg  peer-checked:bg-green-recycle peer-checked:text-white  my-4 cursor-pointer "
                   >
-                    {listingSubCategory.category}
+                    {listingSubCategory.subCategoryName}
                   </label>
                 </div>
               )

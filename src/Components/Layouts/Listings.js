@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useState, useEffect } from 'react'
 import { getListings } from '../../Service/listingService'
 import { Triangle } from 'react-loader-spinner'

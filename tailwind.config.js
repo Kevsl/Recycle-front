@@ -35,6 +35,9 @@ module.exports = {
 
     extend: {
       spacing: {
+        400: '400vh',
+        401: '401vw',
+        101: '101vh',
         128: '32rem',
         144: '36rem',
         45: '45%',

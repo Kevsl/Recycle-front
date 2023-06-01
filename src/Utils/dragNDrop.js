@@ -1,7 +1,7 @@
-import React from 'react'
 import { useDropzone } from 'react-dropzone'
+import React, { useState, useEffect } from 'react'
 
-export const AcceptMaxFiles = (props) => {
+export const AcceptMaxFiles = ({ setAcceptedListingImages }) => {
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
       maxFiles: 3,
@@ -29,6 +29,10 @@ export const AcceptMaxFiles = (props) => {
       </li>
     )
   })
+
+  useEffect(() => {
+    setAcceptedListingImages(acceptedFiles)
+  }, [acceptedFileItems, acceptedFiles, setAcceptedListingImages])
 
   return (
     <section className="container border flex flex-col justify-center items-center border-green-recycle border-solid rounded-xl ">

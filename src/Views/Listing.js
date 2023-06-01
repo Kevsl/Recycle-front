@@ -4,16 +4,22 @@ import { FooterMenu } from '../Components/FooterMenu'
 import React, { useState, useEffect } from 'react'
 import { getListing } from '../Service/listingService'
 import { Header } from '../Components/Layouts/Header'
+import { Triangle } from 'react-loader-spinner'
+import { useNavigate } from 'react-router-dom'
 
 const Listing = () => {
   const [listingData, setListingData] = useState([])
   const [carousselPosition, setCarousselPosition] = useState(0)
   const { state } = useLocation()
   const { id } = state
+  const [isLoading, setIsLoading] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
     getListing(id).then((res) => {
+      setIsLoading(true)
       setListingData(res)
+      setIsLoading(false)
     })
   }, [id])
 
@@ -37,7 +43,19 @@ const Listing = () => {
     <div className="font-Baloo w-full text-gray-recycle">
       <Header />
       <div className=" mx-auto">
-        {listingData &&
+        {isLoading ? (
+          <div className="w-1/2 mx-auto flex items-center justify-center ">
+            <Triangle
+              color="#91C788"
+              ariaLabel="triangle-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+              width="80"
+              height="80"
+            />
+          </div>
+        ) : listingData.length ? (
           listingData.map((data) => {
             return (
               <div key={data.id}>
@@ -66,10 +84,10 @@ const Listing = () => {
                 </div>
                 <div className="my-8 w-5/6 mx-auto">
                   <label className="mr-2  border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg">
-                    {data.fkListingCategory}
+                    {data.listingCategory}
                   </label>
                   <label className="mr-2  border border-solid border-green-recycle text-green-recycle px-2 py-2 rounded-lg">
-                    {data.subCategory}
+                    {data.listingSubCategory}
                   </label>
                   <h1 className="text-2xl  text-gray-recycle font-bold mt-8">
                     {data.title}
@@ -93,7 +111,18 @@ const Listing = () => {
                         </p>
                       </div>
                     </div>
-                    <button className="bg-green-recycle text-white px-2 py-2 rounded-full cursor-pointer">
+                    <button
+                      className="bg-green-recycle text-white px-2 py-2 rounded-full cursor-pointer"
+                      onClick={() => {
+                        navigate('/messages', {
+                          state: {
+                            id: data.id,
+                            image: data.images[0],
+                            title: data.title,
+                          },
+                        })
+                      }}
+                    >
                       Contacter
                     </button>
                   </div>
@@ -111,8 +140,7 @@ const Listing = () => {
                     <div className="mb-24">
                       <p className="px-4">
                         <span className="text-gray-dark-recycle">
-                          {' '}
-                          Description :{' '}
+                          Description :
                         </span>
                         <br />
                         {data.description}
@@ -122,7 +150,10 @@ const Listing = () => {
                 </div>
               </div>
             )
-          })}
+          })
+        ) : (
+          <p>Problème de chargement, veuillez réessayer plus tard</p>
+        )}
       </div>
       <Footer />
       <FooterMenu />
