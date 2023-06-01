@@ -24,7 +24,7 @@ const ListingsCategory = () => {
   return (
     <div className="font-Baloo">
       <Header />
-      <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
+      <div className="w-5/6 bg-black-opacity-50 mx-auto h-px rounded-xl"></div>
       {isLoading ? (
         <div className="w-screen h-screen mx-auto my-auto flex items-center justify-center">
           <Triangle
@@ -38,15 +38,17 @@ const ListingsCategory = () => {
           />
         </div>
       ) : listings && listings.length > 0 ? (
-        <Ads
-          listings={listings}
-          isLoading={isLoading}
-          title={
-            categoryName
-              ? `Les annonces pour la catégorie ${categoryName}`
-              : 'Catégorie'
-          }
-        />
+        <div className="mt-32">
+          <Ads
+            listings={listings}
+            isLoading={isLoading}
+            title={
+              categoryName
+                ? `Les annonces pour la catégorie ${categoryName}`
+                : 'Catégorie'
+            }
+          />
+        </div>
       ) : (
         <p className="mt-24 text-xl text-center text-gray-recycle">
           "Aucun produit n'est disponible pour cette catégorie"

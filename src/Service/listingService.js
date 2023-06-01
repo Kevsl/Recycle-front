@@ -34,7 +34,7 @@ export async function getCustomListings(
 }
 
 export async function getListing(id) {
-  let url = `${process.env.REACT_APP_API_URL}listing/${id}`
+  let url = `${process.env.REACT_APP_API_URL}listing/view/${id}`
 
   return axios.get(url).then((res) => {
     return res.data
