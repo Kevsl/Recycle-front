@@ -50,7 +50,7 @@ const Login = () => {
               setIsLoading(false)
               break
             default:
-              console.log(res)
+              res
               setIsLoading(false)
           }
         } else {
@@ -61,7 +61,7 @@ const Login = () => {
         }
       })
     } catch (e) {
-      console.log(e)
+      e
     }
   }
 

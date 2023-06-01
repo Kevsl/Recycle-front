@@ -34,8 +34,6 @@ const EditListing = () => {
     getListing(id).then((res) => {
       setIsLoading(true)
       setListingData(res[0])
-      console.log(res)
-      console.log(res.title)
 
       setIsLoading(false)
     })
@@ -63,7 +61,6 @@ const EditListing = () => {
         latitude,
         longitude
       ).then((res) => {
-        console.log(res)
         navigate('/')
       })
     }

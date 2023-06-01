@@ -58,23 +58,7 @@ const Home = () => {
         )}
       </div>
       <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
-      <div className="my-8 w-full flex items-center justify-center flex-col mx-auto md:w-1/3">
-        <h3 className="text-lg text-center">
-          Créez un compte et rejoignez notre communauté.
-        </h3>
-        <p className="text-xs text-center text-gray-recycle">
-          Un compte est nécessaire pour communiquer avec les vendeurs et publier
-          une annonce.
-        </p>
-        <button
-          className="bg-green-recycle text-white rounded-xl px-6 w-48 mx-auto mt-6"
-          onClick={() => {
-            navigate('/inscription')
-          }}
-        >
-          S inscrire
-        </button>
-      </div>
+
       <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>
       <SocialNetworks />
       <div className="w-5/6 bg-black-opacity-50 mx-auto  h-px rounded-xl"></div>

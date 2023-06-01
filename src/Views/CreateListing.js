@@ -6,7 +6,9 @@ import { Footer } from '../Components/Layouts/Footer'
 import { Header } from '../Components/Layouts/Header'
 import { createListing, getCitiesList } from '../Service/listingService'
 import { AcceptMaxFiles } from '../Utils/dragNDrop'
-
+// import { storage } from '../firebase'
+// import { ref, uploadBytes } from 'firebase/storage'
+// import { v4 } from 'uuid'
 const CreateListing = () => {
   const [zip, setZip] = useState('')
   const [city, setCity] = useState('')
@@ -16,6 +18,8 @@ const CreateListing = () => {
   const [listingSubTypeId, setListingSubTypeId] = useState(1)
   const [listingCategoryId, setListingCategoryId] = useState('')
   const [listingSubCategoryId, setListingSubCategoryId] = useState('')
+  const [acceptedListingImages, setAcceptedListingImages] = useState([])
+
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
   const [coordinatesList, setCoordinatesList] = useState([])
@@ -23,7 +27,7 @@ const CreateListing = () => {
   const [queryFound, setQueryFound] = useState(false)
   const navigate = useNavigate()
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (
       title &&
       listingTypeId &&
@@ -31,9 +35,11 @@ const CreateListing = () => {
       listingSubTypeId &&
       zip &&
       city &&
-      description
+      description &&
+      latitude &&
+      longitude
     ) {
-      createListing(
+      await createListing(
         title,
         description,
         listingTypeId,
@@ -43,9 +49,9 @@ const CreateListing = () => {
         zip,
         city,
         latitude,
-        longitude
+        longitude,
+        acceptedListingImages
       ).then((res) => {
-        console.log(res)
         navigate('/')
       })
     }
@@ -75,7 +81,7 @@ const CreateListing = () => {
           Création d'annonces
         </h1>
 
-        <AcceptMaxFiles />
+        <AcceptMaxFiles setAcceptedListingImages={setAcceptedListingImages} />
 
         <input
           type="text"

@@ -34,10 +34,6 @@ export const ConversationOverview = () => {
     })
   }, [conversationId])
 
-  useEffect(() => {
-    console.log(state)
-  }, [state])
-
   return (
     <div className="relative">
       <i

@@ -58,7 +58,11 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
 
                   <img
                     className="w-full object-cover md:h-full max-h-24 md:max-h-32 rounded-xl z-20"
-                    src={listing.photo ? listing.photo : noPhoto}
+                    src={
+                      listing.images[0]
+                        ? `${process.env.REACT_APP_API_URL}/images/${listing.images[0]}`
+                        : noPhoto
+                    }
                     alt={listing.title}
                     onClick={() => {
                       navigate('/listing', { state: { id: listing.id } })

@@ -105,7 +105,6 @@ export const CategoryMenu = ({
         <div className="flex items-center flex-wrap justify-center my-4">
           {listingSubCategoriesList &&
             listingSubCategoriesList.map((listingSubCategory) => {
-              console.log(listingSubCategory)
               return (
                 <div
                   className="h-21 my-4"

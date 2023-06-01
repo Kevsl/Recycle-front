@@ -1,12 +1,9 @@
 import axios from 'axios'
+import { config } from '../Utils/Consts'
 
 export async function getListings() {
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
-
   let url = `${process.env.REACT_APP_API_URL}listing/images`
-  return axios.get(url, config).then((res) => {
+  return axios.get(url).then((res) => {
     return res.data
   })
 }
@@ -20,23 +17,17 @@ export async function getCustomListings(
   round
 ) {
   let url = `${process.env.REACT_APP_API_URL}listing/search`
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
+
   return axios
-    .post(
-      url,
-      {
-        fkListingType: listingTypeId,
-        fkSubType: listingSubTypeId,
-        fkListingCategory: listingCategoryId,
-        fkSubCategory: listingSubCategoryId,
-        latitude: latitude,
-        longitude: longitude,
-        round: round,
-      },
-      config
-    )
+    .post(url, {
+      fkListingType: listingTypeId,
+      fkSubType: listingSubTypeId,
+      fkListingCategory: listingCategoryId,
+      fkSubCategory: listingSubCategoryId,
+      latitude: latitude,
+      longitude: longitude,
+      round: round,
+    })
     .then((res) => {
       return res.data
     })
@@ -44,27 +35,20 @@ export async function getCustomListings(
 
 export async function getListing(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/${id}`
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
-  return axios.get(url, config).then((res) => {
+
+  return axios.get(url).then((res) => {
     return res.data
   })
 }
 export async function getListingTypes() {
   let url = `${process.env.REACT_APP_API_URL}listingType`
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
+
   return axios.get(url, config).then((res) => {
     return res.data
   })
 }
 
 export async function getListingCategories() {
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
   let url = `${process.env.REACT_APP_API_URL}listingCategory`
   return axios.get(url, config).then((res) => {
     return res.data
@@ -72,9 +56,6 @@ export async function getListingCategories() {
 }
 export async function getListingByCategory(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/images/category/${id}`
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
 
   return axios.get(url, config).then((res) => {
     return res.data
@@ -83,15 +64,11 @@ export async function getListingByCategory(id) {
 
 export async function getMyListings(id) {
   let url = `${process.env.REACT_APP_API_URL}listing/me/${id}`
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
 
   return axios.get(url, config).then((res) => {
     return res.data
   })
 }
-
 export async function createListing(
   title,
   description,
@@ -102,46 +79,52 @@ export async function createListing(
   postCode,
   city,
   latitude,
-  longitude
+  longitude,
+  files
 ) {
   let url = `${process.env.REACT_APP_API_URL}listing/new`
   let id = localStorage.getItem('id')
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+
+  const config2 = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+      'Content-Type': 'multipart/form-data',
+    },
   }
 
-  return axios
-    .post(
-      url,
+  const formData = new FormData()
+  formData.append('city', city)
+  formData.append('country', 'France')
+  formData.append('description', description)
+  formData.append('title', title)
+  formData.append('fkSubCategory', listingSubCategoryId)
+  formData.append('fkListingStatus', 1)
+  formData.append('fkListingType', listingTypeId)
+  formData.append('fkSubListingType', listingSubTypeId)
+  formData.append('fkProfile', id)
+  formData.append('latitude', latitude)
+  formData.append('longitude', longitude)
+  formData.append('postCode', postCode)
+  formData.append('fkUser', localStorage.getItem('id'))
 
-      {
-        city: city,
-        country: 'France',
-        description: description,
-        title: title,
-        fkSubCategory: listingSubCategoryId,
-        fkListingStatus: 1,
-        fkListingType: listingTypeId,
-        fkSubListingType: listingSubTypeId,
-        fkProfile: id,
-        latitude: latitude,
-        longitude: longitude,
-        postCode: postCode,
-        fkUser: localStorage.getItem('id'),
-      },
-      config
-    )
-    .then((res) => {
-      return res.status
+  // Check if files is an array and append each file to formData
+  if (Array.isArray(files)) {
+    files.forEach((file, index) => {
+      formData.append(`images[${index}]`, file)
     })
+  } else if (files) {
+    formData.append('images[0]', files)
+  }
+
+  return axios.post(url, formData, config2).then((res) => {
+    return res.status
+  })
 }
+
 export async function getCitiesList(id) {
   let url = `https://api-adresse.data.gouv.fr/search/?q=${id}&type=municipality`
-  const config = {
-    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  }
+
   return axios.get(url, config).then((res) => {
-    console.log(res.data.features)
     return res.data.features
   })
 }
