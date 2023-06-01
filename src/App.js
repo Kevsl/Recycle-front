@@ -9,6 +9,7 @@ import CreateListing from './Views/CreateListing'
 import ListingsCategory from './Views/ListingsByCategory'
 import Search from './Views/Search'
 import EditListing from './Views/editListing'
+import { Mentions } from './Views/Mentions'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/creation" element={<CreateListing />} />
         <Route path="/recherche" element={<Search />} />
         <Route path="/modification" element={<EditListing />} />
+        <Route path="/mentions" element={<Mentions />} />
         <Route path="/categorie/:id" element={<ListingsCategory />} />
       </Routes>
     </div>
