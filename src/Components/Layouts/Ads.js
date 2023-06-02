@@ -61,7 +61,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                     src={
                       listing.listingCoverImage
                         ? listing.listingCoverImage
-                        : listing.images[0]
+                        : listing.images
                         ? listing.images[0]
                         : noPhoto
                     }
