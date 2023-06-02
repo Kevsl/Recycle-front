@@ -29,7 +29,11 @@ const Profil = () => {
           <button
             className="w-48 border rounded-xl border-dark-Blue py-2 text-center"
             onClick={() => {
-              navigate('/messages')
+              navigate('/messages', {
+                state: {
+                  newMessage:false
+                },
+              })
             }}
           >
             <i className="fa-solid fa-message mx-2"></i>

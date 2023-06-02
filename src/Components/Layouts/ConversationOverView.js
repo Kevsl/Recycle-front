@@ -3,6 +3,8 @@ import {
   getConversations,
   getMyConversations,
   getSpecificConversation,
+  sendFirstMessage,
+  sendMessage
 } from '../../Service/conversationsService'
 import { FooterMenu } from '../FooterMenu'
 import { useNavigate } from 'react-router-dom'
@@ -13,9 +15,9 @@ export const ConversationOverview = () => {
   const navigate = useNavigate()
   const [conversations, setConversations] = useState([])
   const [messages, setMessages] = useState([])
+  const [currentMessage,setCurrentMessage] = useState('')
   const ownerId = localStorage.getItem('id')
-  const ownerAvatar = localStorage.getItem('avatar')
-  const ownerName = localStorage.getItem('username')
+  const [recipientId,setRecipientId ] = useState('')
   const [contactName, setContactName] = useState('')
   const [contactAvatar, setContactAvatar] = useState('')
   const [conversationId, setConversationId] = useState('')
@@ -25,15 +27,69 @@ export const ConversationOverview = () => {
   useEffect(() => {
     getMyConversations(ownerId).then((res) => {
       setConversations(res.conversations)
+      console.log(res.conversations[0])
     })
-  }, [])
+  }, [ownerId])
+
 
   useEffect(() => {
-    getSpecificConversation(conversationId).then((res) => {
+
+    if(conversationId.length> 0 )
+   { getSpecificConversation(conversationId).then((res) => {
       setMessages(res)
-    })
+      console.log(res)
+
+      
+      
+      // if( conversationId.length > 0 && res.messagesList.messagesList[0].recipient === ownerId){
+      //   setRecipientId(res.messagesList.messagesList[0].recipient)
+
+      // }else if(conversationId.length > 0 && res.messagesList){
+      //   setRecipientId(res.messagesList.messagesList[0].sender)
+      // }
+    })}
   }, [conversationId])
 
+
+  // function  handleRefresh()
+  // {
+  //   if(!currentMessage){
+  //       setConversationId(conversationId)
+  //   }
+  // }
+
+  // setTimeout(() => {
+  //   handleRefresh()
+  // }, 20000)
+
+  // const handleRefreshPage = async () =>{
+  //   await setTimeout(5000);
+  //   navigate('/messages', {
+  //     state: {
+  //       newMessage:false
+  //     },
+  //   })
+  //   setCurrentMessage('')
+
+
+  // }
+
+
+
+  function handleNewConversation(id, firstMessage){
+    if(id && firstMessage){
+      sendFirstMessage(id,firstMessage)
+    }
+  }
+
+  function handleNewMessage(fkConversation, fkUserSender, fkUserRecipient, content){
+    if(fkConversation && content && fkUserSender && fkUserRecipient){
+      sendMessage(fkConversation,fkUserSender, fkUserRecipient, content)
+    }
+  }
+
+
+  
   return (
     <div className="relative">
       <i
@@ -83,14 +139,12 @@ export const ConversationOverview = () => {
                   </div>
                 )
               })}
+              {  state.newMessage &&
             <div
               className={`py-2  pb-2   border-b-2  border-gray-light ${
                 conversationId === state.id && 'bg-gray-light'
               } `}
-              onClick={() => {
-                setConversationId(state.id)
-                setIsMessagesVisible(true)
-              }}
+ 
             >
               <div className="flex items-center my-px  ">
                 <img
@@ -103,6 +157,8 @@ export const ConversationOverview = () => {
                 </p>
               </div>
             </div>
+                          }
+
           </div>
         </div>
         <div
@@ -112,7 +168,7 @@ export const ConversationOverview = () => {
         >
           {messages.messagesList && messages.messagesList.length > 0 ? (
             messages.messagesList.map((message) => {
-              return message.sender == ownerId ? (
+              return message.sender === ownerId ? (
                 <div className="my-8 rounded-lg" key={message.id}>
                   <div className="flex items-center justify-end my-1 ">
                     {/* <img
@@ -151,10 +207,31 @@ export const ConversationOverview = () => {
             <input
               type="text"
               className=" border border-solid border-gray-light w-full rounded-xl mx-4 h-12 px-4"
-            />
-            <span>
-              <p className="relative">
-                <i className="fa-solid fa-paper-plane w-6 h-6 text-dark-blue absolute -bottom-4 right-8 "></i>
+              onChange={(e) =>{
+                setCurrentMessage(e.target.value)
+   
+              }}
+
+
+              />
+              <span>
+                <p className="relative">
+                  <i className="fa-solid fa-paper-plane w-6 h-6 text-dark-blue absolute -bottom-4 right-8 " 
+                  onClick={() => {
+  
+                    if(state.newMessage){
+                    handleNewConversation(state.id, currentMessage)
+                    // handleRefreshPage()
+                    }
+
+      
+                    else{
+                      handleNewMessage(conversationId, ownerId, recipientId, currentMessage)
+                      // handleRefreshPage()
+
+                  
+                    }}
+                  }></i>
               </p>
             </span>
           </div>
