@@ -25,7 +25,11 @@ export const FooterMenu = () => {
         <button
           className=""
           onClick={() => {
-            navigate('/messages')
+            navigate('/messages', {
+              state: {
+                newMessage: false,
+              },
+            })
           }}
         >
           <i className="fa-regular fa-message text-green-recycle text-2xl "></i>

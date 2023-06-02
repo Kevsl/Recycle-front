@@ -108,13 +108,13 @@ export async function createListing(
   formData.append('fkUser', localStorage.getItem('id'))
 
   // Check if files is an array and append each file to formData
-  if (Array.isArray(files)) {
-    files.forEach((file, index) => {
-      formData.append(`images[${index}]`, file)
-    })
-  } else if (files) {
-    formData.append('images[0]', files)
-  }
+  // if (Array.isArray(files)) {
+  //   files.forEach((file, index) => {
+  //     formData.append(`images[${index}]`, file)
+  //   })
+  // } else if (files) {
+  //   formData.append('images[0]', files)
+  // }
 
   return axios.post(url, formData, config2).then((res) => {
     return res.status
