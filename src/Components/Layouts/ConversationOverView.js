@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {
   getMyConversations,
   getSpecificConversation,
@@ -9,6 +9,7 @@ import { FooterMenu } from '../FooterMenu'
 import { useNavigate } from 'react-router-dom'
 import { dateTranslator } from '../../Utils/tools'
 import { useLocation } from 'react-router-dom'
+import { Triangle } from 'react-loader-spinner'
 
 export const ConversationOverview = () => {
   const navigate = useNavigate()
@@ -19,25 +20,33 @@ export const ConversationOverview = () => {
   const [recipientId, setRecipientId] = useState('')
   const [conversationId, setConversationId] = useState('')
   const [isMessagesVisible, setIsMessagesVisible] = useState(false)
-  const [isLoaded, setIsLoaded] = useState(false)
-
+  const [isConvLoading, setIsConvLoading] = useState(false)
+  const [isMsgLoading, setIsMsgLoading] = useState(false)
   const { state } = useLocation()
+  const messagesEndRef = useRef(null)
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
 
   useEffect(() => {
+    setIsConvLoading(true)
     getMyConversations(ownerId).then((res) => {
       setConversations(res.conversations)
-      console.log(res.conversations)
-      setIsLoaded(true)
+      setIsConvLoading(false)
     })
   }, [])
 
   useEffect(() => {
     if (conversationId) {
       fetchSingleConversation()
+      setIsMsgLoading(false)
     }
   }, [conversationId])
 
   function fetchSingleConversation() {
+    setIsMsgLoading(true)
+
     getSpecificConversation(conversationId).then((res) => {
       setMessages(res)
       if (conversationId) {
@@ -48,9 +57,29 @@ export const ConversationOverview = () => {
     })
   }
 
-  const handleRefreshPage = async () => {
-    fetchSingleConversation()
-    setCurrentMessage('')
+  useEffect(() => {
+    const intervalId = setInterval(setConversationId(conversationId), 10000)
+
+    return () => {
+      clearInterval(intervalId)
+    }
+  }, [])
+
+  function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      handleSubmit()
+    }
+  }
+
+  function handleRefreshPage() {
+    if (conversationId) {
+      setIsMsgLoading(true)
+
+      fetchSingleConversation()
+      setCurrentMessage('')
+
+      setIsMsgLoading(false)
+    }
   }
 
   function handleNewConversation(id, firstMessage) {
@@ -67,13 +96,20 @@ export const ConversationOverview = () => {
   ) {
     if (fkConversation && content && fkUserSender && fkUserRecipient) {
       sendMessage(fkConversation, fkUserSender, fkUserRecipient, content)
+      handleRefreshPage()
+      setCurrentMessage('')
     }
   }
-
-  function handleSubmit() {
+  useEffect(() => {
     if (state.newMessage) {
+      setIsMessagesVisible(true)
+    }
+  }, [])
+  function handleSubmit() {
+    if (state.newMessage === true) {
       handleNewConversation(state.id, currentMessage)
-      navigate('/messages', {
+      state.newMessage = false
+      navigate('/profil', {
         state: {
           newMessage: false,
         },
@@ -85,6 +121,10 @@ export const ConversationOverview = () => {
       handleRefreshPage()
     }
   }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
 
   return (
     <div className="relative">
@@ -99,23 +139,39 @@ export const ConversationOverview = () => {
       </h1>
       <div className=" w-fullmd:mt-4: md:flex md:items-start md:justify-start">
         <div
-          className={`w-full  md:w-1/3  overflow-scroll text-ellipsis md:border-r-2 border-gray-light`}
+          className={`w-full  md:w-1/3  overflow-scroll text-ellipsis md:border-r-2 border-gray-light h-80`}
         >
           <div
             className={` ${
-              isMessagesVisible && 'invisible md:visible'
+              isMessagesVisible && !state.newMessage && 'invisible md:visible'
             } h-55 md:h-80`}
           >
-            {conversations &&
+            {isConvLoading ? (
+              <div className="flex items-center justify-center w-full mt-48">
+                <Triangle
+                  color="#91C788"
+                  ariaLabel="triangle-loading"
+                  wrapperStyle={{}}
+                  wrapperClassName=""
+                  visible={true}
+                  width="80"
+                  height="80"
+                />
+              </div>
+            ) : conversations ? (
               Object.keys(conversations).map((conversation) => {
                 return (
                   <div
-                    className={` pb-4  border-b-2  border-gray-light cursor-pointer  ${
+                    className={` pb-4  border-b-2  border-gray-light cursor-pointer ${
+                      state.newMessage && 'invisible md:visible'
+                    }  ${
                       conversationId ==
                         conversations[conversation].conversationId &&
                       'bg-gray-light'
                     } `}
                     onClick={() => {
+                      setIsMsgLoading(true)
+
                       setConversationId(
                         conversations[conversation].conversationId
                       )
@@ -143,10 +199,19 @@ export const ConversationOverview = () => {
                     </p>
                   </div>
                 )
-              })}
-            {state.id && state.newMessage && (
+              })
+            ) : (
+              <p
+                className={`text-center   ${
+                  state.newMessage ? 'invisible' : 'mt-32'
+                }`}
+              >
+                Pas de conversations actuellement.
+              </p>
+            )}
+            {state.id && state.newMessage === true && (
               <div
-                className={`py-2  pb-2   border-b-2  border-gray-light ${
+                className={` pb-4  border-b-2  border-gray-light cursor-pointer  ${
                   conversationId == state.id && 'bg-gray-light'
                 } `}
               >
@@ -165,11 +230,23 @@ export const ConversationOverview = () => {
           </div>
         </div>
         <div
-          className={`w-full pb-24 bg-white  md:w-2/3  overflow-scroll pt-8 border-l-2 border-gray-light ${
+          className={`w-full pb-24 bg-white  md:w-2/3  overflow-scroll md:h-80 pt-8 border-l-2 border-gray-light ${
             !isMessagesVisible && 'invisible  md:visible'
           }`}
         >
-          {messages.messagesList && messages.messagesList.length > 0 ? (
+          {isMsgLoading ? (
+            <div className="flex items-center justify-center w-full mt-32 h-64 bg-red overflow-scroll">
+              <Triangle
+                color="#91C788"
+                ariaLabel="triangle-loading"
+                wrapperStyle={{}}
+                wrapperClassName=""
+                visible={true}
+                width="80"
+                height="80"
+              />
+            </div>
+          ) : messages.messagesList && !isMsgLoading ? (
             messages.messagesList.map((message) => {
               return message.sender == ownerId ? (
                 <div className="my-8 rounded-lg" key={message.id}>
@@ -192,7 +269,11 @@ export const ConversationOverview = () => {
               )
             })
           ) : (
-            <p className="text-center mt-12 text-gray-recycle"></p>
+            !state.newMessage && (
+              <p className="text-center mt-12 text-gray-recycle">
+                Pas de messages
+              </p>
+            )
           )}
           <div className="flex items-center justify-between md:absolute md:bottom-0 md:w-2/3 w-full  ">
             <input
@@ -202,6 +283,8 @@ export const ConversationOverview = () => {
               onChange={(e) => {
                 setCurrentMessage(e.target.value)
               }}
+              onKeyDown={handleKeyDown}
+              id="textInput"
             />
             <span>
               <p className="relative">
@@ -214,6 +297,7 @@ export const ConversationOverview = () => {
               </p>
             </span>
           </div>
+          <div ref={messagesEndRef} />
         </div>
         <FooterMenu />
       </div>
