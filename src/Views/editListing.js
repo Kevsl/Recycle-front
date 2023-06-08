@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FooterMenu } from '../Components/FooterMenu'
+import { FooterMenu } from '../Components/Layouts/FooterMenu'
 import { CategoryMenu } from '../Components/Layouts/CategoryMenu'
 import { Footer } from '../Components/Layouts/Footer'
 import { Header } from '../Components/Layouts/Header'

@@ -1,7 +1,7 @@
-import facebook from '../Assets/images/facebook.png'
-import twitter from '../Assets/images/twitter.png'
-import instagram from '../Assets/images/instagram.png'
-import linkedIn from '../Assets/images/linkedin.png'
+import facebook from '../../Assets/images/facebook.png'
+import twitter from '../../Assets/images/twitter.png'
+import instagram from '../../Assets/images/instagram.png'
+import linkedIn from '../../Assets/images/linkedin.png'
 
 export const SocialNetworks = () => {
   let socialNetworksIcons = [

@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { FooterMenu } from '../Components/FooterMenu'
+import { FooterMenu } from '../Components/Layouts/FooterMenu'
 import { CategoryMenu } from '../Components/Layouts/CategoryMenu'
 import { Footer } from '../Components/Layouts/Footer'
 import { Header } from '../Components/Layouts/Header'
 import { createListing, getCitiesList } from '../Service/listingService'
 import { AcceptMaxFiles } from '../Utils/dragNDrop'
-// import { storage } from '../firebase'
-// import { ref, uploadBytes } from 'firebase/storage'
-// import { v4 } from 'uuid'
+import UploadWidget from '../Components/UploadWidget'
+
 const CreateListing = () => {
   const [zip, setZip] = useState('')
   const [city, setCity] = useState('')
@@ -37,7 +36,8 @@ const CreateListing = () => {
       city &&
       description &&
       latitude &&
-      longitude
+      longitude &&
+      acceptedListingImages
     ) {
       await createListing(
         title,
@@ -81,8 +81,10 @@ const CreateListing = () => {
           Création d'annonces
         </h1>
 
-        <AcceptMaxFiles setAcceptedListingImages={setAcceptedListingImages} />
-
+        <UploadWidget
+          setAcceptedListingImages={setAcceptedListingImages}
+          acceptedListingImages={acceptedListingImages}
+        />
         <input
           type="text"
           className="w-2/3 indent-5 mx-auto border-b border-gray-recycle text-gray-recycle mt-10 mb-4 font-Baloo font-bold"

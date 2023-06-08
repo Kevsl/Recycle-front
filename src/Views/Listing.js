@@ -1,6 +1,6 @@
 import { Footer } from '../Components/Layouts/Footer'
 import { useLocation } from 'react-router-dom'
-import { FooterMenu } from '../Components/FooterMenu'
+import { FooterMenu } from '../Components/Layouts/FooterMenu'
 import React, { useState, useEffect } from 'react'
 import { getListing } from '../Service/listingService'
 import { Header } from '../Components/Layouts/Header'
@@ -119,7 +119,7 @@ const Listing = () => {
                             id: data.id,
                             image: data.images[0],
                             title: data.title,
-                            newMessage:true
+                            newMessage: true,
                           },
                         })
                       }}

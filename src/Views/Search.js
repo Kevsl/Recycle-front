@@ -1,6 +1,6 @@
 import { Header } from '../Components/Layouts/Header'
 import { Ads } from '../Components/Layouts/Ads'
-import { FooterMenu } from '../Components/FooterMenu'
+import { FooterMenu } from '../Components/Layouts/FooterMenu'
 import React, { useState } from 'react'
 import { getCustomListings } from '../Service/listingService'
 import { SearchMenu } from '../Components/Layouts/SearchMenu'
@@ -15,9 +15,7 @@ const Search = () => {
   const [listingSubCategoryId, setListingSubCategoryId] = useState('')
   const [latitude, setLatitude] = useState('')
   const [longitude, setLongitude] = useState('')
-
   const [city, setCity] = useState('')
-
   const [round, setRound] = useState(0)
 
   const handleSearch = () => {

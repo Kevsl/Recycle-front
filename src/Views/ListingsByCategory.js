@@ -1,7 +1,7 @@
 import { Header } from '../Components/Layouts/Header'
 import { Ads } from '../Components/Layouts/Ads'
 import { useParams, useLocation } from 'react-router-dom'
-import { FooterMenu } from '../Components/FooterMenu'
+import { FooterMenu } from '../Components/Layouts/FooterMenu'
 import { getListingByCategory } from '../Service/listingService'
 import React, { useState, useEffect } from 'react'
 import { Triangle } from 'react-loader-spinner'

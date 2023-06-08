@@ -69,6 +69,7 @@ export async function getMyListings(id) {
     return res.data
   })
 }
+
 export async function createListing(
   title,
   description,
@@ -80,19 +81,18 @@ export async function createListing(
   city,
   latitude,
   longitude,
-  files
+  formData
 ) {
-  let url = `${process.env.REACT_APP_API_URL}listing/new`
+  let url = `${'http://127.0.0.1/'}listing/new2`
   let id = localStorage.getItem('id')
 
-  const config2 = {
+  const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
       'Content-Type': 'multipart/form-data',
     },
   }
 
-  const formData = new FormData()
   formData.append('city', city)
   formData.append('country', 'France')
   formData.append('description', description)
@@ -100,31 +100,26 @@ export async function createListing(
   formData.append('fkSubCategory', listingSubCategoryId)
   formData.append('fkListingStatus', 1)
   formData.append('fkListingType', listingTypeId)
-  formData.append('fkSubListingType', listingSubTypeId)
-  formData.append('fkProfile', id)
-  formData.append('latitude', latitude)
-  formData.append('longitude', longitude)
-  formData.append('postCode', postCode)
   formData.append('fkUser', localStorage.getItem('id'))
+  formData.append('longitude', longitude)
+  formData.append('latitude', latitude)
+  formData.append('postCode', postCode)
 
-  // Check if files is an array and append each file to formData
-  // if (Array.isArray(files)) {
-  //   files.forEach((file, index) => {
-  //     formData.append(`images[${index}]`, file)
-  //   })
-  // } else if (files) {
-  //   formData.append('images[0]', files)
-  // }
-
-  return axios.post(url, formData, config2).then((res) => {
+  return axios.post(url, formData, config).then((res) => {
     return res.status
   })
 }
-
 export async function getCitiesList(id) {
   let url = `https://api-adresse.data.gouv.fr/search/?q=${id}&type=municipality`
 
   return axios.get(url, config).then((res) => {
     return res.data.features
+  })
+}
+export async function deleteListing(id) {
+  let url = `${process.env.REACT_APP_API_URL}listing/${id}`
+
+  return axios.delete(url, config).then((res) => {
+    return res.data
   })
 }

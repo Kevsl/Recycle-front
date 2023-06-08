@@ -5,7 +5,7 @@ import {
   sendFirstMessage,
   sendMessage,
 } from '../../Service/conversationsService'
-import { FooterMenu } from '../FooterMenu'
+import { FooterMenu } from './FooterMenu'
 import { useNavigate } from 'react-router-dom'
 import { dateTranslator } from '../../Utils/tools'
 import { useLocation } from 'react-router-dom'

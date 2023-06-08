@@ -32,7 +32,7 @@ const Login = () => {
         if (res.response.status) {
           switch (res.response.status) {
             case 200:
-              navigate('/connexion')
+              navigate('/')
               setIsLoading(false)
               break
             case 500:

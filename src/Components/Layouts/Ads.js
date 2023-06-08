@@ -2,10 +2,12 @@ import React, { useState } from 'react'
 import { Triangle } from 'react-loader-spinner'
 import { useNavigate } from 'react-router-dom'
 import noPhoto from '../../Assets/images/no-photo.png'
+import { deleteListing } from '../../Service/listingService'
 
 export const Ads = ({ listings, isLoading, title, edit }) => {
   const navigate = useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [idToDelete, setIdToDelete] = useState('')
 
   return (
     <div className="font-Baloo block mb-12  listings relative">
@@ -51,6 +53,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                         className="fa-solid fa-trash mx-2  my-2 text-red-recycle w-6 h-6 text-center bg-gray-light pt-1 rounded-lg"
                         onClick={() => {
                           setIsModalOpen(true)
+                          setIdToDelete(listing.id)
                         }}
                       ></i>
                     </p>
@@ -100,6 +103,9 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                 className="border border-solid border-green-recycle  bg-red-recycle rounded-sm mx-4 text-white w-24 h-10 "
                 onClick={() => {
                   setIsModalOpen(false)
+                  deleteListing(idToDelete).then((res) => {
+                    navigate('/profil')
+                  })
                 }}
               >
                 Supprimer

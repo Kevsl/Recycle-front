@@ -1,7 +1,7 @@
 import { Header } from '../Components/Layouts/Header'
 import { Ads } from '../Components/Layouts/Ads'
 import { useNavigate } from 'react-router-dom'
-import { FooterMenu } from '../Components/FooterMenu'
+import { FooterMenu } from '../Components/Layouts/FooterMenu'
 import { Balance } from '../Components/Layouts/Balance'
 import { getMyListings } from '../Service/listingService'
 import React, { useState, useEffect } from 'react'
@@ -31,7 +31,7 @@ const Profil = () => {
             onClick={() => {
               navigate('/messages', {
                 state: {
-                  newMessage:false
+                  newMessage: false,
                 },
               })
             }}
