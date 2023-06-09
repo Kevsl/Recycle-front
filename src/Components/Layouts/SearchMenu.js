@@ -92,7 +92,9 @@ export const SearchMenu = ({
                   onClick={() => {
                     handleCity(resultCity)
                   }}
-                ></li>
+                >
+                  {resultCity.properties.label}
+                </li>
               )
             })}
           </ul>

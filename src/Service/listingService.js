@@ -50,7 +50,7 @@ export async function getListingTypes() {
 
 export async function getListingCategories() {
   let url = `${process.env.REACT_APP_API_URL}listingCategory`
-  return axios.get(url, config).then((res) => {
+  return axios.get(url).then((res) => {
     return res.data
   })
 }
@@ -78,11 +78,11 @@ export async function createListing(
   listingSubCategoryId,
   postCode,
   city,
-  latitude,
   longitude,
+  latitude,
   files
 ) {
-  let url = `${'http://127.0.0.1/'}listing/new`
+  let url = `${process.env.REACT_APP_API_URL}listing/new`
   let id = localStorage.getItem('id')
   const config = {
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },

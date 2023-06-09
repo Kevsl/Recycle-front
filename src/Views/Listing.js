@@ -69,9 +69,9 @@ const Listing = () => {
                     <i className="fa-solid fa-chevron-right"></i>
                   </button>
                   <img
-                    src={data.images[carousselPosition]}
+                    src={data.listingCoverImage[carousselPosition]}
                     className="w-full object-cover"
-                    alt={data.images[carousselPosition]}
+                    alt={data.listingCoverImage[carousselPosition]}
                   />
                   <button
                     className="w-16 h-16 absolute top-42 left-2  rounded-full py-1 flex items-center justify-center hover:bg-gray hover:text-white"
@@ -117,7 +117,7 @@ const Listing = () => {
                         navigate('/messages', {
                           state: {
                             id: data.id,
-                            image: data.images[0],
+                            image: data.listingCoverImage,
                             title: data.title,
                             newMessage: true,
                           },
