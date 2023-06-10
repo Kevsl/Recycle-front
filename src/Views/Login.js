@@ -130,7 +130,7 @@ const Login = () => {
                 height="80"
                 width="80"
                 color="#91C788"
-                ariaLabel="triangle-loading"
+                aria-label="triangle-loading"
                 wrapperStyle={{}}
                 wrapperClassName=""
                 visible={true}
@@ -143,7 +143,7 @@ const Login = () => {
                   // localStorage.setItem('token', 'ezezeaadsdqsdqs2323231')
                   // navigate('/')
                 }}
-                ariaLabel="Se connecter"
+                aria-label="Se connecter"
               >
                 Se connecter
               </button>
@@ -155,7 +155,7 @@ const Login = () => {
               onClick={() => {
                 navigate('/inscription')
               }}
-              ariaLabel="S'inscrire"
+              aria-label="S'inscrire"
             >
               Créer un compte
             </button>

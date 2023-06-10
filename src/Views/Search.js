@@ -83,7 +83,7 @@ const Search = () => {
             <div className="w-screen h-screen mx-auto my-auto flex items-center justify-center">
               <Triangle
                 color="#91C788"
-                ariaLabel="triangle-loading"
+                aria-label="triangle-loading"
                 wrapperStyle={{}}
                 wrapperClassName=""
                 visible={true}

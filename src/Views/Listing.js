@@ -29,14 +29,14 @@ const Listing = () => {
     if (direction === 'right') {
       let value = carousselPosition
       setCarousselPosition((value += 1))
-      if (carousselPosition === listingData[0].images.length - 1) {
+      if (carousselPosition === listingData[0].listingCoverImage.length - 1) {
         setCarousselPosition(0)
       }
     } else {
       let value = carousselPosition
       setCarousselPosition((value -= 1))
       if (carousselPosition < 1) {
-        setCarousselPosition(2)
+        setCarousselPosition(listingData[0].listingCoverImage.length - 1)
       }
     }
   }
@@ -49,7 +49,7 @@ const Listing = () => {
           <div className="w-screen h-screen mx-auto my-auto flex items-center justify-center">
             <Triangle
               color="#91C788"
-              ariaLabel="triangle-loading"
+              aria-label="triangle-loading"
               wrapperStyle={{}}
               wrapperClassName=""
               visible={true}
@@ -67,7 +67,7 @@ const Listing = () => {
                     onClick={() => {
                       handleCaroussel('right')
                     }}
-                    ariaLabel="Voir la photo suivante"
+                    aria-label="Voir la photo suivante"
                   >
                     <i className="fa-solid fa-chevron-right"></i>
                   </button>
@@ -81,7 +81,7 @@ const Listing = () => {
                     onClick={() => {
                       handleCaroussel('left')
                     }}
-                    ariaLabel="Voir la photo précèdente"
+                    aria-label="Voir la photo précèdente"
                   >
                     <i className="fa-solid fa-chevron-left"></i>
                   </button>
@@ -130,7 +130,7 @@ const Listing = () => {
                             },
                           })
                         }}
-                        ariaLabel="Envoyer un message à l'auteur de l'annonce"
+                        aria-label="Envoyer un message à l'auteur de l'annonce"
                       >
                         Contacter
                       </button>

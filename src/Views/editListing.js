@@ -88,7 +88,7 @@ const EditListing = () => {
         <div className="w-1/2 mx-auto flex items-center justify-center ">
           <Triangle
             color="#91C788"
-            ariaLabel="triangle-loading"
+            aria-label="triangle-loading"
             wrapperStyle={{}}
             wrapperClassName=""
             visible={true}
@@ -165,7 +165,7 @@ const EditListing = () => {
               onClick={() => {
                 handleSubmit()
               }}
-              ariaLabel="Modifier votre annonce"
+              aria-label="Modifier votre annonce"
             >
               Modifier l'annonce
             </button>

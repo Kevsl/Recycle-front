@@ -109,7 +109,7 @@ export const SearchMenu = ({
           onClick={() => {
             handleSearch()
           }}
-          ariaLabel="Rechercher une annonce"
+          aria-label="Rechercher une annonce"
         >
           Rechercher
         </button>

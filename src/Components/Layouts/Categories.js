@@ -27,7 +27,7 @@ export const Categories = () => {
             <div className="w-1/2 mx-auto flex items-center justify-evenly">
               <Triangle
                 color="#91C788"
-                ariaLabel="triangle-loading"
+                aria-label="triangle-loading"
                 wrapperStyle={{}}
                 wrapperClassName=""
                 visible={true}

@@ -55,7 +55,7 @@ export const Header = () => {
             onClick={() => {
               navigate('/profil')
             }}
-            ariaLabel="Navigation vers la page profil"
+            aria-label="Navigation vers la page profil"
           >
             <i className="fa-regular fa-user text-dark-blue w-6 h-6 text-2xl mx-4"></i>
           </button>
@@ -64,7 +64,7 @@ export const Header = () => {
             onClick={() => {
               handleLogout()
             }}
-            ariaLabel="Se déconnecter de l'application"
+            aria-label="Se déconnecter de l'application"
           >
             <i className="fa-solid fa-right-from-bracket text-dark-blue w-6 h-6 text-2xl mx-4"></i>{' '}
           </button>
@@ -80,7 +80,7 @@ export const Header = () => {
                   ? setIsBurgerMenuVisible(false)
                   : setIsBurgerMenuVisible(true)
               }}
-              ariaLabel="Menu de connexion"
+              aria-label="Menu de connexion"
             >
               <i className="fa-solid fa-xmark z-0 text-white w-12 h-12 text-2xl"></i>
             </p>
@@ -89,7 +89,7 @@ export const Header = () => {
               onClick={() => {
                 navigate('/connexion')
               }}
-              ariaLabel="Navigation vers la page de connexion"
+              aria-label="Navigation vers la page de connexion"
             >
               Connexion
             </button>
@@ -98,7 +98,7 @@ export const Header = () => {
               onClick={() => {
                 navigate('/inscription')
               }}
-              ariaLabel="Navigation vers la page d'inscription"
+              aria-label="Navigation vers la page d'inscription"
             >
               S inscrire
             </button>

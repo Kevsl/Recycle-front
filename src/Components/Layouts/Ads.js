@@ -18,7 +18,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
             <div className="w-1/2 mx-auto flex items-center justify-center ">
               <Triangle
                 color="#91C788"
-                ariaLabel="triangle-loading"
+                aria-label="triangle-loading"
                 wrapperStyle={{}}
                 wrapperClassName=""
                 visible={true}
@@ -99,7 +99,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                 onClick={() => {
                   setIsModalOpen(false)
                 }}
-                ariaLabel="Annuler la suppresion d'une annonce"
+                aria-label="Annuler la suppresion d'une annonce"
               >
                 Annuler
               </button>
@@ -111,7 +111,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                     navigate('/profil')
                   })
                 }}
-                ariaLabel="Confirmer la suppresion d'une annonce"
+                aria-label="Confirmer la suppresion d'une annonce"
               >
                 Supprimer
               </button>

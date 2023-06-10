@@ -187,7 +187,7 @@ const Register = () => {
                         setAvatarChosen(avatar.id)
                       }}
                       className="w-20 h-20 flex justify-center items-center rounded-full mx-1 my-1 hover:h-16 hover:w-16 hover:bg-green-recycle focus:h-16 focus:w-16 focus:bg-green-recycle"
-                      ariaLabel="Choisir un avatar pour votre profil"
+                      aria-label="Choisir un avatar pour votre profil"
                     >
                       <img
                         src={avatar.image}
@@ -200,7 +200,7 @@ const Register = () => {
               ) : (
                 <Triangle
                   color="#91C788"
-                  ariaLabel="triangle-loading"
+                  aria-label="triangle-loading"
                   wrapperStyle={{}}
                   wrapperClassName=""
                   visible={true}
@@ -217,7 +217,7 @@ const Register = () => {
               onClick={() => {
                 handleRegister()
               }}
-              ariaLabel="S'inscrire"
+              aria-label="S'inscrire"
             >
               S'inscrire
             </button>
@@ -227,7 +227,7 @@ const Register = () => {
               onClick={() => {
                 navigate('/connexion')
               }}
-              ariaLabel="Se connecter"
+              aria-label="Se connecter"
             >
               Se connecter
             </button>

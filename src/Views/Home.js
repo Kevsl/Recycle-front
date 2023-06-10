@@ -44,7 +44,7 @@ const Home = () => {
           onClick={() => {
             navigate('/recherche')
           }}
-          ariaLabel="Rechercher l'annonce"
+          aria-label="Rechercher l'annonce"
         >
           Recherche d'annonces
         </button>

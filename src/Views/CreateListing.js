@@ -150,7 +150,7 @@ const CreateListing = () => {
           onClick={() => {
             handleSubmit()
           }}
-          ariaLabel="Publier votre annonce"
+          aria-label="Publier votre annonce"
         >
           Poster une annonce
         </button>

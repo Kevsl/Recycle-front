@@ -36,7 +36,7 @@ const Profil = () => {
                 },
               })
             }}
-            ariaLabel="Navigation vers la messagerie"
+            aria-label="Navigation vers la messagerie"
           >
             <i className="fa-solid fa-message mx-2"></i>
             Messagerie
@@ -46,7 +46,7 @@ const Profil = () => {
             onClick={() => {
               navigate('/creation')
             }}
-            ariaLabel="Navigation vers la page de création d'une annonce"
+            aria-label="Navigation vers la page de création d'une annonce"
           >
             <i className="fa-solid fa-plus mx-2"></i>
             Publier

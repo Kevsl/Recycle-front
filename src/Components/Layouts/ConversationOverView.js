@@ -150,7 +150,7 @@ export const ConversationOverview = () => {
               <div className="flex items-center justify-center w-full mt-48">
                 <Triangle
                   color="#91C788"
-                  ariaLabel="triangle-loading"
+                  aria-label="triangle-loading"
                   wrapperStyle={{}}
                   wrapperClassName=""
                   visible={true}
@@ -238,7 +238,7 @@ export const ConversationOverview = () => {
             <div className="flex items-center justify-center w-full mt-32 h-64 bg-red overflow-scroll">
               <Triangle
                 color="#91C788"
-                ariaLabel="triangle-loading"
+                aria-label="triangle-loading"
                 wrapperStyle={{}}
                 wrapperClassName=""
                 visible={true}
