@@ -19,7 +19,6 @@ const Register = () => {
   const [avatars, setAvatars] = useState([])
   const [avatarChosen, setAvatarChosen] = useState(1)
   const [errorMessage, setErrorMessage] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getAllAvatars().then((res) => {
@@ -53,49 +52,36 @@ const Register = () => {
     ) {
       try {
         register(email, password, pseudo, avatarChosen).then((res) => {
-          setIsLoading(false)
           if (res.status === 200) {
             navigate('/')
-            setIsLoading(false)
           }
           if (res.response.status) {
             switch (res.response.status) {
               case 200:
                 navigate('/')
-                setIsLoading(false)
                 break
               case 500:
                 setErrorMessage('Problème avec le serveur')
-                setIsLoading(false)
 
                 break
               case 400:
                 setErrorMessage('Problème avec votre connexion')
-                setIsLoading(false)
 
                 break
               case 401:
                 setErrorMessage('Problème avec vos identifiants')
-                setIsLoading(false)
                 break
               default:
-                setIsLoading(false)
             }
           } else {
             setErrorMessage(
               'Problème interne veuillez nous excuser pour la gêne occasionée'
             )
-            setIsLoading(false)
           }
         })
       } catch (e) {}
     }
   }
-
-  // let token = localStorage.getItem('token')
-  // if (token === 'true') {
-  //   // navigate('/')
-  // }
 
   return (
     <div>
@@ -201,6 +187,7 @@ const Register = () => {
                         setAvatarChosen(avatar.id)
                       }}
                       className="w-20 h-20 flex justify-center items-center rounded-full mx-1 my-1 hover:h-16 hover:w-16 hover:bg-green-recycle focus:h-16 focus:w-16 focus:bg-green-recycle"
+                      ariaLabel="Choisir un avatar pour votre profil"
                     >
                       <img
                         src={avatar.image}
@@ -230,6 +217,7 @@ const Register = () => {
               onClick={() => {
                 handleRegister()
               }}
+              ariaLabel="S'inscrire"
             >
               S'inscrire
             </button>
@@ -239,6 +227,7 @@ const Register = () => {
               onClick={() => {
                 navigate('/connexion')
               }}
+              ariaLabel="Se connecter"
             >
               Se connecter
             </button>

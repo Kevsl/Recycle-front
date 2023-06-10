@@ -127,7 +127,7 @@ export const ConversationOverview = () => {
   }, [messages])
 
   return (
-    <div className="relative">
+    <div className="relative -pt-4">
       <i
         onClick={() => {
           setIsMessagesVisible(false)
@@ -139,7 +139,7 @@ export const ConversationOverview = () => {
       </h1>
       <div className=" w-fullmd:mt-4: md:flex md:items-start md:justify-start">
         <div
-          className={`w-full  md:w-1/3  overflow-scroll text-ellipsis md:border-r-2 border-gray-light h-80`}
+          className={`w-full  md:w-1/3  overflow-scroll text-ellipsis md:border-r-2 border-gray-light h-55`}
         >
           <div
             className={` ${

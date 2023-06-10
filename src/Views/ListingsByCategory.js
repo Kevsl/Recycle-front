@@ -24,7 +24,11 @@ const ListingsCategory = () => {
   return (
     <div className="font-Baloo">
       <Header />
+
       <div className="w-5/6 bg-black-opacity-50 mx-auto h-px rounded-xl"></div>
+      <h1 className="text-center mt-20 text-xl text-bold text-gray-recycle">
+        Annonces par catégories
+      </h1>
       {isLoading ? (
         <div className="w-screen h-screen mx-auto my-auto flex items-center justify-center">
           <Triangle
@@ -38,7 +42,7 @@ const ListingsCategory = () => {
           />
         </div>
       ) : listings && listings.length > 0 ? (
-        <div className="mt-32">
+        <div className="mt-12">
           <Ads
             listings={listings}
             isLoading={isLoading}

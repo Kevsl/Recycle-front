@@ -5,21 +5,22 @@ import { FooterMenu } from '../Components/Layouts/FooterMenu'
 import { Balance } from '../Components/Layouts/Balance'
 import { getMyListings } from '../Service/listingService'
 import React, { useState, useEffect } from 'react'
-import { ProfilEdit } from '../Components/Layouts/ProfilEdit'
 
 const Profil = () => {
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [listings, setListings] = useState([])
-  const [profilEdit, setProfilEdit] = useState(false)
+  const token = localStorage.getItem('id')
 
   useEffect(() => {
     setIsLoading(true)
-    getMyListings(localStorage.getItem('id')).then((res) => {
-      setIsLoading(false)
-      setListings(res)
-    })
-  }, [])
+    if (token) {
+      getMyListings(token).then((res) => {
+        setIsLoading(false)
+        setListings(res)
+      })
+    }
+  }, [token])
 
   return (
     <div className="font-Baloo">
@@ -35,6 +36,7 @@ const Profil = () => {
                 },
               })
             }}
+            ariaLabel="Navigation vers la messagerie"
           >
             <i className="fa-solid fa-message mx-2"></i>
             Messagerie
@@ -44,6 +46,7 @@ const Profil = () => {
             onClick={() => {
               navigate('/creation')
             }}
+            ariaLabel="Navigation vers la page de création d'une annonce"
           >
             <i className="fa-solid fa-plus mx-2"></i>
             Publier
@@ -66,11 +69,7 @@ const Profil = () => {
           edit={true}
         />
       )}
-      {profilEdit && (
-        <div>
-          <ProfilEdit />
-        </div>
-      )}
+
       <FooterMenu />
     </div>
   )

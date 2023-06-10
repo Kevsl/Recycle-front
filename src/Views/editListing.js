@@ -101,7 +101,7 @@ const EditListing = () => {
           <Header />
           <div className="flex flex-col justify-center w-5/6 mx-auto font-Baloo max-w-xl border border-solid px-4 py-4 rounded-xl my-4 border-green-recycle mt-28">
             <h1 className="text-center my-8 text-3xl text-bold text-gray-recycle">
-              Modifier l'annonce
+              Modifier une annonce
             </h1>
 
             <AcceptMaxFiles />
@@ -165,6 +165,7 @@ const EditListing = () => {
               onClick={() => {
                 handleSubmit()
               }}
+              ariaLabel="Modifier votre annonce"
             >
               Modifier l'annonce
             </button>

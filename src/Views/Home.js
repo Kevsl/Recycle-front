@@ -25,9 +25,9 @@ const Home = () => {
   return (
     <div className="font-Baloo">
       <Header />
-      <h2 className="text-dark-blue absolute top-60 text-xl ml-14 md:text-2xl md:top-28 ">
+      <h1 className="text-dark-blue absolute top-48 text-xl ml-14 md:text-2xl md:top-28 ">
         Partager, recevoir, préserver...
-      </h2>
+      </h1>
       <img
         src={homeHeader}
         alt="Recycle l appli de don entre particuliers "
@@ -44,6 +44,7 @@ const Home = () => {
           onClick={() => {
             navigate('/recherche')
           }}
+          ariaLabel="Rechercher l'annonce"
         >
           Recherche d'annonces
         </button>

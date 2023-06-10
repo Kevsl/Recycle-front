@@ -1,9 +1,10 @@
 import logo from '../Assets/images/logo.png'
 import { checkEmail, checkPassword } from '../Utils/Regex'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { login } from '../Service/authService'
 import { Triangle } from 'react-loader-spinner'
+import { ErrorMessage } from '../Components/Layouts/ErrorMessage'
 
 const Login = () => {
   const navigate = useNavigate()
@@ -61,6 +62,11 @@ const Login = () => {
       })
     } catch (e) {}
   }
+  useEffect(() => {
+    login('kevin@gmail.com', '3!bKN;9H,o').then((res) => {
+      navigate('/')
+    })
+  })
 
   return (
     <div>
@@ -116,11 +122,8 @@ const Login = () => {
               </p>
             )}
           </div>
-          {errorMessage.length > 0 && (
-            <p className="text-red-recycle text-sm my-4 text-center">
-              {errorMessage}
-            </p>
-          )}
+          <ErrorMessage errorMessage={errorMessage} />
+
           <div className="w-full flex items-center justify-center flex-col">
             {isLoading === true ? (
               <Triangle
@@ -140,6 +143,7 @@ const Login = () => {
                   // localStorage.setItem('token', 'ezezeaadsdqsdqs2323231')
                   // navigate('/')
                 }}
+                ariaLabel="Se connecter"
               >
                 Se connecter
               </button>
@@ -151,6 +155,7 @@ const Login = () => {
               onClick={() => {
                 navigate('/inscription')
               }}
+              ariaLabel="S'inscrire"
             >
               Créer un compte
             </button>

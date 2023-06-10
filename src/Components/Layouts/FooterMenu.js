@@ -19,6 +19,7 @@ export const FooterMenu = () => {
           onClick={() => {
             navigate('/')
           }}
+          ariaLabel="Navigation vers la page d'accueil"
         >
           <i className="fa-solid fa-house-chimney text-green-recycle text-2xl"></i>
         </button>
@@ -31,6 +32,7 @@ export const FooterMenu = () => {
               },
             })
           }}
+          ariaLabel="Navigation vers la messagerie"
         >
           <i className="fa-regular fa-message text-green-recycle text-2xl "></i>
         </button>
@@ -39,6 +41,7 @@ export const FooterMenu = () => {
           onClick={() => {
             navigate('/creation')
           }}
+          ariaLabel="Navigation vers la page  de création d'annonce"
         >
           <i className="fa-solid fa-plus text-white text-2xl "></i>
         </button>
@@ -46,6 +49,7 @@ export const FooterMenu = () => {
           onClick={() => {
             navigate('/recherche')
           }}
+          ariaLabel="Navigation vers la page de recherche d'une annonce"
         >
           <i className="fa-solid fa-magnifying-glass text-green-recycle text-2xl"></i>
         </button>
@@ -53,6 +57,7 @@ export const FooterMenu = () => {
           onClick={() => {
             navigate('/profil')
           }}
+          ariaLabel="Navigation vers la page profil"
         >
           <i className="fa-solid fa-user-pen mx-2 text-green-recycle text-2xl"></i>
         </button>

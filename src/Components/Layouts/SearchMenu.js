@@ -1,6 +1,7 @@
 import { CategoryMenu } from './CategoryMenu'
 import React, { useEffect, useState } from 'react'
 import { getCitiesList } from '../../Service/listingService'
+import { ErrorMessage } from './ErrorMessage'
 export const SearchMenu = ({
   setIsAdsVisible,
   listingTypeId,
@@ -18,6 +19,7 @@ export const SearchMenu = ({
   round,
   setRound,
   handleSearch,
+  errorMessage,
 }) => {
   const [coordinatesList, setCoordinatesList] = useState([])
   const [query, setQuery] = useState([])
@@ -100,12 +102,14 @@ export const SearchMenu = ({
           </ul>
         </div>
       )}
+      <ErrorMessage errorMessage={errorMessage} />
       <div className="flex items-center justify-center">
         <button
           className="w-48 mx-auto my-6 border border-solid border-green-recycle bg-green-recycle text-white px-2 py-2 rounded-lg cursor-pointer"
           onClick={() => {
             handleSearch()
           }}
+          ariaLabel="Rechercher une annonce"
         >
           Rechercher
         </button>

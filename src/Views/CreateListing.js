@@ -5,7 +5,6 @@ import { CategoryMenu } from '../Components/Layouts/CategoryMenu'
 import { Footer } from '../Components/Layouts/Footer'
 import { Header } from '../Components/Layouts/Header'
 import { createListing, getCitiesList } from '../Service/listingService'
-import { AcceptMaxFiles } from '../Utils/dragNDrop'
 import UploadWidget from '../Components/UploadWidget'
 
 const CreateListing = () => {
@@ -151,6 +150,7 @@ const CreateListing = () => {
           onClick={() => {
             handleSubmit()
           }}
+          ariaLabel="Publier votre annonce"
         >
           Poster une annonce
         </button>

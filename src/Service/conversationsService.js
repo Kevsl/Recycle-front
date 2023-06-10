@@ -8,8 +8,9 @@ export async function getMyConversations(id) {
     .get(url, config)
 
     .then((res) => {
-      return res.data
+      return res
     })
+    .catch((e) => e)
 }
 
 export async function getSpecificConversation(id) {

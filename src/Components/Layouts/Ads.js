@@ -32,7 +32,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                 Aucune annonce pour le moment...
               </p>
             </div>
-          ) : listings ? (
+          ) : listings && listings !== 'empty' ? (
             listings.map((listing) => {
               return (
                 <div
@@ -62,7 +62,8 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                   <img
                     className="w-full object-cover md:h-full max-h-24 md:max-h-32 rounded-xl z-20"
                     src={
-                      listing.listingCoverImage
+                      listing.listingCoverImage &&
+                      listing.listingCoverImage !== 'empty'
                         ? listing.listingCoverImage
                         : listing.fkListingCategoryImage
                         ? listing.fkListingCategoryImage
@@ -82,7 +83,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
               )
             })
           ) : (
-            <p>Aucune annonce</p>
+            <p>Aucune annonce...</p>
           )}
         </div>
       </div>
@@ -98,6 +99,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                 onClick={() => {
                   setIsModalOpen(false)
                 }}
+                ariaLabel="Annuler la suppresion d'une annonce"
               >
                 Annuler
               </button>
@@ -109,6 +111,7 @@ export const Ads = ({ listings, isLoading, title, edit }) => {
                     navigate('/profil')
                   })
                 }}
+                ariaLabel="Confirmer la suppresion d'une annonce"
               >
                 Supprimer
               </button>

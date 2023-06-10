@@ -10,6 +10,8 @@ import ListingsCategory from './Views/ListingsByCategory'
 import Search from './Views/Search'
 import EditListing from './Views/editListing'
 import { Mentions } from './Views/Mentions'
+import FOF from './Views/404'
+import { Policies } from './Views/Policies'
 
 function App() {
   return (
@@ -26,6 +28,8 @@ function App() {
         <Route path="/modification" element={<EditListing />} />
         <Route path="/mentions" element={<Mentions />} />
         <Route path="/categorie/:id" element={<ListingsCategory />} />
+        <Route path="/confidentialite" element={<Policies />} />
+        <Route path="*" element={<FOF />} />
       </Routes>
     </div>
   )
