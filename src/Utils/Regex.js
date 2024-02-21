@@ -16,33 +16,3 @@ export function checkPassword(password) {
     return false
   }
 }
-
-export function checkString(string) {
-  const wordsToBan = [
-    'Connard',
-    'Salope',
-    'Cul',
-    'Sexe',
-    'Sodomie',
-    'bite',
-    'Nichons',
-    'Nég',
-    'Neg',
-    'Meurtre',
-    'Génocide',
-    'bougn',
-    'juif',
-    'éja',
-  ]
-
-  const lowerCaseString = string.toLowerCase()
-
-  for (let i = 0; i < wordsToBan.length; i++) {
-    const word = wordsToBan[i]
-    if (lowerCaseString.includes(word)) {
-      return false
-    }
-  }
-
-  return true
-}
